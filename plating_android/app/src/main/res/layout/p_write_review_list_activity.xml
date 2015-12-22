@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/transparent"
+            android:onClick="onClickNavigateBack"
+            android:padding="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/action_icon_back" />
+
+        <TextView
+            android:id="@+id/chef_name_under_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="리뷰 작성하기"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:onClick="onClick_finishWritingReview"
+            android:text="보내기"
+            android:textColor="@color/white"/>
+<!--
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:onClick="onClickCallPlating"
+            android:padding="13dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/action_icon_phone_white_100px" />-->
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_announcement_layout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/app_card_background_grey_color"
+        android:layout_below="@+id/tool_bar_layout"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/daily_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="리뷰 작성후 우측 상단 '보내기' 버튼을 꼭 눌러주세요!"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/plating_divider_color" />
+    </LinearLayout>
+<!--
+    <Button
+        android:id="@+id/finish_writing_review_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="onClick_finishWritingReview"
+        android:text="작성완료"
+        android:textColor="@color/white" />
+-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/review_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/daily_announcement_layout"
+        android:background="@color/app_background_grey_color"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="20dp"
+        android:scrollbars="none" />
+</RelativeLayout>

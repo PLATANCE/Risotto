@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/munchery_light_grey_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal">
+
+        <include layout="@layout/tool_bar" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/transparent"
+            android:onClick="onClickNavigateBack"
+            android:padding="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/action_icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="주문 내역"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="13dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/action_icon_phone_white_100px"
+            android:background="@color/transparent"
+            android:onClick="onClickCallPlating"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_announcement_layout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/tool_bar_layout"
+        android:gravity="center_vertical"
+        android:background="@color/app_card_background_grey_color"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:clickable="true">
+        <TextView
+            android:id="@+id/daily_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:singleLine="true"
+            android:textSize="13dp"
+            android:text="모든 주문 내역은 주문일로부터 3개월 동안 저장됩니다."/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/plating_divider_color"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/order_history_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/daily_announcement_layout"
+        android:paddingTop="14dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:background="@color/app_background_grey_color"
+        android:visibility="visible"/>
+</RelativeLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:clickable="true">
+
+    <RelativeLayout
+        android:id="@+id/menu_description_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/menu_image"
+        android:background="@color/app_card_background_grey_color"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
+
+        <!--Grey Outline for ImageView-->
+<!--        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerVertical="true"
+            android:background="@color/grey_100"/>-->
+        <ImageView
+            android:id="@+id/food_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:padding="0dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_toRightOf="@id/food_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/menu_description"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+
+                android:text="크림 프레테 소스를 곁들인\n연어 스테이크와 완두콘 매쉬"
+                android:textColor="@color/grey_700"
+                android:textSize="15dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:id="@+id/RL_original_price"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/grey_500"
+                            android:gravity="center"
+                            android:layout_centerInParent="true"/>
+                        <TextView
+                            android:id="@+id/menu_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="12,000원"
+                            android:textColor="@color/grey_500"
+                            android:textSize="14dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/menu_price_alt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="-3dp"
+                        android:gravity="center"
+                        android:text="10,000원"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:id="@+id/row_item_count_minus_button"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="6dp"
+                        android:background="@color/transparent"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ico_minus" />
+
+                    <TextView
+                        android:id="@+id/row_item_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textSize="14dp"
+                        android:text="1"
+                        android:textColor="@color/grey_600" />
+
+                    <ImageButton
+                        android:id="@+id/row_item_count_plus_button"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="6dp"
+                        android:background="@color/transparent"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ico_plus" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/plating_divider_color"/>
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="40dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/future_menu_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수"
+        android:textSize="13dp"
+        android:textColor="@color/grey_500"/>
+    <RelativeLayout
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp">
+        <ImageView
+            android:id="@+id/future_menu_selected_circle_imageview"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:background="@drawable/shape_circle_very_light_grey"/>
+        <TextView
+            android:id="@+id/future_menu_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="14"
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimary"/>
+<!--        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="15"
+            android:textSize="18dp"
+            android:textColor="@color/grey_700"/>-->
+    </RelativeLayout>
+</LinearLayout>

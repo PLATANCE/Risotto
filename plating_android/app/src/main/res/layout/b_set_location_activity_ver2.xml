@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_50"
+    tools:context="com.plating.pages.i_set_location.SetLocationActivity">
+
+    <RelativeLayout
+        android:id="@+id/tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar" />
+
+        <ImageButton
+            android:id="@+id/action_back_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/transparent"
+            android:onClick="onClickNavigateBack"
+            android:padding="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/action_icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="요리가 배달될 주소 입력"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_announcement_layout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@+id/tool_bar_layout"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:clickable="true">
+        <TextView
+            android:id="@+id/daily_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13dp"
+            android:text="거주하고 계신 지역을 선택해주세요"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_200"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar_layout"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/area_button_1"
+                style="@style/AreaButton"
+                android:text="논현동"/>
+
+            <Button
+                android:id="@+id/area_button_2"
+                style="@style/AreaButton"
+                android:text="대치동"/>
+            <Button
+                android:id="@+id/area_button_3"
+                style="@style/AreaButton"
+                android:text="도곡동"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/area_button_4"
+                style="@style/AreaButton"
+                android:text="삼성동"/>
+
+            <Button
+                android:id="@+id/area_button_5"
+                style="@style/AreaButton"
+                android:text="신사동"/>
+            <Button
+                android:id="@+id/area_button_6"
+                style="@style/AreaButton"
+                android:text="압구정동"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/area_button_7"
+                style="@style/AreaButton"
+                android:text="역삼동"/>
+
+            <Button
+                android:id="@+id/area_button_8"
+                style="@style/AreaButton"
+                android:text="청담동"/>
+            <Button
+                android:id="@+id/area_button_9"
+                style="@style/AreaButton"
+                android:text="그 외"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

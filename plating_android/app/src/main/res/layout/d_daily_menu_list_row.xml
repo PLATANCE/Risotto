@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_2dp_radius_layout_white"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="260dp">
+
+            <ImageView
+                android:id="@+id/menu_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_card_background_grey_color"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:id="@+id/daily_menu_sold_out_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/dark_grey_b"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/b_restaurant_is_open_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/menu_status_main_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SOLD OUT!"
+                        android:textColor="@color/white"
+                        android:textSize="36dp" />
+
+                    <TextView
+                        android:id="@+id/menu_status_sub_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="금일 메뉴가 매진 되었습니다."
+                        android:textColor="@color/white"
+                        android:textSize="17dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/num_of_item_added_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/plating_add_item_yellow"
+                android:gravity="center"
+                android:text="1 ITEM IN CART"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu_description_layout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/app_card_background_grey_color"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/chef_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:background="@color/transparent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/menu_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/chef_image"
+                android:text="대한민국을 휘어잡을 쉐프대한민국을 휘어잡을 쉐프대한민국을 휘어잡을 쉐프"
+                android:textColor="@color/grey_700"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/chef_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/menu_description"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/chef_image"
+                android:gravity="bottom"
+                android:text="'장경욱' 수석 쉐프"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14dp" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/app_card_background_grey_color"
+            android:orientation="horizontal"
+            android:paddingBottom="14dp"
+            android:paddingTop="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <!-- rating ans price -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <!-- rating -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/review_star_1"
+                            style="@style/ReviewStarSize"
+                            android:layout_gravity="center"
+                            android:background="@drawable/icon_star_filled_yellow" />
+
+                        <ImageView
+                            android:id="@+id/review_star_2"
+                            style="@style/ReviewStarSize"
+                            android:layout_gravity="center"
+                            android:background="@drawable/icon_star_filled_yellow" />
+
+                        <ImageView
+                            android:id="@+id/review_star_3"
+                            style="@style/ReviewStarSize"
+                            android:layout_gravity="center"
+                            android:background="@drawable/icon_star_filled_yellow" />
+
+                        <ImageView
+                            android:id="@+id/review_star_4"
+                            style="@style/ReviewStarSize"
+                            android:layout_gravity="center"
+                            android:background="@drawable/icon_star_filled_yellow" />
+
+                        <ImageView
+                            android:id="@+id/review_star_5"
+                            style="@style/ReviewStarSize"
+                            android:layout_gravity="center"
+                            android:background="@drawable/icon_star_filled_yellow" />
+
+                        <TextView
+                            android:id="@+id/num_of_reviews_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            android:text="(25)"
+                            android:textColor="@color/grey_500"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+
+                    <!-- price -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/menu_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="12,000 원"
+                            android:textColor="@color/grey_500"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- alt_price -->
+                <LinearLayout
+                    android:id="@+id/menu_price_altRL"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/menu_price_alt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="-2dp"
+                            android:gravity="center"
+                            android:text="10,000 원"
+                            android:textColor="@color/grey_600"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+            </LinearLayout>
+                </LinearLayout>
+
+
+            <!-- Button -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/put_to_cart_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/shape_button_rounded_corner_2dp_color_primary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+ 추가하기"
+                        android:textColor="@color/white"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="13dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/review_star_1"
+                    style="@style/ReviewStarSize"
+                    android:background="@drawable/icon_star_filled_yellow" />
+
+                <ImageView
+                    android:id="@+id/review_star_2"
+                    style="@style/ReviewStarSize"
+                    android:background="@drawable/icon_star_filled_yellow" />
+
+                <ImageView
+                    android:id="@+id/review_star_3"
+                    style="@style/ReviewStarSize"
+                    android:background="@drawable/icon_star_filled_yellow" />
+
+                <ImageView
+                    android:id="@+id/review_star_4"
+                    style="@style/ReviewStarSize"
+                    android:background="@drawable/icon_star_filled_yellow" />
+
+                <ImageView
+                    android:id="@+id/review_star_5"
+                    style="@style/ReviewStarSize"
+                    android:background="@drawable/icon_star_filled_yellow" />
+
+                <TextView
+                    android:id="@+id/num_of_reviews_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="(25)"
+                    android:textColor="@color/grey_500"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="85dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/menu_price_altRL"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/menu_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="12,000 원"
+                            android:textColor="@color/grey_500"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@color/grey_500" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/menu_price_alt"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="-2dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="10,000 원"
+                        android:textColor="@color/grey_600"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="12dp">
+                    <ImageButton
+                        android:id="@+id/put_to_cart_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:paddingBottom="14dp"
+                        android:paddingTop="3dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/shape_button_rounded_corner_2dp_color_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:paddingBottom="14dp"
+                        android:paddingRight="3dp"
+                        android:paddingTop="3dp"
+                        android:text="+ 추가하기"
+                        android:textColor="@color/white"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            -->
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

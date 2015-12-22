@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/io.netty/netty/3.9.0.Final/bead2f4609b302c43859f156df8911e50df0610b/netty-3.9.0.Final.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="bead2f4609b302c43859f156df8911e50df0610b">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/netty-3.9.0.Final-f261dca67d11cd814ef9d551c8d0a3a17a5d8423.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-c5ce213422562954eb4f6bafd89c660c1daf546a.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-321fa1c707392742b53e9124368e7f406e61f709.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/gson-2.2.4-8b64c446bf9590c581fec1fa50cfa6e32324a0f4.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-8eaf4382d4c020c04fae637a0f3136ab91b0cff8.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.3.1/f9f7185c92ca5fefe2fb3efdeb477a67c96ea2d0/jackson-core-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f9f7185c92ca5fefe2fb3efdeb477a67c96ea2d0">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/jackson-core-2.3.1-8fcaec7171993ced858d61d82586a1d84eb207da.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.5/6b262da268f8ad9eff941b25503a9198f0a0ac93/slf4j-api-1.7.5.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6b262da268f8ad9eff941b25503a9198f0a0ac93">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/slf4j-api-1.7.5-ee4b2966cc1327a4978506d468910ded6cd9f496.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-f55721fe5c299e5220d46be8ed21e10f8b091991.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1c1afa0ab2a8197a5da1b36c4167a9e479cb74d9">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-5c6c0e3cc672871e56ad2fd909b4c67ab2b636d5.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/com.ning/async-http-client/1.8.3/a5d85f5b8a971544ef9b3e2e08848c7053dae496/async-http-client-1.8.3.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a5d85f5b8a971544ef9b3e2e08848c7053dae496">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/async-http-client-1.8.3-e8cb4f04152a40975b15d488ec817c715ed9c6f3.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-dba66089dfa58e9e8d57fec6e09768fecd1969b1.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.kakao.sdk/auth/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1febb94a51cc9383c75a4f45b8641b2e3d6ef6e8">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-01b487c61c53cf7d75dd0bc9da29745b6831d06b.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-50df686d1a5a58a92f0aa67ec4593c84bedca842.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-d1f3b0f558189161a8e082f806559ed0e6b5a438.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-862447c0d5e0c163b560cf4ae08f3616103b1c83.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-b94d2b9909f83085923f969d74c267995e23d5bf.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-504b5d62b90198583f0638d3f1ff93ea6ec16337.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-8afe3721a2ddf4f03ca1bf0d9af8785d8f9cc653.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-f0750620004e7d714f1c3436811c5af42859d49d.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-1e615873b294f4f0b2cf345c756a539915a0dcbb.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.3.1/c4096a8323bbbcbeda072e3def123a9b66783361/jackson-databind-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c4096a8323bbbcbeda072e3def123a9b66783361">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/jackson-databind-2.3.1-02d786beee51d6d329e1703c7d6f40c6807b939f.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.kakao.sdk/kakaotalk/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e75eeca07f88013c74ac599fe45055adf9aaf6c9">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-0810981bc370067b8fae0900381d093fb7616961.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/3_dev_Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-62d2c8e1bb069bf8e474e8eb4a06b0d2fe14c1f1.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-306d6e792938ffb70d49da3a15079ec80cd7635c.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-a7f2cfecf17e7db921f3d8210f3609c10de7599f.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-3cc97d0f2a24d26ad44a392332a58a8a24a3f7de.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-2df89abbc397f1e7fe2a5b0a99ec357709a2a3d8.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-c73a47d57d6612d9e974a14e85106603093edd02.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-f043d4a572f9523bfdd071f323259d2110304b94.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-5150ec339c98fda22ca0e0460c1937a4db06093f.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-ee8f0e79df4fe71f157dd69c3641702e9a5e9ba6.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-44d3899e1a0b74b703f668c21403538e6ba10f51.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-d5f0baa5d2b13ea4551755729a994792c1294f3a.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.kakao.sdk/usermgmt/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="23d286375d2ccdb64654a3b5e5e5aacdd5aa26d0">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-b45bdaa6a2b20ae87b2db2bb65a49869383d9a85.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-8db9a4e478abaee14c28d2a9f216f52092a28fac.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/library-1.0.19-a828a3ddf8e3d380b46796a1688613a31c81f6cb.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.3.0/f5e853a20b60758922453d56f9ae1e64af5cb3da/jackson-annotations-2.3.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f5e853a20b60758922453d56f9ae1e64af5cb3da">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.3.0-de1ddf50c248dc84f1f3725ba59890a98e47643b.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-c76ea7c5864a9e2c37fa597b4437080dcaa615cc.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-ddb71eb6519040e9a9792b3bd55ced9ee3b43168.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-abbd711acfd6067dada0a3aecbec7d57e614711f.jar" />
+    </item>
+    <item
+        jar="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/exploded-aar/com.kakao.sdk/util/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7bf15eb5aa658545af001d3412fd2075192c7b70">
+        <dex dex="/Users/redjjol/Documents/0_플레이팅/plating_android/Plating/app/build/intermediates/pre-dexed/debug/classes-a76e4af890a0dee848fc98952eb741cccae6cede.jar" />
+    </item>
+
+</items>

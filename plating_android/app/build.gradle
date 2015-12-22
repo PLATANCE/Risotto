@@ -1,0 +1,82 @@
+//apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'io.fabric'
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
+
+android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.plating"
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 31
+        versionName "0.1.31"
+        multiDexEnabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        //javaMaxHeapSize "2g"
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // Support library. App compat
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    // Library for recyclerview
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    // Support design library
+    compile 'com.android.support:design:23.0.1'
+    // Google Play Service - DO NOT USE THIS. THIS CCREATES METHODS OVER 65K, RESULTING IN GRADLE COMPILE ERROR
+    // compile "com.google.android.gms:play-services:8.1.0"
+    // Google Play Service - Base library
+    compile 'com.google.android.gms:play-services-base:8.1.0'
+    // GCM for push notification
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
+    // Location for getting current GPS location
+    compile 'com.google.android.gms:play-services-location:8.1.0'
+    // Volley library for network connection
+    compile 'com.mcxiaoke.volley:library:1.0.+'
+    // Material design elements: button, switches, progress indicator, widget
+    compile 'com.github.rey5137:material:1.1.1'
+    // Another Material design elements: button, switches, progress indicator, widget
+    //    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    // Google library for converting Java Objects into JSON representation
+    compile 'com.google.code.gson:gson:2.2.4'
+    // Facebook SDK
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+    //mix panel
+    compile 'com.mixpanel.android:mixpanel-android:4.6.4'
+    // Android button with circular loading integration
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+    // Dialogs
+    compile('com.afollestad.material-dialogs:core:0.8.2.0@aar') {
+        transitive = true
+    }
+    //fablic
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
+        transitive = true
+    }
+    // KakaoTalk api
+    compile group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    compile group: 'com.kakao.sdk', name: 'auth', version: project.KAKAO_SDK_VERSION
+    compile group: 'com.kakao.sdk', name: 'util', version: project.KAKAO_SDK_VERSION
+    // Kakaolink library
+    compile group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
+    compile files('libs/AF-Android-SDK-v3.3.0.jar')
+}

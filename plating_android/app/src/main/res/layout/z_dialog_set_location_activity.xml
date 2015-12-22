@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="28dp"
+    android:background="@color/grey_100"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/area_name_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="서울특별시 강남구"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/location_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:hint="주소를 입력하세요."
+        android:textSize="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="-10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialog_set_location_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="취소"
+            android:background="@color/transparent"
+            android:textColor="@color/cyan_700"
+            android:textSize="16dp"/>
+        <Button
+            android:id="@+id/dialog_set_location_confirm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:textColor="@color/cyan_700"
+            android:text="확인"/>
+    </LinearLayout>
+
+</LinearLayout>

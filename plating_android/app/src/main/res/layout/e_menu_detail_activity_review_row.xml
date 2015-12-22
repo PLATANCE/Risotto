@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:paddingBottom="10dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/review_star_and_date_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/review_star_1"
+                style="@style/ReviewStarSize_Big"
+                android:background="@drawable/icon_star_empty_yellow" />
+
+            <ImageView
+                android:id="@+id/review_star_2"
+                style="@style/ReviewStarSize_Big"
+                android:background="@drawable/icon_star_empty_yellow" />
+
+            <ImageView
+                android:id="@+id/review_star_3"
+                style="@style/ReviewStarSize_Big"
+                android:background="@drawable/icon_star_empty_yellow" />
+
+            <ImageView
+                android:id="@+id/review_star_4"
+                style="@style/ReviewStarSize_Big"
+                android:background="@drawable/icon_star_empty_yellow" />
+
+            <ImageView
+                android:id="@+id/review_star_5"
+                style="@style/ReviewStarSize_Big"
+                android:background="@drawable/icon_star_empty_yellow" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/review_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingTop="3dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="2015.10.08"
+            android:textColor="@color/grey_400"
+            android:textSize="13dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/review_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/review_star_and_date_layout"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/review_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:text="음식이 너무나 맛있어요. 앞으로도 계속 좋은 음식 만들으주면 감사하겠습니다. 단어로 평점을 매기자면 이번 요리는 '미쳤다...'"
+            android:textColor="@color/grey_600"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/review_user_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/review_textview"
+            android:gravity="right"
+            android:layout_marginTop="6dp"
+            android:text="By: 010-53**-****"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+<!--
+    <View
+        android:layout_width="70dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/grey_300"
+        android:layout_below="@+id/review_text_layout"/>
+-->
+
+</RelativeLayout>

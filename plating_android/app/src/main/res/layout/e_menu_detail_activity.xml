@@ -1,0 +1,617 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_grey_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/transparent"
+            android:onClick="onClickNavigateBack"
+            android:padding="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/action_icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="TODAY'S MENU"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:background="@color/transparent"
+            android:onClick="onClickCallPlating"
+            android:padding="13dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/action_icon_phone_white_100px"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:onClick="onClickStartCartActivity"
+            android:padding="11dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/action_icon_cart_white" />
+
+        <TextView
+            android:id="@+id/total_number_of_item_in_cart"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:paddingLeft="6dp"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar_layout"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:id="@+id/menu_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:gravity="center_horizontal"
+                android:singleLine="true"
+                android:text="크림 프레체 소스를 곁들인\n연어 스테이크와 완두콩 매쉬"
+                android:textColor="@color/grey_800"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/menu_name_eng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_horizontal"
+                android:text="Salmon Steak with Creme Fraiche\nand Chunky Mashed Peas"
+                android:textColor="@color/grey_700"
+                android:textSize="12dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="20dp">
+                <!--
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/grey_200" />
+                -->
+
+                <ImageView
+                    android:id="@+id/menu_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:id="@+id/daily_menu_sold_out_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/dark_grey_b"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/restaurant_is_open_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/menu_status_main_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SOLD OUT!"
+                            android:textColor="@color/white"
+                            android:textSize="36dp" />
+
+                        <TextView
+                            android:id="@+id/menu_status_sub_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="금일 메뉴가 매진 되었습니다."
+                            android:textColor="@color/white"
+                            android:textSize="17dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/num_of_item_added_to_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/plating_add_item_yellow"
+                    android:gravity="center"
+                    android:text="1 ITEM IN CART"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+
+            <!-- Rating and Price -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:paddingBottom="14dp"
+                android:paddingTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/review_star_1"
+                                style="@style/ReviewStarSize"
+                                android:layout_gravity="center"
+                                android:background="@drawable/icon_star_filled_yellow" />
+
+                            <ImageView
+                                android:id="@+id/review_star_2"
+                                style="@style/ReviewStarSize"
+                                android:layout_gravity="center"
+                                android:background="@drawable/icon_star_filled_yellow" />
+
+                            <ImageView
+                                android:id="@+id/review_star_3"
+                                style="@style/ReviewStarSize"
+                                android:layout_gravity="center"
+                                android:background="@drawable/icon_star_filled_yellow" />
+
+                            <ImageView
+                                android:id="@+id/review_star_4"
+                                style="@style/ReviewStarSize"
+                                android:layout_gravity="center"
+                                android:background="@drawable/icon_star_filled_yellow" />
+
+                            <ImageView
+                                android:id="@+id/review_star_5"
+                                style="@style/ReviewStarSize"
+                                android:layout_gravity="center"
+                                android:background="@drawable/icon_star_filled_yellow" />
+
+                            <TextView
+                                android:id="@+id/num_of_reviews_textview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3dp"
+                                android:text="(25)"
+                                android:textColor="@color/grey_500"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/menu_price"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="12,000 원"
+                                android:textColor="@color/grey_500"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/RL_menu_price_ori"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:id="@+id/menu_price_alt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="-2dp"
+                                    android:gravity="center"
+                                    android:text="10,000 원"
+                                    android:textColor="@color/grey_600"
+                                    android:textSize="14dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageButton
+                            android:id="@+id/put_to_cart_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/shape_button_rounded_corner_2dp_color_primary" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+ 추가하기"
+                            android:textColor="@color/white"
+                            android:textSize="12dp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!--
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/review_star_1"
+                        style="@style/ReviewStarSize_Big"
+                        android:background="@drawable/icon_star_filled_yellow" />
+
+                    <ImageView
+                        android:id="@+id/review_star_2"
+                        style="@style/ReviewStarSize_Big"
+                        android:background="@drawable/icon_star_filled_yellow" />
+
+                    <ImageView
+                        android:id="@+id/review_star_3"
+                        style="@style/ReviewStarSize_Big"
+                        android:background="@drawable/icon_star_filled_yellow" />
+
+                    <ImageView
+                        android:id="@+id/review_star_4"
+                        style="@style/ReviewStarSize_Big"
+                        android:background="@drawable/icon_star_filled_yellow" />
+
+                    <ImageView
+                        android:id="@+id/review_star_5"
+                        style="@style/ReviewStarSize_Big"
+                        android:background="@drawable/icon_star_filled_yellow" />
+
+                    <TextView
+                        android:id="@+id/num_of_reviews_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(25)"
+                        android:textColor="@color/grey_500"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="85dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/RL_menu_price_ori"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/menu_price"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="12,000 원"
+                                android:textColor="@color/grey_500"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="12dp"
+                                android:layout_marginRight="12dp"
+                                android:background="@color/grey_500" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/menu_price_alt"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="-2dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="10,000 원"
+                            android:textColor="@color/grey_600"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent">
+
+                        <ImageButton
+                            android:id="@+id/put_to_cart_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:paddingBottom="20dp"
+                            android:paddingTop="3dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/shape_button_rounded_corner_2dp_color_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:paddingBottom="20dp"
+                            android:paddingRight="3dp"
+                            android:paddingTop="3dp"
+                            android:text="+ 추가하기"
+                            android:textColor="@color/white"
+                            android:textSize="12dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+            -->
+
+            <RelativeLayout
+                android:id="@+id/chef_information_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_2dp_radius_layout_plating_background"
+                android:paddingBottom="8dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/chef_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/transparent"
+                    android:padding="1dp"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/chef_image"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/chef_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_toRightOf="@id/chef_image"
+                        android:text="Andrew 셰프"
+                        android:textColor="@color/grey_800"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/chef_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/chef_name"
+                        android:layout_marginTop="6dp"
+                        android:layout_toRightOf="@id/chef_image"
+                        android:gravity="center_vertical"
+                        android:text="짧은 소개"
+                        android:textColor="@color/grey_600"
+                        android:textSize="13.5dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="-6dp"
+                    android:background="@drawable/icon_arrow_right"
+                    android:gravity="center"
+                    android:scaleType="fitXY" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_corner_2dp_radius_layout_plating_background"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="left"
+                    android:lineSpacingExtra="5dp"
+                    android:text="신선하고 촉촉한 노르웨이산 연어의 부드러운 참 맛을 느낄수 있도록 기본에 충실한 레시피를 사용했습니다. 비타민E가 풍부하고 고단백 저칼로리 식품인 연어를 수비드로 조리하여 시어링으로 마무리했습니다. 향긋한 딜 허브와 상큼한 케이퍼가 비린맛을 잡아주고 부드러운 크림 프레체 소스를 곁들이면 훌륭한 스테이크 요리를 즐길 수 있습니다. 한끼 식사로 충분하도록 완두콩으로 만든 매쉬에 라임으로 깔끔함을 더한 사이드와 웨지감자를 준비했습니다."
+                    android:textColor="@color/grey_600"
+                    android:textSize="13dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ingredients"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/ingredients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="5dp"
+                        android:text="영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 영양소 정보 "
+                        android:textColor="@color/grey_600"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:text="Calories"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/calories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="160 cal"
+                        android:textColor="@color/grey_600"
+                        android:textSize="13dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/customer_review_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_corner_2dp_radius_layout_plating_background"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:text="고객님들의 평가"
+                    android:textColor="@color/grey_700"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/shape_button_rounded_corner_2dp_color_primary"
+                android:onClick="onClickViewMoreOrLessReview"
+                android:text="리뷰 더 보기"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
