@@ -1,11 +1,9 @@
-package com.plating.pages.s_recommend;
+package com.plating.pages.s_refer;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,17 +15,15 @@ import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.kakao.util.KakaoParameterException;
 import com.plating.R;
 import com.plating.application.PlatingActivity;
-import com.plating.helperAPI.DialogAPI;
 import com.plating.helperAPI.ToastAPI;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
-import com.plating.network.r_coupon.GetMyCouponListFromServer;
 import com.plating.network.s_recommend.GetUserCodeFromServer;
 
 /**
  * Created by home on 15. 12. 21..
  */
-public class RecommendActivity extends PlatingActivity implements View.OnClickListener {
+public class ReferActivity extends PlatingActivity implements View.OnClickListener {
 
     private ImageView recommend_image;
     private LinearLayout recommend_layout_kakao;

@@ -22,7 +22,7 @@ import com.plating.application.Constant;
 import com.plating.helperAPI.DialogAPI;
 import com.plating.pages.q_promotion.RegisterPromotionActivity;
 import com.plating.pages.r_coupon.MyCouponListActivity;
-import com.plating.pages.s_recommend.RecommendActivity;
+import com.plating.pages.s_refer.ReferActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.object.NavigationDrawerMenu;
 import com.plating.pages.o_order_history.OrderHistoryListActivity;
@@ -143,7 +143,7 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
                     } catch (KakaoParameterException e) {
                         e.printStackTrace();
                     }*/
-            Intent intent = new Intent(mContext, RecommendActivity.class);
+            Intent intent = new Intent(mContext, ReferActivity.class);
             mContext.startActivity(intent);
         }
 

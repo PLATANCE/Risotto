@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/plating_android_0.1.32.iml" filepath="$PROJECT_DIR$/plating_android_0.1.32.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plating_android.iml" filepath="$PROJECT_DIR$/plating_android.iml" />
     </modules>
   </component>
 </project>

@@ -7,21 +7,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.plating.application.Constant;
 import com.plating.application.Debug;
 import com.plating.network.RequestURL;
-import com.plating.object.CouponListRow;
-import com.plating.pages.h_cart.CartActivity;
-import com.plating.pages.r_coupon.MyCouponListActivity;
-import com.plating.pages.s_recommend.RecommendActivity;
+import com.plating.pages.s_refer.ReferActivity;
 import com.plating.util.SVUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by home on 15. 12. 21..
@@ -39,7 +32,7 @@ public class GetUserCodeFromServer {
                         Debug.d(LOG_TAG, "getDataFromServer.response: " + response.toString());
                         String str = convertJsonToString(response);
                         Debug.d(LOG_TAG, "convertJsonToString: " + str);
-                        ((RecommendActivity) context).getUserCodeFromServer_Callback(str);
+                        ((ReferActivity) context).getUserCodeFromServer_Callback(str);
 
                     }
                 },
