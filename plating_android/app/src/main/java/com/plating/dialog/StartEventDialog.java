@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -61,7 +62,6 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
         imageButton.setOnClickListener(this);
 
         this.setCanceledOnTouchOutside(false);
-
     }
 
     @Override

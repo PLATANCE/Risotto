@@ -204,6 +204,7 @@ public class DailyMenuListActivity extends PlatingActivity {
                     public void run() {
                         MixPanel.mixPanel_trackWithOutProperties("Show Event Dialog");
                         startEventDialog.show();
+
                     }
                 }, 600);
 

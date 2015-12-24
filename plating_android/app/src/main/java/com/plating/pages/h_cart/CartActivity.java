@@ -801,7 +801,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         } else if(radio_pay_card.isChecked()) {
             if(TV_card.getText().equals(Constant.PLEASE_ENTER_CREDIT_CARD)) {
                 Btn_order.setEnabled(false);
-                Btn_order.setText("카드를 등록해주세요");
+                Btn_order.setText("신용카드를 등록해주세요");
                 isEnables = false;
             }
         }

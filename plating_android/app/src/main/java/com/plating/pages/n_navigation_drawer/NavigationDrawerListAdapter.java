@@ -120,7 +120,11 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
         }
 
         public void whatIsPlating() {
-            DialogAPI.showDialog(mContext, "Plating 이란?", "플레이팅의 목표는 우리나라 모든 사람들이 저렴하고 합리적인 가격에 높은 퀄리티와 건강에 좋은 음식을 드실 수 있게 하는것 입니다.", "확인", null);
+            DialogAPI.showDialog(mContext,
+                    "Plating 이란?",
+                    "플레이팅은 정직하고\n특별한 음식을 제공합니다.\n\n" +
+                            "국내 실력파 셰프들이 엄선한 식재료와 레시피로" +
+                            "직접 조리한 요리를 합리적인 가격대에 즐기세요!", "확인", null);
         }
 
         public void recommendToFriends() {
