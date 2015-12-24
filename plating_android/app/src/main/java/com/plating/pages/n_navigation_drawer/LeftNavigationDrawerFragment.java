@@ -46,21 +46,23 @@ public class LeftNavigationDrawerFragment extends android.app.Fragment {
 
     public static List<NavigationDrawerMenu> getData() {
         List<NavigationDrawerMenu> data = new ArrayList<>();
-        String[] titles = {"주문 내역", "프로모션 코드 등록", "내 쿠폰함", "고객 지원", "소중한 사람에게 알려주기", "리뷰 써주기", "Plating 이란?"};
+        String[] titles = {"주문 내역", "프로모션 코드 등록", "내 쿠폰함", "고객 지원", "친구초대", "리뷰 써주기", "Plating 이란?"};
+        String[] moreInfos = {"", "", "", "", "1만원+1만원 무료쿠폰 지급", "", ""};
 
         int[] icons = {
-                R.drawable.nav_icon_receipt_100,
-                R.drawable.nav_icon_promotion_100,
-                R.drawable.nav_icon_coupon_100,
-                R.drawable.nav_icon_headset_100,
-                R.drawable.nav_icon_share_100,
-                R.drawable.nav_icon_pencil_100,
-                R.drawable.nav_icon_restaurant_100};
+                R.drawable.nav_icon_receipt_gray_100,
+                R.drawable.nav_icon_promotion_gray_100,
+                R.drawable.nav_icon_coupon_gray_100,
+                R.drawable.nav_icon_headset_gray_100,
+                R.drawable.nav_icon_share_gray_100,
+                R.drawable.nav_icon_pencil_gray_100,
+                R.drawable.nav_icon_restaurant_gray_100};
 
         for(int i = 0; i < titles.length; i++) {
             NavigationDrawerMenu menu = new NavigationDrawerMenu();
             menu.iconId = icons[i];
             menu.title = titles[i];
+            menu.moreInfo = moreInfos[i];
             data.add(menu);
         }
 

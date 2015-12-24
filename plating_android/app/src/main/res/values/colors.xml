@@ -60,6 +60,10 @@
     <color name="search_activity_text_color">#ffffff</color>
 
 
+    <!-- Rooney's Colors-->
+    <color name="drawerGray">#4C4948</color>
+    <color name="referCenterBackground">#3E3A39</color>
+
     <!-- Black with opacity -->
     <color name="black">#000000</color>
     <color name="black_e">#e0000000</color>

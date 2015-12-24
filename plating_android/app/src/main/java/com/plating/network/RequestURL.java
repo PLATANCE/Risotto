@@ -49,6 +49,8 @@ public class RequestURL {
     public static final String DIALOG_IMAGE_URL = "http://plating.co.kr/app/media/dialog/";
     // URL header for coupon image
     public static final String COUPON_IMAGE_URL = "http://plating.co.kr/app/media/coupon/";
+    // URL header for refer image
+    public static final String REFER_IMAGE_URL = "http://plating.co.kr/app/media/refer/";
 
 
 

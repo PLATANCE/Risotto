@@ -6,4 +6,5 @@ package com.plating.object;
 public class NavigationDrawerMenu {
     public int iconId;
     public String title;
+    public String moreInfo;
 }
