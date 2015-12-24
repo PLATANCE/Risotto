@@ -34,9 +34,12 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     private LinearLayout recommend_layout_sms;
     private LinearLayout recommend_layout_url;
     private String refer_text;
+    private String detail;
     private TextView user_code;
     private TextView detail_text;
     private SpannableString content;
+    private String refer_link;
+    private String refer_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +73,9 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         detail_text.setText(content);
         detail_text.setOnClickListener(this);
 
-        refer_text = "친구들에게 플레이팅을 알려주세요.\n친구가 코드를 입력하면 10,000원이 적립되고\n첫 주문시 나에게도 10,000원이 적립됩니다!";
+        detail = "초대받은 친구가 추천 코드를 입력하고 첫 주문을 하면, 초대하신 분께 1만원 포인트를 드립니다.";
+        refer_text = "셰프의 요리를 집에서 즐겨요! 지금 플레이팅 앱을 다운받고 첫 주문 1만원 할인 받으세요.";
+        refer_link = "http://goo.gl/t5lrSL";
     }
 
     public void getUserCodeFromServer() {
@@ -79,7 +84,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
 
     public void getUserCodeFromServer_Callback(String userCode) {
         user_code.setText(userCode);
-        refer_text += "프로모션 코드 : " + userCode;
+        this.refer_code = userCode;
     }
 
     @Override
@@ -91,7 +96,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         } else if (v == recommend_layout_url) {
             copyURL();
         } else if(v == detail_text) {
-            DialogAPI.showDialog(this, "친구 추천!!", refer_text, "닫기", null);
+            DialogAPI.showDialog(this, "친구를 초대하세요!", detail, "닫기", null);
         }
     }
 
@@ -100,8 +105,8 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         try {
             KakaoLink kakaoLink = KakaoLink.getKakaoLink(this);
             final KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-            kakaoTalkLinkMessageBuilder.addText(refer_text);
-            kakaoTalkLinkMessageBuilder.addAppButton("'플레이팅' 앱 다운받기",
+            kakaoTalkLinkMessageBuilder.addText(refer_text + "\n추천인 코드:" + refer_code);
+            kakaoTalkLinkMessageBuilder.addAppButton("집에서 셰프의 요리를!",
                     new AppActionBuilder().addActionInfo(AppActionInfoBuilder.createAndroidActionInfoBuilder()
                             .setMarketParam("referrer=kakaotalklink")
                             .build())
@@ -121,7 +126,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         //DialogAPI.showDialog(this, "고객 지원", "문자 눌렸음", "확인", null);
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.putExtra("sms_body", refer_text);
+        intent.putExtra("sms_body", refer_text + "\n다운로드 링크: " + refer_link + "\n추천인 코드: " + refer_code);
         intent.setType("vnd.android-dir/mms-sms");
         startActivity(intent);
     }
@@ -129,7 +134,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     public void copyURL() {
         //DialogAPI.showDialog(this, "고객 지원", "URL 복사 눌렸음", "확인", null);
         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("refer_text", refer_text);
+        ClipData clipData = ClipData.newPlainText("refer_text", refer_text + "\n다운로드 링크: " + refer_link + "\n추천인 코드: " + refer_code);
         clipboardManager.setPrimaryClip(clipData);
         ToastAPI.showToast("복사 되었습니다.");
     }

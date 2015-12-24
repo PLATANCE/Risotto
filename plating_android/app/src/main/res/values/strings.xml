@@ -7,8 +7,8 @@
     <string name="facebook_app_id">1628165434090487</string>
 
     <!-- KakaoTalk API -->
-    <string name="kakao_app_key">78d922a8db1cb9beee598c916badec55</string>
-    <string name="kakao_scheme">kakao78d922a8db1cb9beee598c916badec55</string>
+    <string name="kakao_app_key">35c3983a3275c9d0372965f9aed3b366</string>
+    <string name="kakao_scheme">kakao35c3983a3275c9d0372965f9aed3b366</string>
     <string name="kakaolink_host">kakaolink</string>
 
     <!-- Mixpanel Plating_mobile -->

@@ -56,6 +56,9 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host" />
                 <!-- Accepts URIs that begin with "recipe-app://recipes" -->
                 <data android:scheme="plating" />
             </intent-filter>
@@ -110,7 +113,18 @@
         <activity android:name=".pages.s_refer.ReferActivity"
             android:label="@string/title_activity_recommend"
             android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".pages.o_order_history.OrderHistoryActivity"
             android:label="@string/title_activity_order_history"

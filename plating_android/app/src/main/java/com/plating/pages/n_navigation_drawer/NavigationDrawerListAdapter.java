@@ -88,8 +88,8 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
         public void onClick(View v) {
             switch (getAdapterPosition()) {
                 case 0:
-                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 주문 내역");
-                    showOrderHistoryList();
+                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 친구 추천");
+                    recommendToFriends();
                     break;
                 case 1:
                     MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 프로모션 코드 등록");
@@ -102,11 +102,10 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
                 case 3:
                     MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 고객 지원");
                     getCustomerService();
-
                     break;
                 case 4:
-                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 소중한 사람에게 알려주기");
-                    recommendToFriends();
+                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 주문 내역");
+                    showOrderHistoryList();
                     break;
                 case 5:
                     MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 리뷰 써주기");

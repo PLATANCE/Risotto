@@ -2,6 +2,7 @@ package com.plating.object_singleton;
 
 import android.util.Log;
 
+import com.plating.application.Constant;
 import com.plating.object.MenuInCart;
 
 import java.util.ArrayList;
@@ -181,6 +182,18 @@ public class Cart {
         return totalDiscountedPrice;
     }
 
+
+    public int getPriceToPayWithoutPoint(){
+        int totalAltPrice = 0;
+        for(int i = 0 ; i < mMenuList.size(); i++){
+            totalAltPrice += mMenuList.get(i).alt_price * mMenuList.get(i).count;
+        }
+        return totalAltPrice + Constant.DELIVERY_PRICE;
+    }
+
+    public int getAvailablePoint(int currentMyPoint) {
+        return Math.min(getPriceToPayWithoutPoint(), currentMyPoint);
+    }
     private final Comparator<MenuInCart> myComparator = new Comparator<MenuInCart>() {
         @Override
         public int compare(MenuInCart box, MenuInCart box2) {

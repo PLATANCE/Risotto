@@ -46,15 +46,15 @@ public class LeftNavigationDrawerFragment extends android.app.Fragment {
 
     public static List<NavigationDrawerMenu> getData() {
         List<NavigationDrawerMenu> data = new ArrayList<>();
-        String[] titles = {"주문 내역", "프로모션 코드 등록", "내 쿠폰함", "고객 지원", "친구초대", "리뷰 써주기", "Plating 이란?"};
-        String[] moreInfos = {"", "", "", "", "1만원+1만원 무료쿠폰 지급", "", ""};
+        String[] titles = {"친구 초대", "프로모션 코드 등록", "내 쿠폰함", "고객 지원", "주문 내역", "리뷰 써주기", "Plating 이란?"};
+        String[] moreInfos = {"1만원+1만원 무료쿠폰", "", "", "", "", "", ""};
 
         int[] icons = {
+                R.drawable.nav_icon_share_gray_100,
                 R.drawable.nav_icon_receipt_gray_100,
                 R.drawable.nav_icon_promotion_gray_100,
                 R.drawable.nav_icon_coupon_gray_100,
                 R.drawable.nav_icon_headset_gray_100,
-                R.drawable.nav_icon_share_gray_100,
                 R.drawable.nav_icon_pencil_gray_100,
                 R.drawable.nav_icon_restaurant_gray_100};
 

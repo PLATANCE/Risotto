@@ -597,6 +597,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 params.put("menu_d_idx", menu_d_idx);
                 params.put("order_amount", order_amount);
                 params.put("credit_used", credit_used + "");
+                params.put("point", Integer.toString(Cart.getCartInstance().getAvailablePoint(myPoint)) + "");
                 params.put("total_price", total_price + "");
                 params.put("pay_method", pay_method + "");
 
