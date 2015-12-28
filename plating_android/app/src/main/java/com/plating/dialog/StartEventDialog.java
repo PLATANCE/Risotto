@@ -1,5 +1,6 @@
 package com.plating.dialog;
 
+import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,9 +8,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -54,6 +58,15 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
         imageLoader = VolleySingleton.getsInstance().getmImageLoader();
         imageButton = (ImageButton) findViewById(R.id.bt_close);
 
+        // set each application's width and height
+
+        //WindowManager windowManager = (WindowManager) getContext().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+
+        ViewGroup.LayoutParams  params = (ViewGroup.LayoutParams)image.getLayoutParams();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        image.setLayoutParams(params);
+
         // Image Load
         VolleySingleton.getsInstance().loadImageToImageView(image, imageUrl);
 
@@ -63,6 +76,7 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
 
         this.setCanceledOnTouchOutside(false);
     }
+
 
     @Override
     public void onClick(View v) {

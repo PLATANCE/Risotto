@@ -17,9 +17,6 @@ public class Constant {
     public static String ORDER_PLACED = "ORDER_PLACED";
 
 
-    //배송료
-    public static int DELIVERY_PRICE = 3500;
-
     // Constants for Server Requests
     public static String SERVER_CONNECTION_FAILURE = "서버와의 연결이 불안정합니다.";
 
