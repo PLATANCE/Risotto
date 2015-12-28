@@ -36,6 +36,6 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_order_history">OrderHistoryActivity</string>
     <string name="title_activity_my_coupon">MyCouponListActivity</string>
-    <string name="title_activity_recommend">RecommendActivity</string>
+    <string name="title_activity_refer">ReferActivity</string>
 
 </resources>
