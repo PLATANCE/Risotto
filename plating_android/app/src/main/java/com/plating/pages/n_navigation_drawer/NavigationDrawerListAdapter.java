@@ -83,12 +83,12 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
             moreInfo = (TextView) itemView.findViewById(R.id.list_moreInfo);
         }
 
-        //"주문 내역", "쿠폰 등록", "고객 지원", "소중한 사람에게 알려주기", "리뷰 써주기", "Plating 이란?"
+        //"친구 초대", "프로모션 코드 등록", "내 쿠폰함", "주문 내역", "고객 지원", "리뷰 써주기", "Plating 이란?"
         @Override
         public void onClick(View v) {
             switch (getAdapterPosition()) {
                 case 0:
-                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 친구 추천");
+                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 친구 초대");
                     recommendToFriends();
                     break;
                 case 1:
@@ -100,12 +100,12 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
                     showMyCouponList();
                     break;
                 case 3:
-                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 고객 지원");
-                    getCustomerService();
-                    break;
-                case 4:
                     MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 주문 내역");
                     showOrderHistoryList();
+                    break;
+                case 4:
+                    MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 고객 지원");
+                    getCustomerService();
                     break;
                 case 5:
                     MixPanel.mixPanel_trackWithOutProperties("Click Navigation Item - 리뷰 써주기");

@@ -53,6 +53,14 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.a_event_dialog);
 
+        // control dialog size
+        DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
+        int height = metrics.heightPixels;
+        int width = metrics.widthPixels;
+
+        getWindow().setLayout(height / 2, height / 2);
+
+
         // Set View
         image = (ImageView) findViewById(R.id.imageView);
         imageLoader = VolleySingleton.getsInstance().getmImageLoader();
@@ -61,12 +69,13 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
         // set each application's width and height
 
         //WindowManager windowManager = (WindowManager) getContext().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-
+        /*
         ViewGroup.LayoutParams  params = (ViewGroup.LayoutParams)image.getLayoutParams();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         image.setLayoutParams(params);
-
+        Log.d("StartEventDialog :", "width:" + params.width + "Height:" + params.height);
+        */
         // Image Load
         VolleySingleton.getsInstance().loadImageToImageView(image, imageUrl);
 

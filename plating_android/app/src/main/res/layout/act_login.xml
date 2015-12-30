@@ -8,15 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5.5"
-        android:src="@drawable/intro_3"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/intro_3" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4.5"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,29 +27,30 @@
 
             <ImageButton
                 android:id="@+id/act_login_fb_fake"
-                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="3"
                 android:background="@drawable/tutorial_login_fb"
                 android:scaleType="centerCrop" />
 
             <ImageButton
-                android:layout_marginTop="5dp"
                 android:id="@+id/act_login_kakao_fake"
-                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="3"
-                android:background="@drawable/tutorial_login_kakao"/>
+                android:background="@drawable/tutorial_login_kakao" />
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <LinearLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
@@ -62,20 +63,20 @@
                     android:gravity="center">
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="회원가입과 동시에 플레이팅의 " />
+                        android:text="회원가입과 동시에 플레이팅의 "
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:textColor="@color/munchery_orange"
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="onClick_openServiceTerm"
                         android:text="@string/service_policy"
-                        android:onClick="onClick_openServiceTerm"/>
+                        android:textColor="@color/munchery_orange"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -85,20 +86,20 @@
                     android:gravity="center">
 
                     <TextView
-                        android:textColor="@color/munchery_orange"
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="onClick_openPrivacyTerm"
                         android:text="@string/privacy_policy"
-                        android:onClick="onClick_openPrivacyTerm"/>
+                        android:textColor="@color/munchery_orange"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="에 동의하시게 됩니다." />
+                        android:text="에 동의하시게 됩니다."
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -107,10 +108,10 @@
 
 
     <LinearLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/act_login_fb"

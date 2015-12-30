@@ -25,7 +25,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="3"
             android:gravity="center"
-            android:textScaleX="0.9"
             android:lineSpacingExtra="2sp"
             android:text="냉동 육류, 어류를\n사용하지 않습니다."
             android:textColor="@color/munchery_orange"

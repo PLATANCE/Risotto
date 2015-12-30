@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5.5"
-        android:src="@drawable/intro_3"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/intro_3" />
 
     <LinearLayout
         android:id="@+id/linear_before"
@@ -28,7 +28,6 @@
             android:lineSpacingExtra="2sp"
             android:text="국내 실력파 셰프들이 직접 조리하여\n정성을 담아 배달합니다."
             android:textColor="@color/munchery_orange"
-            android:textScaleX="0.9"
             android:textSize="17sp"
             android:textStyle="bold" />
 
@@ -79,11 +78,11 @@
 
     <LinearLayout
         android:id="@+id/linear_after"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,24 +92,24 @@
 
 
             <ImageButton
-                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="3"
-                android:background="@drawable/tutorial_login_kakao"/>
+                android:background="@drawable/tutorial_login_kakao" />
 
             <ImageButton
-                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="3"
-                android:background="@drawable/tutorial_login_fb"/>
+                android:background="@drawable/tutorial_login_fb" />
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,20 +124,20 @@
                     android:gravity="center">
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="회원가입과 동시에 플레이팅의 " />
+                        android:text="회원가입과 동시에 플레이팅의 "
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView_service"
-                        android:textColor="@color/munchery_orange"
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/service_policy" />
+                        android:text="@string/service_policy"
+                        android:textColor="@color/munchery_orange"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -149,19 +148,19 @@
 
                     <TextView
                         android:id="@+id/textView_privacy"
-                        android:textColor="@color/munchery_orange"
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/privacy_policy" />
+                        android:text="@string/privacy_policy"
+                        android:textColor="@color/munchery_orange"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="11sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="에 동의하시게 됩니다." />
+                        android:text="에 동의하시게 됩니다."
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
