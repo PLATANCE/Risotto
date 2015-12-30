@@ -64,10 +64,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".pages.ab_tutorial.TutorialActivity"
+            android:label="@string/title_activity_tutorial"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".pages.b_login.LogInActivity"
             android:label="@string/title_activity_my_information"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.LoginActivity" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pages.c_daily_menu_list.DailyMenuListActivity"
             android:label="@string/title_activity_menu_list"

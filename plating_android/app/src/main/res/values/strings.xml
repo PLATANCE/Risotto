@@ -33,9 +33,15 @@
     <string name="title_activity_welcome">플레이팅</string>
     <string name="title_activity_payment">PaymentActivity</string>
     <string name="title_activity_my_information">MyInformationActivity</string>
+    <string name="title_activity_tutorial">TutorialActivity</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_order_history">OrderHistoryActivity</string>
     <string name="title_activity_my_coupon">MyCouponListActivity</string>
     <string name="title_activity_refer">ReferActivity</string>
 
+
+
+    <!-- underline Text-->
+    <string name="service_policy"><u>서비스 이용약관</u></string>
+    <string name="privacy_policy"><u>개인정보 취급방침</u></string>
 </resources>

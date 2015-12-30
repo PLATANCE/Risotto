@@ -48,6 +48,13 @@
     <color name="munchery_add_item_yellow">#F0FED157</color>
     <color name="munchery_light_grey_white">#F4F7F8</color>
 
+
+    <color name="munchery_radius_selected">#FFEF673B</color>
+    <color name="munchery_radius_unselected">#80EF673B</color>
+
+
+
+
     <!--Chee Hoon Ha's Colors-->
     <color name="emerald">#1AC8B0</color>
     <color name="primary">#009688</color>

@@ -7,12 +7,14 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import com.plating.R;
 import com.plating.application.PlatingActivity;
 import com.plating.gcm.RegistrationIntentService;
 import com.plating.helperAPI.AndroidVersionAPI;
 import com.plating.pages.a_splash.dialog.UpdateDialog;
 import com.plating.network.a_splash.CheckForAppUpdate;
+import com.plating.pages.ab_tutorial.TutorialActivity;
 import com.plating.pages.b_login.LogInActivity;
 import com.plating.pages.c_daily_menu_list.DailyMenuListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
@@ -80,12 +82,22 @@ public class SplashActivity extends PlatingActivity {
         // Otherwise, start Sign up activity
         if (SVUtil.GetUserIdx(mContext) == 0) {
             /*
-             * Add Tutorial!!
+             * Tutorial Activity Start
              */
-            ShowLoginPage();
+            showTutorial();
+            //ShowLoginPage();
         } else {
             ShowDailyMenuList();
         }
+    }
+
+    private void showTutorial() {
+        Intent intent = new Intent(mContext, TutorialActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+        //Apply splash exit (fade out) and main entry (fade in) animation transitions.
+        overridePendingTransition(R.anim.abc_grow_fade_in_from_bottom, R.anim.abc_shrink_fade_out_from_bottom);
     }
 
     private void ShowLoginPage() {

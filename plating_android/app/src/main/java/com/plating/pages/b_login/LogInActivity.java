@@ -49,6 +49,7 @@ import java.util.Map;
  * Created by redjjol on 17/09/15.
  */
 public class LogInActivity extends PlatingActivity implements View.OnClickListener {
+    public static String LOG_TAG = "LogInActivity";
     private LoginButton Button_fb;
     private com.kakao.usermgmt.LoginButton Button_kakao;
     private ImageButton Btn_fb_fake, Btn_kakao_fake;
@@ -65,6 +66,7 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(LOG_TAG, "LifeCyle : onCreate()");
         setContentView(R.layout.act_login);
 
         os_version = Build.VERSION.SDK_INT + "";
