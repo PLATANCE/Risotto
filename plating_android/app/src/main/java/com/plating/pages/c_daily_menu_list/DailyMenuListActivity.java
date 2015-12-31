@@ -71,7 +71,6 @@ public class DailyMenuListActivity extends PlatingActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences.Editor editor;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,22 +197,17 @@ public class DailyMenuListActivity extends PlatingActivity {
             String time = sharedPreferences.getString("time", "");
             Log.d(LOG_TAG, "date :" + date + " time : " + time);
             if(!time.equals(date)) {
-                startEventDialog = new StartEventDialog(this, RequestURL.DIALOG_IMAGE_URL + image_url_dialog, redirect);
+                startEventDialog = new StartEventDialog(this, RequestURL.DIALOG_IMAGE_URL + image_url_dialog, redirect, editor);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         MixPanel.mixPanel_trackWithOutProperties("Show Event Dialog");
                         startEventDialog.show();
-
                     }
                 }, 600);
             }
-
-            editor.putString("time", date);
-            editor.commit();
         }
-
     }
 
 

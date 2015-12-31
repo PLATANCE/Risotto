@@ -44,4 +44,5 @@
     <!-- underline Text-->
     <string name="service_policy"><u>서비스 이용약관</u></string>
     <string name="privacy_policy"><u>개인정보 취급방침</u></string>
+    <string name="not_to_show_today"><u>오늘 그만 보기</u></string>
 </resources>

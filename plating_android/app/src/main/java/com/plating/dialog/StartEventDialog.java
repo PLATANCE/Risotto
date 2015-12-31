@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
@@ -26,6 +28,9 @@ import com.plating.network.VolleySingleton;
 import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Rooney on 15. 12. 14..
  */
@@ -34,17 +39,21 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
     ImageView image;
     String imageUrl;
     ImageLoader imageLoader;
-    ImageButton imageButton;
+    ImageButton bt_close;
+    TextView textview_close_again;
+
+
     Context mContext;
     int redirect;
+    SharedPreferences.Editor editor;
 
-    public StartEventDialog(Context context, String imageUrl, int redirect) {
+    public StartEventDialog(Context context, String imageUrl, int redirect, SharedPreferences.Editor editor) {
         super(context);
         this.mContext = context;
         this.imageUrl = imageUrl;
         this.redirect = redirect;
+        this.editor = editor;
     }
-
 
 
     @Override
@@ -56,7 +65,6 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
         // control dialog size
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
         int height = metrics.heightPixels;
-        int width = metrics.widthPixels;
 
         getWindow().setLayout(height / 2, height / 2);
 
@@ -64,24 +72,16 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
         // Set View
         image = (ImageView) findViewById(R.id.imageView);
         imageLoader = VolleySingleton.getsInstance().getmImageLoader();
-        imageButton = (ImageButton) findViewById(R.id.bt_close);
+        bt_close = (ImageButton) findViewById(R.id.bt_close);
+        textview_close_again = (TextView) findViewById(R.id.textview_close_again);
 
-        // set each application's width and height
-
-        //WindowManager windowManager = (WindowManager) getContext().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        /*
-        ViewGroup.LayoutParams  params = (ViewGroup.LayoutParams)image.getLayoutParams();
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = WindowManager.LayoutParams.MATCH_PARENT;
-        image.setLayoutParams(params);
-        Log.d("StartEventDialog :", "width:" + params.width + "Height:" + params.height);
-        */
-        // Image Load
+        // image load
         VolleySingleton.getsInstance().loadImageToImageView(image, imageUrl);
 
         // set Listener
         image.setOnClickListener(this);
-        imageButton.setOnClickListener(this);
+        bt_close.setOnClickListener(this);
+        textview_close_again.setOnClickListener(this);
 
         this.setCanceledOnTouchOutside(false);
     }
@@ -89,16 +89,27 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == imageButton) {
+        if (v == bt_close) {
+            MixPanel.mixPanel_trackWithOutProperties("Click Close Dialog");
             dismiss();
-            MixPanel.mixPanel_trackWithOutProperties("Close Event Dialog");
-        } else if(v == image) {
+        } else if (v == textview_close_again) {
+            MixPanel.mixPanel_trackWithOutProperties("Click Not to Show Today");
+            setDateToSharedPrefference();
             dismiss();
+        } else if (v == image) {
             MixPanel.mixPanel_trackWithOutProperties("Detail Event Dialog");
-            if(redirect == 1) {
+            dismiss();
+            if (redirect == 1) {
                 Intent intent = new Intent(mContext, MyCouponListActivity.class);
                 mContext.startActivity(intent);
             }
         }
+    }
+
+    public void setDateToSharedPrefference() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateFormat.format(new Date());
+        editor.putString("time", date);
+        editor.commit();
     }
 }
