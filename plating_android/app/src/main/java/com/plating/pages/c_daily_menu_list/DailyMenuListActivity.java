@@ -208,7 +208,6 @@ public class DailyMenuListActivity extends PlatingActivity {
 
                     }
                 }, 600);
-
             }
 
             editor.putString("time", date);

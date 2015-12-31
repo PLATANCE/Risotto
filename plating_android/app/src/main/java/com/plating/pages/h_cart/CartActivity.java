@@ -418,7 +418,11 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         int cartTotal = cart.getTotalPriceOfAllItems();
 
         // Delivery Fee
-        mDeliveryFee.setText(PriceAPI.intPriceToStringPriceWonSymbolFormat(deliveryFee));
+        if(deliveryFee == 0) {
+            mDeliveryFee.setText("(이벤트) 무료");
+        } else {
+            mDeliveryFee.setText(PriceAPI.intPriceToStringPriceWonSymbolFormat(deliveryFee));
+        }
 
 
         // 쿠폰 추가 시, RL_discount visible

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.plating.R;
+import com.plating.sdk_tools.mix_panel.MixPanel;
 
 /**
  * Created by home on 15. 12. 29..
@@ -21,8 +22,8 @@ public class TutorialFragment2 extends Fragment {
     }
 
     public static final TutorialFragment2 newInstance() {
-        Log.d("TutorialFragment2", "newInstance");
         TutorialFragment2 fragment2 = new TutorialFragment2();
+        MixPanel.mixPanel_trackWithOutProperties("(SCREEN) Tutorial 2");
         Bundle args = new Bundle();
         args.putInt("num", 2);
         fragment2.setArguments(args);

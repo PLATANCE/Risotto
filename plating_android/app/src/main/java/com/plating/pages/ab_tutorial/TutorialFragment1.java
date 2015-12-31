@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.plating.R;
 import com.plating.sdk_tools.circleindicator.CircleIndicator;
+import com.plating.sdk_tools.mix_panel.MixPanel;
 
 /**
  * Created by home on 15. 12. 29..
@@ -23,8 +24,8 @@ public class TutorialFragment1 extends Fragment {
     }
 
     public static final TutorialFragment1 newInstance() {
-        Log.d("TutorialFragment1", "newInstance");
         TutorialFragment1 fragment1 = new TutorialFragment1();
+        MixPanel.mixPanel_trackWithOutProperties("(SCREEN) Tutorial 1");
         Bundle args = new Bundle();
         args.putInt("num", 1);
         fragment1.setArguments(args);

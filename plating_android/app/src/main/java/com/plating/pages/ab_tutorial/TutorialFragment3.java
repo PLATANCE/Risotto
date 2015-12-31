@@ -1,9 +1,6 @@
 package com.plating.pages.ab_tutorial;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,9 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.plating.R;
 import com.plating.pages.b_login.LogInActivity;
@@ -38,8 +32,8 @@ public class TutorialFragment3 extends Fragment implements View.OnClickListener 
     }
 
     public static final TutorialFragment3 newInstance() {
-        Log.d("TutorialFragment3", "newInstance");
         TutorialFragment3 fragment3 = new TutorialFragment3();
+        MixPanel.mixPanel_trackWithOutProperties("(SCREEN) Tutorial 3");
         Bundle args = new Bundle();
         args.putInt("num", 3);
         fragment3.setArguments(args);
@@ -59,9 +53,5 @@ public class TutorialFragment3 extends Fragment implements View.OnClickListener 
 
         Intent intent = new Intent(getActivity(), LogInActivity.class);
         startActivity(intent);
-
-        //Apply splash exit (fade out) and main entry (fade in) animation transitions.
-        //((Activity) getActivity()).overridePendingTransition(0, 0);
-
     }
 }

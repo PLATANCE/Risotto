@@ -18,7 +18,7 @@
     </style>
 
     <style name="Theme.WelcomeActivity" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_screen_ver_3</item>
+        <item name="android:windowBackground">@drawable/intro_0</item>
         <item name="android:windowFullscreen">true</item>
     </style>
     
