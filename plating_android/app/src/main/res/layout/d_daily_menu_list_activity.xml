@@ -1,5 +1,4 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
@@ -18,26 +17,28 @@
             android:layout_height="48dp"
             android:background="@color/black"
             android:orientation="horizontal">
+
             <include
                 android:id="@+id/tool_bar"
                 layout="@layout/tool_bar" />
+
             <ImageButton
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:padding="12dp"
                 android:layout_alignParentLeft="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/action_icon_menu_white_ver2"
                 android:background="@color/transparent"
-                android:onClick="onClickShowLeftNavigationDrawer"/>
+                android:onClick="onClickShowLeftNavigationDrawer"
+                android:padding="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/action_icon_menu_white_ver2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
                 android:layout_centerInParent="true"
+                android:text="TODAY'S MENU"
                 android:textColor="@color/white"
-                android:text="TODAY'S MENU"/>
+                android:textSize="15dp" />
             <!--
             <LinearLayout
                 android:id="@+id/open_future_date_selection_layout"
@@ -61,37 +62,38 @@
             </LinearLayout>
 -->
             <ImageButton
-                android:visibility="gone"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginRight="40dp"
-                android:padding="13dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:background="@color/transparent"
+                android:onClick="onClickCallPlating"
+                android:padding="13dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/action_icon_phone_white_100px"
-                android:background="@color/transparent"
-                android:onClick="onClickCallPlating"/>
+                android:visibility="gone" />
 
             <ImageButton
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:padding="11dp"
                 android:layout_alignParentRight="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/action_icon_cart_white"
                 android:background="@color/transparent"
-                android:onClick="onClickStartCartActivity"/>
+                android:onClick="onClickStartCartActivity"
+                android:padding="11dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/action_icon_cart_white" />
+
             <TextView
                 android:id="@+id/total_number_of_item_in_cart"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentRight="true"
-                android:paddingLeft="6dp"
-                android:paddingBottom="16dp"
-                android:gravity="center"
                 android:background="@color/transparent"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:paddingLeft="6dp"
                 android:textColor="@color/white"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -99,25 +101,27 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_below="@id/tool_bar_layout"
-            android:gravity="center_vertical"
             android:background="@color/app_card_background_grey_color"
+            android:clickable="true"
+            android:gravity="center_vertical"
             android:orientation="vertical"
-            android:visibility="visible"
-            android:clickable="true">
+            android:visibility="visible">
+
             <TextView
                 android:id="@+id/daily_announcement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"
                 android:singleLine="true"
-                android:textSize="13dp"
-                android:text="모든 메뉴는 당일 조리, 당일 배송 됩니다."/>
+                android:text="모든 메뉴는 당일 조리, 당일 배송 됩니다."
+                android:textColor="@color/colorPrimary"
+                android:textSize="13dp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/app_shawdow_color"/>
+                android:background="@color/app_shawdow_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -125,9 +129,10 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_below="@id/tool_bar_layout"
-            android:visibility="gone"
             android:background="@color/white"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
+
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
@@ -135,30 +140,35 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="오늘"
-                    android:textSize="13dp"
-                    android:textColor="@color/grey_500"/>
+                    android:textColor="@color/grey_500"
+                    android:textSize="13dp" />
+
                 <RelativeLayout
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="8dp">
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/shape_circle_very_light_grey"/>
+                        android:background="@drawable/shape_circle_very_light_grey" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="14"
-                        android:textSize="18dp"
-                        android:textColor="@color/colorPrimary"/>
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18dp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
@@ -166,29 +176,34 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="목"
-                    android:textSize="13dp"
-                    android:textColor="@color/grey_500"/>
+                    android:textColor="@color/grey_500"
+                    android:textSize="13dp" />
+
                 <RelativeLayout
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="8dp">
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="15"
-                        android:textSize="18dp"
-                        android:textColor="@color/grey_700"/>
+                        android:textColor="@color/grey_700"
+                        android:textSize="18dp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
@@ -196,29 +211,34 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="금"
-                    android:textSize="13dp"
-                    android:textColor="@color/grey_500"/>
+                    android:textColor="@color/grey_500"
+                    android:textSize="13dp" />
+
                 <RelativeLayout
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="8dp">
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="16"
-                        android:textSize="18dp"
-                        android:textColor="@color/grey_700"/>
+                        android:textColor="@color/grey_700"
+                        android:textSize="18dp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
@@ -226,43 +246,79 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="토"
-                    android:textSize="13dp"
-                    android:textColor="@color/grey_500"/>
+                    android:textColor="@color/grey_500"
+                    android:textSize="13dp" />
+
                 <RelativeLayout
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="8dp">
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="17"
-                        android:textSize="18dp"
-                        android:textColor="@color/grey_700"/>
+                        android:textColor="@color/grey_700"
+                        android:textSize="18dp" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_below="@id/daily_announcement_layout"
             android:id="@+id/menu_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
+            android:layout_below="@id/daily_announcement_layout"
+            android:background="@color/app_background_grey_color"
             android:clipToPadding="false"
             android:overScrollMode="never"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
             android:scrollbars="none"
-            android:background="@color/app_background_grey_color"
-            android:visibility="visible"/>
+            android:visibility="visible" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@color/app_card_background_grey_color"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="moveToAddressListActivity"
+                    android:singleLine="true"
+                    android:text="내 위 치 설 정"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/app_shawdow_color" />
+            </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/order_confirmed_mark"
@@ -293,19 +349,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:gravity="center"
-                android:textColor="@color/grey_600"
                 android:text="주문 내역은 '메뉴 > 주문 내역' 에서\n확인 가능합니다."
+                android:textColor="@color/grey_600"
                 android:textSize="14dp" />
         </LinearLayout>
     </RelativeLayout>
 
     <fragment
         android:id="@+id/navigation_drawer_left"
+        android:name="com.plating.pages.n_navigation_drawer.LeftNavigationDrawerFragment"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
         app:layout="@layout/n_left_navigation_drawer_fragment"
-        tools:layout="@layout/n_left_navigation_drawer_fragment"
-        android:name="com.plating.pages.n_navigation_drawer.LeftNavigationDrawerFragment"/>
+        tools:layout="@layout/n_left_navigation_drawer_fragment" />
 
 </android.support.v4.widget.DrawerLayout>

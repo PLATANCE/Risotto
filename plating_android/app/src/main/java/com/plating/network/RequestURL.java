@@ -41,6 +41,9 @@ public class RequestURL {
     // URL UserCode
     public static final String SERVER__GET_USERCODE = FULL_URL + "/user/user_code";
 
+    // URL User Address List
+    public static final String SERVER__GET_ADDRESS_LIST = FULL_URL + "/user/get_address";
+
     // URL header for daily menu image
     public static final String DAILY_MENU_IMAGE_URL = "http://plating.co.kr/app/media/";
     // URL header for chef image

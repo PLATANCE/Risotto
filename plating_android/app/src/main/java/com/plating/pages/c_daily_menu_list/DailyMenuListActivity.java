@@ -41,6 +41,8 @@ import com.plating.object.DailyMenu;
 import com.plating.object.UserDialog;
 import com.plating.object_singleton.Cart;
 import com.plating.pages.d_menu_detail.MenuDetailActivity;
+import com.plating.pages.i_set_location.AddressListActivity;
+import com.plating.pages.i_set_location.SetLocationActivity;
 import com.plating.pages.n_navigation_drawer.LeftNavigationDrawerFragment;
 import com.plating.pages.p_write_review_activity.WriteReviewListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
@@ -91,6 +93,13 @@ public class DailyMenuListActivity extends PlatingActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+    }
+
+    public void moveToAddressListActivity(View v) {
+        MixPanel.mixPanel_trackWithOutProperties("Edit Address");
+
+        Intent intent = new Intent(mContext, AddressListActivity.class);
+        startActivity(intent);
     }
 
 
