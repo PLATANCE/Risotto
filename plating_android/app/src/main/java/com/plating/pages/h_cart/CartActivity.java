@@ -30,6 +30,7 @@ import com.dd.CircularProgressButton;
 import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.application.PlatingActivity;
+import com.plating.helperAPI.DialogAPI;
 import com.plating.helperAPI.PhoneNumberAPI;
 import com.plating.helperAPI.PriceAPI;
 import com.plating.network.RequestURL;
@@ -96,6 +97,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public String LOG_TAG;
     public int pay_method;
+    public int min_total_price;
 
 
     @Override
@@ -261,8 +263,15 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             showTimeSlot();
         } else if (view == Btn_order) {
 
-
             Cart cart = Cart.getCartInstance();
+
+            // 서버에서 원하는 결제 최소 금액보다 결제 금액이 작을 경우, 다이얼로그 출력
+            if(min_total_price > cart.getTotalPriceOfAllItems()) {
+                DialogAPI.showDialog(this, "최소결제액 미달", "합계가 " + min_total_price + "원 미만인 장바구니는 주문이 불가합니다. 다른 요리를 추가하세요.", "확인", null);
+                return;
+            }
+
+
             int freeCredit = (free_credit <= cart.size()) ? free_credit : cart.size();
             credit_used = freeCredit;
             String deliveryTime = mDeliveryTime.getText().toString();
@@ -661,6 +670,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                         try {
                             JSONObject jo = new JSONObject(response);
                             JSONObject my_info = jo.getJSONObject("my_info");
+                            min_total_price = jo.getInt("min_total_price");
                             bk_len = jo.getInt("bk_len");
                             card_no = jo.getString("card_no");
                             // user has already registerd credit card, inflate view and check radio button valued 'CARD'
