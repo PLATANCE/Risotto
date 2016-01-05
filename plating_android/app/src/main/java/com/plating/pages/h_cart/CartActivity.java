@@ -660,7 +660,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void getCartInformation() {
         RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(this);
-        String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.GetUserIdx(cx);
+        String url = "http://api.plating.co.kr/cart_info_t?user_idx=" + SVUtil.GetUserIdx(cx);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
+    android:layout_height="80dp"
     android:background="@drawable/border_set"
     android:orientation="horizontal">
 
@@ -31,8 +31,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="Address1"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/usual_main_text_black" />
 
         <TextView
             android:paddingBottom="5dp"
@@ -42,18 +41,19 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="Address2"
-            android:textColor="#40000000"
-            android:textStyle="bold" />
+            android:textColor="#d4d4d4"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView_delete"
+    <ImageView
+        android:id="@+id/imageView_delete"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:text="@string/text_delete"
-        android:textColor="@color/black"
+        android:src="@drawable/address_delete"
+        android:textColor="@color/usual_main_text_black"
         android:textStyle="bold" />
 </LinearLayout>

@@ -70,6 +70,8 @@
     <!-- Rooney's Colors-->
     <color name="drawerGray">#4C4948</color>
     <color name="referCenterBackground">#3E3A39</color>
+    <color name="usual_main_text_black">#3E3A39</color>
+    <color name="usual_main_text_orange">#ED6D1F</color>
 
     <!-- Black with opacity -->
     <color name="black">#000000</color>

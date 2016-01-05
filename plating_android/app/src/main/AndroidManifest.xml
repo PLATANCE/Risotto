@@ -92,6 +92,10 @@
             android:label="@string/title_activity_address_list"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".pages.i_set_location.DeliveryCoverageActivity"
+            android:label="@string/title_activity_address_list"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".pages.i_set_location.SetLocationActivityVer2"
             android:label="@string/title_activity_set_location"
             android:screenOrientation="portrait" />

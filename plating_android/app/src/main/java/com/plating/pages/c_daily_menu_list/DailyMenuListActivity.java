@@ -36,12 +36,16 @@ import com.plating.network.VolleySingleton;
 import com.plating.network.c_daily_menu_list.GetDialogFromServer;
 import com.plating.network.c_daily_menu_list.IsReviewAvailable;
 import com.plating.network.c_daily_menu_list.getMenuListFromServer;
+import com.plating.network.i_set_location.GetAddressInUseFromServer;
+import com.plating.network.i_set_location.GetAddressListFromServer;
 import com.plating.network.i_set_location.SetUserGPSLocation;
+import com.plating.object.AddressListRow;
 import com.plating.object.DailyMenu;
 import com.plating.object.UserDialog;
 import com.plating.object_singleton.Cart;
 import com.plating.pages.d_menu_detail.MenuDetailActivity;
 import com.plating.pages.i_set_location.AddressListActivity;
+import com.plating.pages.i_set_location.DeliveryCoverageActivity;
 import com.plating.pages.i_set_location.SetLocationActivity;
 import com.plating.pages.n_navigation_drawer.LeftNavigationDrawerFragment;
 import com.plating.pages.p_write_review_activity.WriteReviewListActivity;
@@ -73,6 +77,9 @@ public class DailyMenuListActivity extends PlatingActivity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences.Editor editor;
 
+    AddressListRow addressListRow;
+    TextView text_my_address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +95,8 @@ public class DailyMenuListActivity extends PlatingActivity {
 
         getMenuListFromServer();
 
+        getAddressInUseFromServer();
+
         showOrderConfirmedMarkLayoutIfOrderIsPlaced();
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -95,10 +104,28 @@ public class DailyMenuListActivity extends PlatingActivity {
 
     }
 
+    public void getAddressInUseFromServer() {
+        GetAddressInUseFromServer.getDataFromServer(this, mRequestQueue);
+    }
+
+    public void getAddressInUseFromServer_Callback(AddressListRow addressListRow) {
+        this.addressListRow = addressListRow;
+        if(addressListRow.getAddress() == null) {
+            text_my_address.setText("요리가 배달될 주소를 입력해 주세요.");
+        } else {
+            text_my_address.setText(addressListRow.getAddress() + " " + addressListRow.getAddress_detail());
+        }
+    }
+
+
     public void moveToAddressListActivity(View v) {
         MixPanel.mixPanel_trackWithOutProperties("Edit Address");
-
-        Intent intent = new Intent(mContext, AddressListActivity.class);
+        Intent intent;
+        if(addressListRow.getAddress() == null) {
+            intent = new Intent(mContext, SetLocationActivity.class);
+        } else {
+            intent = new Intent(mContext, AddressListActivity.class);
+        }
         startActivity(intent);
     }
 
@@ -122,6 +149,8 @@ public class DailyMenuListActivity extends PlatingActivity {
         mOpenFutureDateSelectionLinearLayout = (LinearLayout) findViewById(R.id.future_date_list_layout);
         mFutureDateListLayout = (LinearLayout) findViewById(R.id.future_date_list_layout);
         mTotalNumberOfItemsInCart = (TextView) findViewById(R.id.total_number_of_item_in_cart);
+
+        text_my_address = (TextView) findViewById(R.id.text_my_address);
 
         // Recycler view for list of restaurants
         mRecyclerView = (RecyclerView) findViewById(R.id.menu_list_recycler_view);
@@ -172,6 +201,7 @@ public class DailyMenuListActivity extends PlatingActivity {
         super.onResume();
 
         showWriteReviewActivityIfAvailable();
+        getAddressInUseFromServer();
 
         // Do this, so that it shows correct number of items in cart for each item.
         if (mAdapter != null)

@@ -1,22 +1,18 @@
 package com.plating.pages.i_set_location;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
 import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.object.AddressListRow;
-import com.plating.object.CouponListRow;
-import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 
 import java.util.ArrayList;
@@ -30,6 +26,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private Context mContext;
     private LayoutInflater inflater;
     public ArrayList<AddressListRow> data = new ArrayList<>();
+
+    private static final int TYPE_ITEM = 1;
+    private static final int TYPE_FOOTER = 2;
 
     public AddressListAdapter(Context context, ArrayList<AddressListRow> data) {
         Log.d(LOG_TAG, "Start: AddressListAdapter");
@@ -46,7 +45,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         View view = inflater.inflate(R.layout.b_address_list_row, parent, false);
         AddressViewHolder holder = new AddressViewHolder(view);
         return holder;
+
     }
+
 
     @Override
     public void onBindViewHolder(AddressViewHolder holder, int position) {
@@ -59,6 +60,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             holder.imageView_use_check.setImageResource(R.drawable.address_check_yes);
         }
     }
+
 
     @Override
     public int getItemCount() {
@@ -74,7 +76,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         public ImageView imageView_use_check;
         public TextView textView_addr1;
         public TextView textView_addr2;
-        public TextView textView_delete;
+        public ImageView imageView_delete;
 
         public AddressViewHolder(View itemView) {
             super(itemView);
@@ -83,17 +85,20 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             imageView_use_check.setOnClickListener(this);
             textView_addr1 = (TextView) itemView.findViewById(R.id.textView_addr1);
             textView_addr2 = (TextView) itemView.findViewById(R.id.textView_addr2);
-            textView_delete = (TextView) itemView.findViewById(R.id.textView_delete);
-            textView_delete.setOnClickListener(this);
+            imageView_delete = (ImageView) itemView.findViewById(R.id.imageView_delete);
+            imageView_delete.setOnClickListener(this);
 
         }
+
 
         @Override
         public void onClick(View v) {
             if (v == imageView_use_check) {
-                Log.d(LOG_TAG, "imageView_use_check Checked");
-            } else if (v == textView_delete) {
-                Log.d(LOG_TAG, "textView_delete Checked");
+                MixPanel.mixPanel_trackWithOutProperties("Change Address");
+                ((AddressListActivity) mContext).updateAddress(data.get(getAdapterPosition()).getIdx(), "update");
+            } else if (v == imageView_delete) {
+                MixPanel.mixPanel_trackWithOutProperties("Delete Address");
+                ((AddressListActivity) mContext).updateAddress(data.get(getAdapterPosition()).getIdx(), "delete");
             }
         }
     }

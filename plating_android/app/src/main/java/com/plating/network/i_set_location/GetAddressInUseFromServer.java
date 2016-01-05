@@ -12,22 +12,20 @@ import com.plating.application.Constant;
 import com.plating.application.Debug;
 import com.plating.network.RequestURL;
 import com.plating.object.AddressListRow;
-import com.plating.object.CouponListRow;
 import com.plating.pages.c_daily_menu_list.DailyMenuListActivity;
-import com.plating.pages.h_cart.CartActivity;
 import com.plating.pages.i_set_location.AddressListActivity;
-import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.util.SVUtil;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 /**
- * Created by home on 16. 1. 4..
+ * Created by home on 16. 1. 5..
  */
-public class GetAddressListFromServer {
-    public static String LOG_TAG = Constant.APP_NAME + "GetAddressListFromServer";
+public class GetAddressInUseFromServer {
+    public static String LOG_TAG = Constant.APP_NAME + "GetAddressInUseFromServer";
 
     public static void getDataFromServer(final Context context, RequestQueue requestQueue) {
         JsonArrayRequest request = new JsonArrayRequest(
@@ -36,11 +34,11 @@ public class GetAddressListFromServer {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Debug.d(LOG_TAG, "getDataFromServer.response: " + response.toString());
-                        ArrayList<AddressListRow> addressListRowArrayList = convertJsonToAddressList(response);
+                        Debug.d(LOG_TAG, "getDataFromServer.response: " + response.toString() + " length :" + response.length());
+                        AddressListRow addressListRow = convertJsonToAddressListRow(response);
 
+                        ((DailyMenuListActivity) context).getAddressInUseFromServer_Callback(addressListRow);
 
-                        ((AddressListActivity) context).getAddressListFromServer_Callback(addressListRowArrayList);
                     }
                 },
                 new Response.ErrorListener() {
@@ -55,27 +53,22 @@ public class GetAddressListFromServer {
     }
 
     public static String getRequestUrl(int userIdx) {
-        return RequestURL.SERVER__GET_ADDRESS_LIST + "?user_idx=" + userIdx;
+        return RequestURL.SERVER__GET_ADDRESS_INUSE + "?user_idx=" + userIdx;
     }
 
-    private static ArrayList<AddressListRow> convertJsonToAddressList(JSONArray response) {
-        Debug.d(LOG_TAG, "convertJsonToAddressList: Start");
-        ArrayList<AddressListRow> addressListRows = new ArrayList<>();
+    public static AddressListRow convertJsonToAddressListRow(JSONArray response) {
+        if (response != null && response.length() > 0) {
+            JSONObject addressJsonObject = response.optJSONObject(0);
 
-        if (response != null || response.length() > 0) {
+            AddressListRow addressListRow = new AddressListRow();
 
-            for (int i = 0; i < response.length(); i++) {
-                AddressListRow addressListRow = new AddressListRow();
+            addressListRow.setIdx(addressJsonObject.optInt("idx", -1));
+            addressListRow.setAddress(addressJsonObject.optString("address", ""));
+            addressListRow.setAddress_detail(addressJsonObject.optString("address_detail", ""));
+            addressListRow.setIn_use(addressJsonObject.optInt("in_use", -1));
 
-                addressListRow.setIdx(response.optJSONObject(i).optInt("idx", -1));
-                addressListRow.setAddress(response.optJSONObject(i).optString("address", ""));
-                addressListRow.setAddress_detail(response.optJSONObject(i).optString("address_detail", ""));
-                addressListRow.setIn_use(response.optJSONObject(i).optInt("in_use", -1));
-
-                addressListRows.add(addressListRow);
-            }
+            return addressListRow;
         }
-
-        return addressListRows;
+        return new AddressListRow();
     }
 }

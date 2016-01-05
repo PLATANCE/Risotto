@@ -42,7 +42,9 @@ public class RequestURL {
     public static final String SERVER__GET_USERCODE = FULL_URL + "/user/user_code";
 
     // URL User Address List
-    public static final String SERVER__GET_ADDRESS_LIST = FULL_URL + "/user/get_address";
+    public static final String SERVER__GET_ADDRESS_LIST = FULL_URL + "/user/get_address_list";
+    public static final String SERVER__GET_ADDRESS_INUSE = FULL_URL + "/user/get_address";
+    public static final String SERVER__UPDATE_ADDRESS = FULL_URL + "/user/update_address";
 
     // URL header for daily menu image
     public static final String DAILY_MENU_IMAGE_URL = "http://plating.co.kr/app/media/";
