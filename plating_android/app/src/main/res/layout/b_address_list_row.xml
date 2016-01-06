@@ -45,15 +45,16 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView_delete"
+    <TextView
+        android:id="@+id/textview_delete"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:src="@drawable/address_delete"
+        android:text="X"
+        android:textSize="20sp"
         android:textColor="@color/usual_main_text_black"
         android:textStyle="bold" />
 </LinearLayout>

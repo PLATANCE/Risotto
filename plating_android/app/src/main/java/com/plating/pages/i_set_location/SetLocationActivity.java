@@ -1,6 +1,7 @@
 package com.plating.pages.i_set_location;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.plating.R;
 import com.plating.application.Constant;
@@ -19,14 +21,17 @@ import com.plating.object.AvailableLocation;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.sdk_tools.mix_panel.MixPanelProperty;
 
+import org.w3c.dom.Text;
+
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class SetLocationActivity extends PlatingActivity {
+public class SetLocationActivity extends PlatingActivity implements View.OnClickListener {
     String LOG_TAG = Constant.APP_NAME + "SetLocationActivity";
 
     private EditText mSetLocationEditText;
     private RecyclerView mRecyclerView;
+    private TextView textview_delivery_coverage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,22 @@ public class SetLocationActivity extends PlatingActivity {
         mSetLocationEditText = (EditText) findViewById(R.id.set_location_edit_text);
         mRecyclerView = (RecyclerView) findViewById(R.id.available_location_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        textview_delivery_coverage = (TextView) findViewById(R.id.textview_delivery_coverage);
+        textview_delivery_coverage.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == textview_delivery_coverage) {
+            MixPanel.mixPanel_trackWithOutProperties("Click Show Delivery Coverage");
+            moveToAddressCoverActivity();
+        }
+    }
+
+    public void moveToAddressCoverActivity() {
+
+        Intent intent = new Intent(this, AddressCoverActivity.class);
+        startActivity(intent);
     }
 
     public void setOnClickListener() {

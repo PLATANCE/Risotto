@@ -27,9 +27,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private LayoutInflater inflater;
     public ArrayList<AddressListRow> data = new ArrayList<>();
 
-    private static final int TYPE_ITEM = 1;
-    private static final int TYPE_FOOTER = 2;
-
     public AddressListAdapter(Context context, ArrayList<AddressListRow> data) {
         Log.d(LOG_TAG, "Start: AddressListAdapter");
 
@@ -76,7 +73,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         public ImageView imageView_use_check;
         public TextView textView_addr1;
         public TextView textView_addr2;
-        public ImageView imageView_delete;
+        public TextView textview_delete;
 
         public AddressViewHolder(View itemView) {
             super(itemView);
@@ -85,8 +82,8 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             imageView_use_check.setOnClickListener(this);
             textView_addr1 = (TextView) itemView.findViewById(R.id.textView_addr1);
             textView_addr2 = (TextView) itemView.findViewById(R.id.textView_addr2);
-            imageView_delete = (ImageView) itemView.findViewById(R.id.imageView_delete);
-            imageView_delete.setOnClickListener(this);
+            textview_delete = (TextView) itemView.findViewById(R.id.textview_delete);
+            textview_delete.setOnClickListener(this);
 
         }
 
@@ -96,7 +93,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             if (v == imageView_use_check) {
                 MixPanel.mixPanel_trackWithOutProperties("Change Address");
                 ((AddressListActivity) mContext).updateAddress(data.get(getAdapterPosition()).getIdx(), "update");
-            } else if (v == imageView_delete) {
+            } else if (v == textview_delete) {
                 MixPanel.mixPanel_trackWithOutProperties("Delete Address");
                 ((AddressListActivity) mContext).updateAddress(data.get(getAdapterPosition()).getIdx(), "delete");
             }

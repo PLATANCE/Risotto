@@ -30,6 +30,7 @@
     <string name="title_activity_cart">CartActivity</string>
     <string name="title_activity_chef">ChefActivity</string>
     <string name="title_activity_set_location">SetLocationActivity</string>
+    <string name="title_activity_addess_cover">AddressCoverActivity</string>
     <string name="title_activity_address_list">AddressListActivity</string>
     <string name="title_activity_welcome">플레이팅</string>
     <string name="title_activity_payment">PaymentActivity</string>
