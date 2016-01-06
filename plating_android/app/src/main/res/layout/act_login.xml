@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/intro_3" />
+            android:background="@drawable/intro_3" />
         <View
             android:id="@+id/blackView"
             android:layout_width="match_parent"
