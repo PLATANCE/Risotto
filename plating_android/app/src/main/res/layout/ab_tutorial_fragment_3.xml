@@ -9,7 +9,7 @@
         android:layout_height="0dp"
         android:layout_weight="5.5"
         android:scaleType="centerCrop"
-        android:src="@drawable/intro_3" />
+        android:background="@drawable/intro_3" />
 
     <LinearLayout
         android:id="@+id/linear_before"
