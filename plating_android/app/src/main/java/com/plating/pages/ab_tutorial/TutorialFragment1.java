@@ -32,3 +32,6 @@ public class TutorialFragment1 extends Fragment {
         return fragment1;
     }
 }
+
+
+  
