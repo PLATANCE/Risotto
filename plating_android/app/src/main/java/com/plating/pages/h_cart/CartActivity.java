@@ -42,6 +42,7 @@ import com.plating.object_singleton.Cart;
 import com.plating.pages.c_daily_menu_list.DailyMenuListActivity;
 import com.plating.pages.h_cart.dialog.ConfirmOrderDialog;
 import com.plating.pages.h_cart.dialog.EnterPhoneNumberDialog;
+import com.plating.pages.i_set_location.AddressListActivity;
 import com.plating.pages.i_set_location.SetLocationActivity;
 import com.plating.pages.j_payment.AddCreditCardActivity;
 import com.plating.pages.r_coupon.MyCouponListActivity;
@@ -316,13 +317,17 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         } else if (view == IB_address) {
             MixPanel.mixPanel_trackWithOutProperties("Edit Address");
 
-            Intent intent = new Intent(mContext, SetLocationActivity.class);
+            Intent intent;
+            if(mAddress.getText().equals(Constant.PLEASE_ENTER_ADDRESS)) {
+                intent = new Intent(mContext, SetLocationActivity.class);
+            } else {
+                intent = new Intent(mContext, AddressListActivity.class);
+            }
             startActivity(intent);
         }  else if(view == IB_addcard) {
             MixPanel.mixPanel_trackWithOutProperties("Add Credit Card");
 
-            Intent intent;
-            intent = new Intent(mContext, AddCreditCardActivity.class);
+            Intent intent = new Intent(mContext, AddCreditCardActivity.class);
             startActivity(intent);
         } else if(view == radio_pay_card) {
             if(cart_order_detail_layout.getChildCount() == 4) {
@@ -660,7 +665,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void getCartInformation() {
         RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(this);
-        String url = "http://api.plating.co.kr/cart_info_t?user_idx=" + SVUtil.GetUserIdx(cx);
+        String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.GetUserIdx(cx);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
