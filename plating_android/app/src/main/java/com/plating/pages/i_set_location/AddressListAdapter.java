@@ -1,12 +1,14 @@
 package com.plating.pages.i_set_location;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -27,6 +29,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private LayoutInflater inflater;
     public ArrayList<AddressListRow> data = new ArrayList<>();
 
+    private static final int TYPE_ITEM = 1;
+    private static final int TYPE_FOOTER  = 2;
+
     public AddressListAdapter(Context context, ArrayList<AddressListRow> data) {
         Log.d(LOG_TAG, "Start: AddressListAdapter");
 
@@ -38,9 +43,13 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     @Override
     public AddressViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d(LOG_TAG, "onCreateViewHolder: Start");
-
-        View view = inflater.inflate(R.layout.b_address_list_row, parent, false);
-        AddressViewHolder holder = new AddressViewHolder(view);
+        View view;
+        if(viewType == TYPE_ITEM) {
+            view = inflater.inflate(R.layout.b_address_list_row, parent, false);
+        } else {
+            view = inflater.inflate(R.layout.b_address_list_add, parent, false);
+        }
+        AddressViewHolder holder = new AddressViewHolder(view, viewType);
         return holder;
 
     }
@@ -48,20 +57,35 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     @Override
     public void onBindViewHolder(AddressViewHolder holder, int position) {
-        AddressListRow addressListRow = data.get(position);
-        holder.textView_addr1.setText(addressListRow.getAddress());
-        holder.textView_addr2.setText(addressListRow.getAddress_detail());
-        if (addressListRow.getIn_use() == 0) {
-            holder.imageView_use_check.setImageResource(R.drawable.address_check_no);
-        } else {
-            holder.imageView_use_check.setImageResource(R.drawable.address_check_yes);
+        Log.d(LOG_TAG, "onBindViewHolder: Start");
+        if(getItemViewType(position) == TYPE_ITEM) {
+            AddressListRow addressListRow = data.get(position);
+            holder.textView_addr1.setText(addressListRow.getAddress());
+            holder.textView_addr2.setText(addressListRow.getAddress_detail());
+            if (addressListRow.getIn_use() == 0) {
+                holder.imageView_use_check.setBackgroundResource(R.drawable.address_check_no);
+            } else {
+                holder.imageView_use_check.setBackgroundResource(R.drawable.address_check_yes);
+            }
         }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        Log.d(LOG_TAG, "getItemViewType: Start");
+        if(isPositionFooter(position)) {
+            return TYPE_FOOTER;
+        }
+        return TYPE_ITEM;
+    }
+
+    public boolean isPositionFooter(int position) {
+        return position == data.size();
+    }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data.size() + 1;
     }
 
     public void updateData(ArrayList<AddressListRow> data) {
@@ -70,32 +94,45 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     class AddressViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        public LinearLayout linear_address;
         public ImageView imageView_use_check;
         public TextView textView_addr1;
         public TextView textView_addr2;
         public TextView textview_delete;
+        private LinearLayout linear_add_address;
 
-        public AddressViewHolder(View itemView) {
+        public AddressViewHolder(View itemView, int viewType) {
             super(itemView);
 
-            imageView_use_check = (ImageView) itemView.findViewById(R.id.imageView_use_check);
-            imageView_use_check.setOnClickListener(this);
-            textView_addr1 = (TextView) itemView.findViewById(R.id.textView_addr1);
-            textView_addr2 = (TextView) itemView.findViewById(R.id.textView_addr2);
-            textview_delete = (TextView) itemView.findViewById(R.id.textview_delete);
-            textview_delete.setOnClickListener(this);
+            if(viewType == TYPE_ITEM) {
+                linear_address = (LinearLayout) itemView.findViewById(R.id.linear_address);
+                linear_address.setOnClickListener(this);
+                imageView_use_check = (ImageView) itemView.findViewById(R.id.imageView_use_check);
+                textView_addr1 = (TextView) itemView.findViewById(R.id.textView_addr1);
+                textView_addr2 = (TextView) itemView.findViewById(R.id.textView_addr2);
+                textview_delete = (TextView) itemView.findViewById(R.id.textview_delete);
+                textview_delete.setOnClickListener(this);
+            } else {
+                linear_add_address = (LinearLayout) itemView.findViewById(R.id.linear_add_address);
+                linear_add_address.setOnClickListener(this);
+            }
 
         }
 
 
         @Override
         public void onClick(View v) {
-            if (v == imageView_use_check) {
+            if (v == linear_address) {
                 MixPanel.mixPanel_trackWithOutProperties("Change Address");
                 ((AddressListActivity) mContext).updateAddress(data.get(getAdapterPosition()).getIdx(), "update");
             } else if (v == textview_delete) {
                 MixPanel.mixPanel_trackWithOutProperties("Delete Address");
                 ((AddressListActivity) mContext).updateAddress(data.get(getAdapterPosition()).getIdx(), "delete");
+            } else if(v == linear_add_address) {
+                MixPanel.mixPanel_trackWithOutProperties("Edit Address");
+
+                Intent intent = new Intent(mContext, SetLocationActivity.class);
+                mContext.startActivity(intent);
             }
         }
     }

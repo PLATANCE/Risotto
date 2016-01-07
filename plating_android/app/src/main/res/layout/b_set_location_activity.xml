@@ -57,7 +57,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="15dp"
             android:paddingLeft="30dp"
-            android:hint="동명(읍,면)을 입력해주세요 예)신사, 신사동"
+            android:hint="동 이름을 입력해주세요. 예) 신사, 신사동"
             android:imeOptions="actionSearch"
             android:singleLine="true"
             android:textSize="14dp" />
@@ -68,7 +68,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_below="@id/set_location_edit_text">
 
             <ImageButton

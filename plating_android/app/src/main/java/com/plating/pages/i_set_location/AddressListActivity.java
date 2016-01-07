@@ -21,10 +21,10 @@ import java.util.ArrayList;
 /**
  * Created by home on 16. 1. 4..
  */
-public class AddressListActivity extends PlatingActivity implements View.OnClickListener {
+public class AddressListActivity extends PlatingActivity {
     private RecyclerView mRecyclerView;
     private AddressListAdapter mAdapter;
-    private ImageView imageView_add_address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,6 @@ public class AddressListActivity extends PlatingActivity implements View.OnClick
     public void getAllView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.address_list_recycler_view);
         mRecyclerView.setLayoutManager(new PreCachingLayoutManager(this));
-        imageView_add_address = (ImageView) findViewById(R.id.imageView_add_address);
-        imageView_add_address.setOnClickListener(this);
     }
 
     public void setUpRecyclerView() {
@@ -49,15 +47,6 @@ public class AddressListActivity extends PlatingActivity implements View.OnClick
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v == imageView_add_address) {
-            MixPanel.mixPanel_trackWithOutProperties("Edit Address");
-
-            Intent intent = new Intent(mContext, SetLocationActivity.class);
-            startActivity(intent);
-        }
-    }
 
     public void getAddressListFromServer() {
         GetAddressListFromServer.getDataFromServer(this, mRequestQueue);

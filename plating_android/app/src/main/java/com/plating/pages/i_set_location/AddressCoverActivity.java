@@ -10,7 +10,7 @@ import com.plating.R;
 import com.plating.application.PlatingActivity;
 
 /**
- * Created by home on 16. 1. 6..
+ * Created by Rooney on 16. 1. 6..
  */
 public class AddressCoverActivity extends PlatingActivity {
     private WebView webView;
@@ -28,10 +28,13 @@ public class AddressCoverActivity extends PlatingActivity {
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+
 
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
 
-        webView.loadUrl("http://plating.co.kr/admin/index.php");
+        webView.loadUrl("http://plating.co.kr/admin/admin_coverage.php");
     }
 }
