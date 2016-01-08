@@ -19,7 +19,7 @@
             android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:background="@color/transparent"
-            android:onClick="onClickNavigateBack"
+            android:onClick="onClickNavigateBackToptoBottom"
             android:padding="14dp"
             android:scaleType="fitXY"
             android:src="@drawable/action_icon_back" />

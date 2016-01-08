@@ -299,24 +299,24 @@
                 android:background="@color/colorPrimary"
                 android:clickable="true"
                 android:gravity="center_vertical"
+                android:onClick="moveToAddressListActivity"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/address_location"/>
+                    android:background="@drawable/address_location" />
 
                 <TextView
                     android:id="@+id/text_my_address"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="9"
-                    android:paddingLeft="10dp"
                     android:gravity="center_vertical"
-                    android:onClick="moveToAddressListActivity"
+                    android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:text="내 위 치 설 정"
                     android:textColor="@color/white"

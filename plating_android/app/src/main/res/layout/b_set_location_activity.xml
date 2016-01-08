@@ -21,7 +21,7 @@
             android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:background="@color/transparent"
-            android:onClick="onClickNavigateBack"
+            android:onClick="onClickNavigateBackToptoBottom"
             android:padding="14dp"
             android:scaleType="fitXY"
             android:src="@drawable/action_icon_back" />
@@ -36,68 +36,88 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tool_bar_layout">
+        android:layout_below="@+id/tool_bar_layout"
+        android:orientation="vertical">
+        <!--
+            <RelativeLayout
+                android:id="@+id/search_delivery_coverage"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="5dp">
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/address_search"/>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/shape_button_rounded_corner_2dp_color_transparent" />
 
-        <EditText
-            android:id="@+id/set_location_edit_text"
+                <TextView
+                    android:id="@+id/textview_delivery_coverage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="배달 가능 지역 보기"
+                    android:textColor="@color/usual_main_text_orange"
+                    android:textSize="13dp" />
+            </RelativeLayout>
+            -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="15dp"
-            android:paddingLeft="30dp"
-            android:hint="동 이름을 입력해주세요. 예) 신사, 신사동"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:textSize="14dp" />
+            android:layout_marginRight="16dp">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/address_search" />
+
+            <EditText
+                android:id="@+id/set_location_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="동 이름을 입력해주세요. 예) 신사, 신사동"
+                android:imeOptions="actionSearch"
+                android:paddingLeft="30dp"
+                android:singleLine="true"
+                android:textSize="14dp" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/search_delivery_coverage"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/set_location_edit_text">
-
-            <ImageButton
-                android:id="@+id/put_to_cart_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/shape_button_rounded_corner_2dp_color_primary" />
+            android:layout_marginRight="16dp">
 
             <TextView
                 android:id="@+id/textview_delivery_coverage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="배달 가능 지역 보기"
-                android:textColor="@color/white"
-                android:textSize="12dp" />
+                android:text="@string/show_delivery_coverage"
+                android:textColor="@color/usual_main_text_orange"
+                android:textSize="13dp" />
         </RelativeLayout>
-
 
         <android.support.v7.widget.RecyclerView
 
             android:id="@+id/available_location_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/search_delivery_coverage"
             android:layout_marginTop="6dp"
             android:visibility="visible" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

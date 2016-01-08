@@ -22,9 +22,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.application.PlatingActivity;
@@ -37,15 +34,11 @@ import com.plating.network.c_daily_menu_list.GetDialogFromServer;
 import com.plating.network.c_daily_menu_list.IsReviewAvailable;
 import com.plating.network.c_daily_menu_list.getMenuListFromServer;
 import com.plating.network.i_set_location.GetAddressInUseFromServer;
-import com.plating.network.i_set_location.GetAddressListFromServer;
-import com.plating.network.i_set_location.SetUserGPSLocation;
 import com.plating.object.AddressListRow;
 import com.plating.object.DailyMenu;
-import com.plating.object.UserDialog;
 import com.plating.object_singleton.Cart;
 import com.plating.pages.d_menu_detail.MenuDetailActivity;
 import com.plating.pages.i_set_location.AddressListActivity;
-import com.plating.pages.i_set_location.DeliveryCoverageActivity;
 import com.plating.pages.i_set_location.SetLocationActivity;
 import com.plating.pages.n_navigation_drawer.LeftNavigationDrawerFragment;
 import com.plating.pages.p_write_review_activity.WriteReviewListActivity;
@@ -74,7 +67,7 @@ public class DailyMenuListActivity extends PlatingActivity {
 
     // SharedPreference to manage dialog status
     SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String MyPREFERENCES = "MyPrefs";
     SharedPreferences.Editor editor;
 
     AddressListRow addressListRow;
@@ -110,7 +103,7 @@ public class DailyMenuListActivity extends PlatingActivity {
 
     public void getAddressInUseFromServer_Callback(AddressListRow addressListRow) {
         this.addressListRow = addressListRow;
-        if(addressListRow.getAddress() == null) {
+        if (addressListRow.getAddress() == null) {
             text_my_address.setText("요리가 배달될 주소를 입력해 주세요.");
         } else {
             text_my_address.setText(addressListRow.getAddress() + " " + addressListRow.getAddress_detail());
@@ -121,12 +114,13 @@ public class DailyMenuListActivity extends PlatingActivity {
     public void moveToAddressListActivity(View v) {
         MixPanel.mixPanel_trackWithOutProperties("Edit Address");
         Intent intent;
-        if(addressListRow.getAddress() == null) {
+        if (addressListRow.getAddress() == null) {
             intent = new Intent(mContext, SetLocationActivity.class);
         } else {
             intent = new Intent(mContext, AddressListActivity.class);
         }
         startActivity(intent);
+        overridePendingTransition(R.anim.transition_slide_in_from_bottom, R.anim.transition_slide_out_to_top);
     }
 
 
@@ -176,7 +170,7 @@ public class DailyMenuListActivity extends PlatingActivity {
         int day = calendar.get(Calendar.DAY_OF_WEEK);
         int date = calendar.get(Calendar.DATE);
 
-        for(int i = 0; i < numberOfFutureDates; i++) {
+        for (int i = 0; i < numberOfFutureDates; i++) {
             View child = getLayoutInflater().inflate(R.layout.d_daily_menu_list_future_menu, null);
             TextView futureMenuDay = (TextView) child.findViewById(R.id.future_menu_day);
             TextView futureMenuDate = (TextView) child.findViewById(R.id.future_menu_date);
@@ -186,7 +180,7 @@ public class DailyMenuListActivity extends PlatingActivity {
             futureMenuDay.setText(CalendarAPI.convertIntDayToStringDay(day + i));
             futureMenuDate.setText(date + "");
 
-            if(i == 0) {
+            if (i == 0) {
                 futureMenuSelectedCircleImageview.setVisibility(View.VISIBLE);
                 futureMenuDate.setTextColor(getResources().getColor(R.color.colorPrimary));
             }
@@ -230,12 +224,12 @@ public class DailyMenuListActivity extends PlatingActivity {
 
     public void getDialogFromServer_Callback(Boolean usedCoupon, String image_url_dialog, int redirect) {
         // if coupon is not used, dialog show!
-        if(usedCoupon) {
+        if (usedCoupon) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String date = dateFormat.format(new Date());
             String time = sharedPreferences.getString("time", "");
             Log.d(LOG_TAG, "date :" + date + " time : " + time);
-            if(!time.equals(date)) {
+            if (!time.equals(date)) {
                 startEventDialog = new StartEventDialog(this, RequestURL.DIALOG_IMAGE_URL + image_url_dialog, redirect, editor);
 
                 new Handler().postDelayed(new Runnable() {
@@ -292,10 +286,6 @@ public class DailyMenuListActivity extends PlatingActivity {
     }
 
 
-
-
-
-
     // Briefly show "Item Added" layout. Show for about 1 second.
     public void showOrderConfirmedMarkLayoutIfOrderIsPlaced() {
         Log.d(LOG_TAG, "showItemAddedCheckMarkLayout");
@@ -304,10 +294,10 @@ public class DailyMenuListActivity extends PlatingActivity {
         // If not, don't show anything
         Intent intent = getIntent();
         boolean orderPlaced = intent.getBooleanExtra(Constant.ORDER_PLACED, false);
-        if(!orderPlaced)
+        if (!orderPlaced)
             return;
 
-        final LinearLayout orderConfirmedMarkLayout = (LinearLayout)findViewById(R.id.order_confirmed_mark);
+        final LinearLayout orderConfirmedMarkLayout = (LinearLayout) findViewById(R.id.order_confirmed_mark);
 
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
@@ -355,16 +345,6 @@ public class DailyMenuListActivity extends PlatingActivity {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     /****************/
     /*** NETWORK ****/
     /****************/
@@ -380,7 +360,7 @@ public class DailyMenuListActivity extends PlatingActivity {
 
     public void showWriteReviewActivityIfAvailable_callback(boolean available, int orderIdx) {
         Log.d(LOG_TAG, "Available: " + available + " orderIdx: " + orderIdx);
-        if(available && mContext != null) {
+        if (available && mContext != null) {
             Intent intent = new Intent(mContext, WriteReviewListActivity.class);
             intent.putExtra(Constant.ORDER_HISTORY_ACTIVITY__ORDER_HISTORY_ID, orderIdx);
             startActivity(intent);

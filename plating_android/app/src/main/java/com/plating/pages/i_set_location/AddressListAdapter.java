@@ -67,6 +67,11 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             } else {
                 holder.imageView_use_check.setBackgroundResource(R.drawable.address_check_yes);
             }
+            if(addressListRow.getReservation_type().equals("reservation_only")) {
+                holder.textView_reservation_type.setVisibility(View.VISIBLE);
+            } else {
+                holder.textView_reservation_type.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -98,6 +103,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         public ImageView imageView_use_check;
         public TextView textView_addr1;
         public TextView textView_addr2;
+        public TextView textView_reservation_type;
         public TextView textview_delete;
         private LinearLayout linear_add_address;
 
@@ -110,6 +116,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
                 imageView_use_check = (ImageView) itemView.findViewById(R.id.imageView_use_check);
                 textView_addr1 = (TextView) itemView.findViewById(R.id.textView_addr1);
                 textView_addr2 = (TextView) itemView.findViewById(R.id.textView_addr2);
+                textView_reservation_type = (TextView) itemView.findViewById(R.id.textView_reservation_type);
                 textview_delete = (TextView) itemView.findViewById(R.id.textview_delete);
                 textview_delete.setOnClickListener(this);
             } else {

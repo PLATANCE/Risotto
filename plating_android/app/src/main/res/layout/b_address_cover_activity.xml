@@ -20,7 +20,7 @@
             android:layout_height="48dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:onClick="onClickNavigateBack">
+            android:onClick="onClickNavigateBackToptoBottom">
 
             <ImageButton
                 android:id="@+id/imgbtn_close"

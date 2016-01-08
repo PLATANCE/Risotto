@@ -127,7 +127,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
             } else {
                 AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
                 alert.setTitle("배달 불가 지역");
-                alert.setMessage("현재는 강남구만 배달 가능합니다.");
+                alert.setMessage("현재 배달 가능한 지역이 아닙니다.");
 
                 alert.setPositiveButton("다시선택", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {

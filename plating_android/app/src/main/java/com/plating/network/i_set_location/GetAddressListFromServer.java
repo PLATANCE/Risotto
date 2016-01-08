@@ -71,6 +71,7 @@ public class GetAddressListFromServer {
                 addressListRow.setAddress(response.optJSONObject(i).optString("address", ""));
                 addressListRow.setAddress_detail(response.optJSONObject(i).optString("address_detail", ""));
                 addressListRow.setIn_use(response.optJSONObject(i).optInt("in_use", -1));
+                addressListRow.setReservation_type(response.optJSONObject(i).optString("reservation_type", ""));
 
                 addressListRows.add(addressListRow);
             }

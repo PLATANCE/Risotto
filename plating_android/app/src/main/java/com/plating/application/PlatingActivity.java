@@ -165,6 +165,12 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         overridePendingTransition(R.anim.transition_slide_in_from_left, R.anim.transition_slide_out_to_right);
     }
 
+    public void onClickNavigateBackToptoBottom(View view) {
+        MixPanel.mixPanel_trackWithOutProperties("Navigate Back");
+        finish();
+        overridePendingTransition(R.anim.transition_slide_in_from_top, R.anim.transition_slide_out_to_bottom);
+    }
+
     public void onClickCallPlating(View view) {
         MixPanel.mixPanel_trackWithOutProperties("Show Call Plating Dialog");
         MakePhoneCallDialog.showDialogForPhoneCall(this, "070-7777-6114");

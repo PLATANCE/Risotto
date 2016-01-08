@@ -44,6 +44,7 @@ public class SetLocationActivity extends PlatingActivity implements View.OnClick
 
     public void getAllViews() {
         mSetLocationEditText = (EditText) findViewById(R.id.set_location_edit_text);
+        Log.d(LOG_TAG, mSetLocationEditText.getBackground().toString());
         mRecyclerView = (RecyclerView) findViewById(R.id.available_location_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         textview_delivery_coverage = (TextView) findViewById(R.id.textview_delivery_coverage);
@@ -62,6 +63,8 @@ public class SetLocationActivity extends PlatingActivity implements View.OnClick
 
         Intent intent = new Intent(this, AddressCoverActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.transition_slide_in_from_bottom, R.anim.transition_slide_out_to_top);
+
     }
 
     public void setOnClickListener() {

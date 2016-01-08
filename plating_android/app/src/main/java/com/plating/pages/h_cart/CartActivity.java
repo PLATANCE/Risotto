@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -89,6 +90,9 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     private int total_price, bk_len;
     private boolean delivery_available, card_exist;
     private int credit_used;
+    private boolean reservation_available;
+    private String reservation_type;
+    private int reservation_available_hour;
 
     private ImageButton bt_add_coupon;
     private int coupon_price;
@@ -267,7 +271,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             Cart cart = Cart.getCartInstance();
 
             // 서버에서 원하는 결제 최소 금액보다 결제 금액이 작을 경우, 다이얼로그 출력
-            if(min_total_price > cart.getTotalPriceOfAllItems()) {
+            if (min_total_price > cart.getTotalPriceOfAllItems()) {
                 DialogAPI.showDialog(this, "최소결제액 미달", "합계가 " + min_total_price + "원 미만인 장바구니는 주문이 불가합니다. 다른 요리를 추가하세요.", "확인", null);
                 return;
             }
@@ -286,11 +290,11 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
             ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
 
-            if(pay_method == 1) {
+            if (pay_method == 1) {
                 mixPanelPropertyArrayList.add(new MixPanelProperty("Pay Method", "Card"));
-            } else if(pay_method == 2) {
+            } else if (pay_method == 2) {
                 mixPanelPropertyArrayList.add(new MixPanelProperty("Pay Method", "Physical Card"));
-            } else if(pay_method == 3) {
+            } else if (pay_method == 3) {
                 mixPanelPropertyArrayList.add(new MixPanelProperty("Pay Method", "Cash"));
             }
 
@@ -310,7 +314,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             }
 
 
-        }  else if (view == IB_phone) {
+        } else if (view == IB_phone) {
             MixPanel.mixPanel_trackWithOutProperties("Edit Phone Number");
 
             EnterPhoneNumberDialog.showDialog(this);
@@ -318,19 +322,19 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             MixPanel.mixPanel_trackWithOutProperties("Edit Address");
 
             Intent intent;
-            if(mAddress.getText().equals(Constant.PLEASE_ENTER_ADDRESS)) {
+            if (mAddress.getText().equals(Constant.PLEASE_ENTER_ADDRESS)) {
                 intent = new Intent(mContext, SetLocationActivity.class);
             } else {
                 intent = new Intent(mContext, AddressListActivity.class);
             }
             startActivity(intent);
-        }  else if(view == IB_addcard) {
+        } else if (view == IB_addcard) {
             MixPanel.mixPanel_trackWithOutProperties("Add Credit Card");
 
             Intent intent = new Intent(mContext, AddCreditCardActivity.class);
             startActivity(intent);
-        } else if(view == radio_pay_card) {
-            if(cart_order_detail_layout.getChildCount() == 4) {
+        } else if (view == radio_pay_card) {
+            if (cart_order_detail_layout.getChildCount() == 4) {
                 View child = getLayoutInflater().inflate(R.layout.h_regist_card_layout, null);
                 IB_addcard = (RelativeLayout) child.findViewById(R.id.set_credit_card_layout);
                 IB_addcard.setOnClickListener(this);
@@ -339,17 +343,17 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 cart_order_detail_layout.addView(child);
             }
             enableOrDisablePlaceOrderButton();
-        } else if(view == radio_pay_direct_card) {
-            if(cart_order_detail_layout.getChildCount() == 5) {
+        } else if (view == radio_pay_direct_card) {
+            if (cart_order_detail_layout.getChildCount() == 5) {
                 cart_order_detail_layout.removeViewAt(4);
             }
             enableOrDisablePlaceOrderButton();
-        } else if(view == radio_pay_direct_credit) {
-            if(cart_order_detail_layout.getChildCount() == 5) {
+        } else if (view == radio_pay_direct_credit) {
+            if (cart_order_detail_layout.getChildCount() == 5) {
                 cart_order_detail_layout.removeViewAt(4);
             }
             enableOrDisablePlaceOrderButton();
-        } else if(view == bt_add_coupon) {
+        } else if (view == bt_add_coupon) {
             MixPanel.mixPanel_trackWithOutProperties("Click Use Coupon");
             Intent intent = new Intent(this, MyCouponListActivity.class);
             intent.putExtra("btVisible", true);
@@ -359,13 +363,13 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            if(data.hasExtra("coupon_price")) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            if (data.hasExtra("coupon_price")) {
                 // - coupon fee
                 coupon_price = data.getExtras().getInt("coupon_price");
                 setCartInformation();
             }
-            if(data.hasExtra("coupon_idx")) {
+            if (data.hasExtra("coupon_idx")) {
                 coupon_idx = data.getExtras().getInt("coupon_idx");
             }
         }
@@ -426,16 +430,26 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     }
 
     public void setCartInformation() {
-        Log.d(LOG_TAG, "setCartInformation : start" + coupon_price);
+        Log.d(LOG_TAG, "setCartInformation : start");
         Cart cart = Cart.getCartInstance();
         mCartTotalPrice.setText(PriceAPI.intPriceToStringPriceWonSymbolFormat(cart.getTotalPriceOfAllItems()));
         int cartTotal = cart.getTotalPriceOfAllItems();
 
         // Delivery Fee
-        if(deliveryFee == 0) {
+        if (deliveryFee == 0) {
             mDeliveryFee.setText("(이벤트) 무료");
         } else {
             mDeliveryFee.setText(PriceAPI.intPriceToStringPriceWonSymbolFormat(deliveryFee));
+        }
+
+        if (reservation_type.equals("reservation_only") && reservation_available == false) {
+            mDeliveryTime.setText("당일 " + reservation_available_hour + "시 이전까지만 예약 가능합니다.");
+            mDeliveryTime.setTextColor(getResources().getColor(R.color.orange_300));
+            IB_time.setEnabled(false);
+        } else {
+            mDeliveryTime.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
+            mDeliveryTime.setTextColor(getResources().getColor(R.color.orange_300));
+            IB_time.setEnabled(true);
         }
 
 
@@ -445,7 +459,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             RL_discount.setVisibility(View.VISIBLE);
 
             // 할인 금액이, 합계 + 배달비 보다 크면, 합계 + 배달비를 아니면 할인 금액을 보여준다.
-            if(cart.getTotalDiscountedPriceOfAllItems(free_credit, myPoint, coupon_price) > (cart.getTotalPriceOfAllItems() + deliveryFee)) {
+            if (cart.getTotalDiscountedPriceOfAllItems(free_credit, myPoint, coupon_price) > (cart.getTotalPriceOfAllItems() + deliveryFee)) {
                 mDiscountedPrice.setText(PriceAPI.intPriceToStringPriceWonSymbolFormat((cart.getTotalPriceOfAllItems() + deliveryFee)));
             } else {
                 mDiscountedPrice.setText(PriceAPI.intPriceToStringPriceWonSymbolFormat(cart.getTotalDiscountedPriceOfAllItems(free_credit, myPoint, coupon_price)));
@@ -465,7 +479,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     private void get_my_point_from_server() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://api.plating.co.kr/promo/point?user_idx="+ SVUtil.GetUserIdx(getApplicationContext());
+        String url = "http://api.plating.co.kr/promo/point?user_idx=" + SVUtil.GetUserIdx(getApplicationContext());
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -479,7 +493,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                             myPoint = jo.getInt("point");
 
 
-                        } catch(Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -497,10 +511,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     }
 
 
-
-
-
-
     /***********************
      * * NETWORK OPERATION *
      ***********************/
@@ -510,7 +520,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void getCouponListFromServer_Callback(ArrayList<CouponListRow> couponListRowArrayList) {
         Log.d(LOG_TAG, "getCouponListFromServer_Callback: size = " + couponListRowArrayList.size());
-        if(couponListRowArrayList.size() > 0) {
+        if (couponListRowArrayList.size() > 0) {
             RL_coupon.setVisibility(View.VISIBLE);
         }
     }
@@ -547,8 +557,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
                             SVUtil.SetOrderIdx(cx, order_idx);
                             Cart.getCartInstance().emptyCart();
-
-
 
 
                             // Change button state to "complete"
@@ -671,7 +679,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("", "result : " + response);
+                        Log.d(LOG_TAG, "result : " + response);
                         try {
                             JSONObject jo = new JSONObject(response);
                             JSONObject my_info = jo.getJSONObject("my_info");
@@ -727,13 +735,18 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 //                                mDeliveryTime.setText(time_slot_list.get(Cart.time_slot_idx).time_slot);
                             }
 
+                            reservation_type = my_info.getString("reservation_type");
+                            reservation_available = jo.getBoolean("reservation_available");
+                            reservation_available_hour = jo.getInt("reservation_available_hour");
+
+
                             setCartInformation();
                             enableOrDisablePlaceOrderButton();
 
                             ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
                             boolean hasInsertedAddress = (address.equals(Constant.PLEASE_ENTER_ADDRESS) ? false : true);
                             mixPanelPropertyArrayList.add(new MixPanelProperty("Address", hasInsertedAddress));
-                            if(hasInsertedAddress) {
+                            if (hasInsertedAddress) {
                                 mixPanelPropertyArrayList.add(new MixPanelProperty("Address Detail", address));
                             }
                             mixPanelPropertyArrayList.add(new MixPanelProperty("Coverage", (hasInsertedAddress && delivery_available) ? true : false));
@@ -789,42 +802,42 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         boolean isEnables = true;
         boolean radioChecked = false;
 
-        for(int i = 0; i < radio_pay_group.getChildCount(); i++) {
+        for (int i = 0; i < radio_pay_group.getChildCount(); i++) {
             RadioButton rb = (RadioButton) radio_pay_group.getChildAt(i);
-            if(rb.isChecked()) {
+            if (rb.isChecked()) {
                 radioChecked = true;
             }
         }
         Log.d(LOG_TAG, "radioChecked : " + radioChecked);
         // Enable or disable the button
-        if(mAddress.getText().equals(Constant.PLEASE_ENTER_ADDRESS)) {
+        if (mAddress.getText().equals(Constant.PLEASE_ENTER_ADDRESS)) {
             Btn_order.setEnabled(false);
             Btn_order.setText("주소를 입력해주세요");
             isEnables = false;
-        } else if(mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER)) {
+        } else if (mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER)) {
             Btn_order.setEnabled(false);
             Btn_order.setText("전화번호를 입력해주세요");
             isEnables = false;
-        } else if(mDeliveryTime.getText().equals(Constant.PLEASE_ENTER_DELIVERY_TIME)) {
+        } else if (mDeliveryTime.getText().equals(Constant.PLEASE_ENTER_DELIVERY_TIME)) {
             Btn_order.setEnabled(false);
             Btn_order.setText("배달 시간을 선택해 주세요");
             isEnables = false;
-        } else if(mDeliveryTime.getText().equals(Constant.DELIVERY_IS_FINISHED)) {
+        } else if (mDeliveryTime.getText().equals(Constant.DELIVERY_IS_FINISHED)) {
             Btn_order.setEnabled(false);
             Btn_order.setText("배달 시간을 선택해 주세요");
             isEnables = false;
-        } else if(!radioChecked) {
+        } else if (!radioChecked) {
             Btn_order.setEnabled(false);
             Btn_order.setText("결제 수단을 선택해 주세요");
             isEnables = false;
-        } else if(radio_pay_card.isChecked()) {
-            if(TV_card.getText().equals(Constant.PLEASE_ENTER_CREDIT_CARD)) {
+        } else if (radio_pay_card.isChecked()) {
+            if (TV_card.getText().equals(Constant.PLEASE_ENTER_CREDIT_CARD)) {
                 Btn_order.setEnabled(false);
                 Btn_order.setText("신용카드를 등록해주세요");
                 isEnables = false;
             }
         }
-        if(isEnables) {
+        if (isEnables) {
             Btn_order.setEnabled(true);
             Btn_order.setText("주문하기");
         }
