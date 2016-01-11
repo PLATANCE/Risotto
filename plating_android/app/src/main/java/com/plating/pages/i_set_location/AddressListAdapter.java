@@ -77,7 +77,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        Log.d(LOG_TAG, "getItemViewType: Start");
+        //Log.d(LOG_TAG, "getItemViewType: Start");
         if(isPositionFooter(position)) {
             return TYPE_FOOTER;
         }
@@ -96,6 +96,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     public void updateData(ArrayList<AddressListRow> data) {
         this.data = data;
     }
+
 
     class AddressViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

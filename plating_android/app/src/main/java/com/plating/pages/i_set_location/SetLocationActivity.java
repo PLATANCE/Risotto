@@ -26,12 +26,12 @@ import org.w3c.dom.Text;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class SetLocationActivity extends PlatingActivity implements View.OnClickListener {
+public class SetLocationActivity extends PlatingActivity {
     String LOG_TAG = Constant.APP_NAME + "SetLocationActivity";
 
     private EditText mSetLocationEditText;
     private RecyclerView mRecyclerView;
-    private TextView textview_delivery_coverage;
+    private AvailableLocationListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,9 @@ public class SetLocationActivity extends PlatingActivity implements View.OnClick
         setContentView(R.layout.b_set_location_activity);
 
         getAllViews();
+
+        setUpRecyclerView();
+
         setOnClickListener();
     }
 
@@ -47,16 +50,11 @@ public class SetLocationActivity extends PlatingActivity implements View.OnClick
         Log.d(LOG_TAG, mSetLocationEditText.getBackground().toString());
         mRecyclerView = (RecyclerView) findViewById(R.id.available_location_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        textview_delivery_coverage = (TextView) findViewById(R.id.textview_delivery_coverage);
-        textview_delivery_coverage.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v == textview_delivery_coverage) {
-            MixPanel.mixPanel_trackWithOutProperties("Click Show Delivery Coverage");
-            moveToAddressCoverActivity();
-        }
+    public void setUpRecyclerView() {
+        mAdapter = new AvailableLocationListAdapter(this, new ArrayList<AvailableLocation>());
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void moveToAddressCoverActivity() {
@@ -115,8 +113,9 @@ public class SetLocationActivity extends PlatingActivity implements View.OnClick
 
     public void populateRecyclerView(ArrayList<AvailableLocation> availableLocationArrayList) {
         // Set recyclerview, which is the listview in this case
-        AvailableLocationListAdapter adapter = new AvailableLocationListAdapter(this, availableLocationArrayList);
-        mRecyclerView.setAdapter(adapter);
+        //AvailableLocationListAdapter adapter = new AvailableLocationListAdapter(this, availableLocationArrayList);
+        mAdapter.updateData(availableLocationArrayList);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void AddressUpdateFinished() {

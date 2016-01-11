@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="@color/white"
-    android:clickable="true">
+    android:clickable="true"
+    android:id="@+id/available_location_layout">
+
     <TextView
         android:id="@+id/location_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:gravity="center_vertical"
-        android:textSize="16dp"
-        android:text="삼성동"/>
+        android:text="삼성동"
+        android:textSize="16dp" />
 </RelativeLayout>

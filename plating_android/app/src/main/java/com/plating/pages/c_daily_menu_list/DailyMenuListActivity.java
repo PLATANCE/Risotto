@@ -104,7 +104,7 @@ public class DailyMenuListActivity extends PlatingActivity {
     public void getAddressInUseFromServer_Callback(AddressListRow addressListRow) {
         this.addressListRow = addressListRow;
         if (addressListRow.getAddress() == null) {
-            text_my_address.setText("요리가 배달될 주소를 입력해 주세요.");
+            text_my_address.setText("요리가 배달될 주소를 입력하세요.");
         } else {
             text_my_address.setText(addressListRow.getAddress() + " " + addressListRow.getAddress_detail());
         }

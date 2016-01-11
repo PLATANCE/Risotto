@@ -16,14 +16,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="15dp"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
+            android:gravity="center"
             android:layout_weight="1.5">
 
             <ImageView
                 android:id="@+id/imageView_use_check"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/address_check_yes" />
 
         </LinearLayout>
@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="7.5"
             android:orientation="vertical">
 
@@ -40,7 +41,6 @@
                 android:id="@+id/textView_addr1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:text="Address1"
                 android:textColor="@color/usual_main_text_black"
@@ -50,7 +50,6 @@
                 android:id="@+id/textView_addr2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:text="Address2"
                 android:textColor="@color/usual_main_text_black"
@@ -77,8 +76,7 @@
         android:layout_marginRight="10dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/text_delete"
+        android:text="삭제"
         android:textColor="@color/usual_main_text_orange"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        android:textSize="13sp" />
 </LinearLayout>
