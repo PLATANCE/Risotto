@@ -236,7 +236,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
             if(v == imageView_banner) {
                 ((DailyMenuListActivity)mContext).moveToBannerActivity();
             } else {
-                int position = getAdapterPosition();
+                int position = getAdapterPosition() - 1;
                 ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
                 mixPanelPropertyArrayList.add(new MixPanelProperty("Position", position + 1));
                 mixPanelPropertyArrayList.add(new MixPanelProperty("Menu Name", data.get(position).nameMenu));
