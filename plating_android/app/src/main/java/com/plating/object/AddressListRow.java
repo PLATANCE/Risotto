@@ -8,6 +8,7 @@ public class AddressListRow {
     private String address;
     private String address_detail;
     private int in_use;
+    private int delivery_available;
     private String reservation_type;
     private double lat;
     private double lon;
@@ -42,6 +43,14 @@ public class AddressListRow {
 
     public void setIn_use(int in_use) {
         this.in_use = in_use;
+    }
+
+    public int getDelivery_available() {
+        return delivery_available;
+    }
+
+    public void setDelivery_available(int delivery_available) {
+        this.delivery_available = delivery_available;
     }
 
     public String getReservation_type() {

@@ -57,7 +57,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
     public MenuViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Log.d(LOG_TAG, "onCreateViewHolder: Start");
         View view;
-        if(viewType == TYPE_ITEM) {
+        if (viewType == TYPE_ITEM) {
             view = inflater.inflate(R.layout.b_available_location_list_row, viewGroup, false);
         } else {
             view = inflater.inflate(R.layout.b_address_delivery_coverage, viewGroup, false);
@@ -69,7 +69,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
     @Override
     public void onBindViewHolder(final MenuViewHolder viewHolder, int position) {
 
-        if(getItemViewType(position) == TYPE_ITEM) {
+        if (getItemViewType(position) == TYPE_ITEM) {
             AvailableLocation availableLocation = data.get(position);
 
             viewHolder.locationName.setText(availableLocation.name);
@@ -89,7 +89,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
 
     @Override
     public int getItemViewType(int position) {
-        if(isPositionFooter(position)) {
+        if (isPositionFooter(position)) {
             return TYPE_FOOTER;
         }
         return TYPE_ITEM;
@@ -110,7 +110,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
 
         public MenuViewHolder(View itemView, int viewType) {
             super(itemView);
-            if(viewType == TYPE_ITEM) {
+            if (viewType == TYPE_ITEM) {
                 available_location_layout = (RelativeLayout) itemView.findViewById(R.id.available_location_layout);
                 available_location_layout.setOnClickListener(this);
                 locationName = (TextView) itemView.findViewById(R.id.location_name);
@@ -127,62 +127,48 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
                 final int position = getAdapterPosition();
                 final AvailableLocation availableLocation = data.get(position);
 
-                if (availableLocation.available) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
 
+                AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                if (availableLocation.available) {
                     alert.setTitle("ADDRESS");
                     alert.setMessage("나머지 주소를 입력해주세요");
-
-                    LinearLayout layout = new LinearLayout(mContext);
-                    layout.setOrientation(LinearLayout.VERTICAL);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(36, 0, 36, 0);
-
-                    // Set an EditText view to get user input
-                    final EditText input = new EditText(mContext);
-                    layout.addView(input, params);
-
-                    alert.setView(layout);
-
-                    alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            String address_d = input.getText().toString();
-                            UpdateAddress(availableLocation.name, address_d, availableLocation.lat, availableLocation.lon, availableLocation.available);
-                        }
-                    });
-
-                    alert.setNegativeButton("취소",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                }
-                            });
-
-                    AlertDialog dialog = alert.create();
-                    dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                    dialog.show();
                 } else {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-                    alert.setTitle("배달 불가 지역");
-                    alert.setMessage("현재 배달 가능한 지역이 아닙니다.");
+                    alert.setTitle("배달이 불가능한 지역입니다.");
+                    alert.setMessage("나머지 주소를 입력하고 확인을 누르면 배달 지역 확장시 알려드리겠습니다.");
 
-                    alert.setPositiveButton("다시선택", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-
-                        }
-                    });
-                    alert.setNegativeButton("확인",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    UpdateAddress(availableLocation.name, "", availableLocation.lat, availableLocation.lon, availableLocation.available);
-                                }
-                            });
-
-                    alert.show();
                 }
-            } else if(v == textview_delivery_coverage) {
+
+                LinearLayout layout = new LinearLayout(mContext);
+                layout.setOrientation(LinearLayout.VERTICAL);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(36, 0, 36, 0);
+
+                // Set an EditText view to get user input
+                final EditText input = new EditText(mContext);
+                layout.addView(input, params);
+
+                alert.setView(layout);
+
+                alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String address_d = input.getText().toString();
+                        UpdateAddress(availableLocation.name, address_d, availableLocation.lat, availableLocation.lon, availableLocation.available);
+                    }
+                });
+
+                alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+
+                AlertDialog dialog = alert.create();
+                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                dialog.show();
+
+            } else if (v == textview_delivery_coverage) {
                 MixPanel.mixPanel_trackWithOutProperties("Click Show Delivery Coverage");
-                ((SetLocationActivity)mContext).moveToAddressCoverActivity();
+                ((SetLocationActivity) mContext).moveToAddressCoverActivity();
             }
         }
 

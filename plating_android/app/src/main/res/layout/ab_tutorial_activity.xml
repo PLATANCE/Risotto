@@ -16,11 +16,12 @@
             android:layout_height="match_parent"/>
 
         <com.plating.sdk_tools.circleindicator.CircleIndicator
+            android:layout_width="match_parent"
             android:id="@+id/indicator"
             android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:layout_height="48dp"/>
+
     </FrameLayout>
 
 </LinearLayout>

@@ -2,6 +2,7 @@
     <string name="app_name">Plating</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_menu_list">MenuListActivity</string>
+    <string name="title_main_banner">MainBannerActivity</string>
 
     <!-- Facebook -->
     <string name="facebook_app_id">1628165434090487</string>

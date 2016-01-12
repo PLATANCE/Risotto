@@ -1,4 +1,4 @@
-package com.plating.pages.i_set_location;
+package com.plating.pages.c_daily_menu_list;
 
 import android.os.Bundle;
 import android.webkit.WebChromeClient;
@@ -10,16 +10,17 @@ import com.plating.R;
 import com.plating.application.PlatingActivity;
 
 /**
- * Created by Rooney on 16. 1. 6..
+ * Created by home on 16. 1. 12..
  */
-public class AddressCoverActivity extends PlatingActivity {
+public class MainBannerActivity extends PlatingActivity {
     private WebView webView;
     private WebSettings webSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.b_address_cover_activity);
+
+        setContentView(R.layout.d_daily_menu_list_banner_activity);
 
         webView = (WebView) findViewById(R.id.webView);
         webSettings = webView.getSettings();
@@ -36,6 +37,6 @@ public class AddressCoverActivity extends PlatingActivity {
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
 
-        webView.loadUrl("http://plating.co.kr/admin/admin_coverage.php");
+        webView.loadUrl("http://plating.co.kr/admin/admin_banner_main.php");
     }
 }

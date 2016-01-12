@@ -88,9 +88,9 @@ public class CircleIndicator extends LinearLayout {
     }
 
     public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin,
-            @AnimatorRes int animatorId, @AnimatorRes int animatorReverseId,
-            @DrawableRes int indicatorBackgroundId,
-            @DrawableRes int indicatorUnselectedBackgroundId) {
+                                   @AnimatorRes int animatorId, @AnimatorRes int animatorReverseId,
+                                   @DrawableRes int indicatorBackgroundId,
+                                   @DrawableRes int indicatorUnselectedBackgroundId) {
 
         mIndicatorWidth = indicatorWidth;
         mIndicatorHeight = indicatorHeight;
@@ -160,7 +160,8 @@ public class CircleIndicator extends LinearLayout {
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
 
-        @Override public void onPageSelected(int position) {
+        @Override
+        public void onPageSelected(int position) {
 
             if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0) {
                 return;
@@ -184,13 +185,13 @@ public class CircleIndicator extends LinearLayout {
 
             mLastPosition = position;
 
-            if(mLastPosition == mViewpager.getAdapter().getCount() - 1) {
-                for(int i = 0; i < mViewpager.getAdapter().getCount(); i++) {
+            if (mLastPosition == mViewpager.getAdapter().getCount() - 1) {
+                for (int i = 0; i < mViewpager.getAdapter().getCount(); i++) {
                     View currentIndicator = getChildAt(i);
                     currentIndicator.setVisibility(INVISIBLE);
                 }
             } else {
-                for(int i = 0; i < mViewpager.getAdapter().getCount(); i++) {
+                for (int i = 0; i < mViewpager.getAdapter().getCount(); i++) {
                     View currentIndicator = getChildAt(i);
                     currentIndicator.setVisibility(VISIBLE);
                 }
@@ -198,12 +199,14 @@ public class CircleIndicator extends LinearLayout {
 
         }
 
-        @Override public void onPageScrollStateChanged(int state) {
+        @Override
+        public void onPageScrollStateChanged(int state) {
         }
     };
 
     private DataSetObserver mInternalDataSetObserver = new DataSetObserver() {
-        @Override public void onChanged() {
+        @Override
+        public void onChanged() {
             super.onChanged();
 
             int newCount = mViewpager.getAdapter().getCount();
@@ -225,7 +228,8 @@ public class CircleIndicator extends LinearLayout {
     /**
      * @deprecated User ViewPager addOnPageChangeListener
      */
-    @Deprecated public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+    @Deprecated
+    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
         if (mViewpager == null) {
             throw new NullPointerException("can not find Viewpager , setViewPager first");
         }
@@ -266,7 +270,8 @@ public class CircleIndicator extends LinearLayout {
     }
 
     private class ReverseInterpolator implements Interpolator {
-        @Override public float getInterpolation(float value) {
+        @Override
+        public float getInterpolation(float value) {
             return Math.abs(1.0f - value);
         }
     }

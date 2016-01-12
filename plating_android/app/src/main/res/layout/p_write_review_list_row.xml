@@ -53,5 +53,5 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:textSize="12dp"
-        android:hint="솔직한 리뷰 부탁드려요 :)"/>
+        android:hint="맛있게 드셨나요? 리뷰를 남겨주세요 :)"/>
 </LinearLayout>

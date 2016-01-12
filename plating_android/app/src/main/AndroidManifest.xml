@@ -76,6 +76,10 @@
             android:label="@string/title_activity_menu_list"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".pages.c_daily_menu_list.MainBannerActivity"
+            android:label="@string/title_main_banner"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".pages.d_menu_detail.MenuDetailActivity"
             android:label="@string/title_activity_menu"
             android:screenOrientation="portrait" />

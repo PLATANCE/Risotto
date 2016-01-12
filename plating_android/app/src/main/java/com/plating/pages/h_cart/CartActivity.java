@@ -34,6 +34,7 @@ import com.plating.application.PlatingActivity;
 import com.plating.helperAPI.DialogAPI;
 import com.plating.helperAPI.PhoneNumberAPI;
 import com.plating.helperAPI.PriceAPI;
+import com.plating.helperAPI.ToastAPI;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
 import com.plating.network.r_coupon.GetMyCouponListFromServer;
@@ -309,8 +310,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
             if (delivery_available) {
                 ConfirmOrderDialog.showDialog(this, deliveryTime, address, phoneNumber, totalPrice, freeCredit, pay_method, coupon_price);
-            } else {
-                SVUtil.showDialog2(mContext, "알림", "배달불가지역입니다.");
             }
 
 
@@ -364,13 +363,14 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            if (data.hasExtra("coupon_price")) {
-                // - coupon fee
-                coupon_price = data.getExtras().getInt("coupon_price");
+            Bundle bundle = data.getExtras();
+            if(bundle != null) {
+                coupon_price = bundle.getInt("coupon_price");
+                coupon_idx = bundle.getInt("coupon_idx");
+                String msg = bundle.getString("msg");
+
                 setCartInformation();
-            }
-            if (data.hasExtra("coupon_idx")) {
-                coupon_idx = data.getExtras().getInt("coupon_idx");
+                ToastAPI.showToast(msg);
             }
         }
     }
@@ -821,6 +821,10 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         } else if (mDeliveryTime.getText().equals(Constant.PLEASE_ENTER_DELIVERY_TIME)) {
             Btn_order.setEnabled(false);
             Btn_order.setText("배달 시간을 선택해 주세요");
+            isEnables = false;
+        } else if (mDeliveryTime.getText().equals("당일 " + reservation_available_hour + "시 이전까지만 예약 가능합니다.")) {
+            Btn_order.setEnabled(false);
+            Btn_order.setText("해당 지역은 오후 4시까지만 예약 가능합니다.");
             isEnables = false;
         } else if (mDeliveryTime.getText().equals(Constant.DELIVERY_IS_FINISHED)) {
             Btn_order.setEnabled(false);

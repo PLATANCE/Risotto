@@ -20,6 +20,8 @@ import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
+import com.plating.network.p_write_review_activity.SubmitReview;
+import com.plating.network.r_coupon.GetCouponAvailableFromServer;
 import com.plating.object.CouponListRow;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 
@@ -103,16 +105,13 @@ public class MyCouponListAdapter extends RecyclerView.Adapter<MyCouponListAdapte
         public void onClick(View v) {
             MixPanel.mixPanel_trackWithOutProperties("Select Coupon");
             int position = getAdapterPosition();
-            Intent intent = new Intent();
+            //Intent intent = new Intent();
 
-            intent.putExtra("coupon_price", data.get(position).getPrice());
-            intent.putExtra("coupon_idx", data.get(position).getIdx());
+            ((MyCouponListActivity) mContext).sendDataToServer(data.get(position).getIdx());
 
-            ((MyCouponListActivity) mContext).setResult(((MyCouponListActivity) mContext).RESULT_OK, intent);
-            ((MyCouponListActivity) mContext).finish();
+
             //((OrderHistoryListActivity) mContext).startOrderHistoryActivity(data.get(position));
 
         }
-
     }
 }

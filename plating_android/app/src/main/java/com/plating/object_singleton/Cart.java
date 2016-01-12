@@ -38,6 +38,28 @@ public class Cart {
 
     // Add 'count' number of menu to cart
 
+    public String setMenuIdxParam() {
+        StringBuffer sb = new StringBuffer(1024);
+        for(int i = 0; i < mMenuList.size(); i++) {
+            sb.append(mMenuList.get(i).menu_idx);
+            if(i != mMenuList.size() - 1) {
+                sb.append("|");
+            }
+        }
+        return sb.toString();
+    }
+
+    public String setMenuAmountParam() {
+        StringBuffer sb = new StringBuffer(1024);
+        for(int i = 0; i < mMenuList.size(); i++) {
+            sb.append(mMenuList.get(i).count);
+            if(i != mMenuList.size() - 1) {
+                sb.append("|");
+            }
+        }
+        return sb.toString();
+    }
+
     public void addMenuToCart(int menu_d_idx, int menu_idx, int count, int price, int alt_price, String image_url_menu, String name_menu) {
         for(int i = 0; i < mMenuList.size(); i++) {
             if(mMenuList.get(i).menu_idx == menu_idx) {

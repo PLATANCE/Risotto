@@ -82,6 +82,8 @@ public class DailyMenuListActivity extends PlatingActivity {
 
         getAllViews();
 
+        setUpRecyclerView();
+
         setOnClickListeners();
 
         setFutureMenuDateLayout();
@@ -202,6 +204,12 @@ public class DailyMenuListActivity extends PlatingActivity {
             mAdapter.notifyDataSetChanged();
     }
 
+    public void moveToBannerActivity() {
+        Intent intent = new Intent(this, MainBannerActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.transition_slide_in_from_bottom, R.anim.transition_slide_out_to_top);
+    }
+
 
     /***********************
      * * NETWORK OPERATION *
@@ -213,7 +221,8 @@ public class DailyMenuListActivity extends PlatingActivity {
 
     public void getMenuListFromServer_Callback(ArrayList<DailyMenu> dailyMenuArrayList) {
         mDailyMenuArrayList = dailyMenuArrayList;
-        populateRecyclerView(dailyMenuArrayList);
+        mAdapter.updateData(dailyMenuArrayList);
+        mAdapter.notifyDataSetChanged();
 
         getDialogFromServer();
     }
@@ -244,9 +253,9 @@ public class DailyMenuListActivity extends PlatingActivity {
     }
 
 
-    public void populateRecyclerView(ArrayList<DailyMenu> dailyMenus) {
+    public void setUpRecyclerView() {
         // Set recyclerview, which is the listview in this case
-        mAdapter = new DailyMenuListAdapter(this, dailyMenus);
+        mAdapter = new DailyMenuListAdapter(this, new ArrayList<DailyMenu>());
         mRecyclerView.setAdapter(mAdapter);
     }
 

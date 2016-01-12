@@ -57,6 +57,8 @@ public class RequestURL {
     // URL header for refer image
     public static final String REFER_IMAGE_URL = "http://plating.co.kr/app/media/refer/";
 
+    public static final String BANNER_IMAGE_URL = "http://plating.co.kr/app/media/banner/";
+
 
 
 }

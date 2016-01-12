@@ -11,10 +11,13 @@ import android.view.View;
 import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.application.PlatingActivity;
+import com.plating.dialog.ReferDialog;
+import com.plating.network.RequestURL;
 import com.plating.network.p_write_review_activity.CancelWritingReview;
 import com.plating.network.p_write_review_activity.GetReviewListFromServer;
 import com.plating.network.p_write_review_activity.SubmitReview;
 import com.plating.object.WriteReviewRow;
+import com.plating.pages.s_refer.ReferActivity;
 import com.plating.util.PreCachingLayoutManager;
 
 import java.util.ArrayList;
@@ -27,7 +30,6 @@ public class WriteReviewListActivity extends PlatingActivity {
 
     private RecyclerView mRecyclerView;
     private WriteReviewListAdapter mAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,62 +69,6 @@ public class WriteReviewListActivity extends PlatingActivity {
     }
 
 
-/*
-
-    private void SubmitReview(final String order_d_idx, final String rating, final String value) {
-        RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(this);
-        StringRequest myReq = new StringRequest(Request.Method.POST,
-                "http://api.plating.co.kr/submit_review",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Log.d("SubmitReview", "result : "+response);
-
-                        AlertDialog.Builder alert = new AlertDialog.Builder(cx);
-                        alert.setTitle("");
-                        alert.setMessage("소중한 의견 감사합니다");
-                        alert.setCancelable(false);
-
-                        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                Intent intent;
-                                intent = new Intent(cx, DailyMenuListActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-
-                                //Apply splash exit (fade out) and main entry (fade in) animation transitions.
-                                overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
-                                finish();
-                            }
-                        });
-                        alert.show();
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("order_idx", order_idx+"");
-                params.put("order_d_idx", order_d_idx+"");
-                params.put("rating", rating+"");
-                params.put("comment", value+"");
-
-
-                return params;
-            }
-        };
-        queue.add(myReq);
-    }
-*/
-
     public void onClick_finishWritingReview(View v) {
         ArrayList<WriteReviewRow> allReviewsWrittenSoFar = mAdapter.getAllReviewsWrittenSoFar();
 
@@ -151,7 +97,7 @@ public class WriteReviewListActivity extends PlatingActivity {
         rating = rating.substring(0, rating.length() - 1);
         comment = comment.substring(0, comment.length() - 1);
 
-        Log.d(LOG_TAG, "asdfasdf : "+order_d_idx+" / "+rating+" / "+comment);
+        Log.d(LOG_TAG, "asdfasdf : " + order_d_idx + " / " + rating + " / " + comment);
         //438 / 4.0 / null
 
         submitReview(order_d_idx, rating, comment);
@@ -164,17 +110,41 @@ public class WriteReviewListActivity extends PlatingActivity {
     public void submitReview_callback() {
         Log.d(LOG_TAG, "SubmitReview_callback");
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("");
-        alert.setMessage("소중한 의견 감사합니다");
-        alert.setCancelable(false);
+        // 2016.01.11 rating 이 4.0 이상이면, 친구 초대 하라는 메세지 다이얼로그!
+        if(getMaxRating() >=  4.0) {
+            ReferDialog dialog = new ReferDialog(this, RequestURL.DIALOG_IMAGE_URL + "refer_dialog.png");
+            dialog.show();
 
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                finish();
+        } else {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("");
+            alert.setMessage("소중한 의견 감사합니다");
+            alert.setCancelable(false);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    finish();
+                }
+            });
+            alert.show();
+        }
+    }
+
+    public void moveToReferActivity() {
+        Intent intent = new Intent(this, ReferActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.transition_slide_in_from_left, R.anim.transition_slide_out_to_right);
+    }
+
+    public double getMaxRating() {
+        double maxRating = 0.0f;
+        ArrayList<WriteReviewRow> allReviewsWrittenSoFar = mAdapter.getAllReviewsWrittenSoFar();
+        for(int i = 0;  i < allReviewsWrittenSoFar.size(); i++) {
+            if(allReviewsWrittenSoFar.get(i).rating > maxRating) {
+                maxRating = allReviewsWrittenSoFar.get(i).rating;
             }
-        });
-        alert.show();
+        }
+        return maxRating;
     }
 
     @Override
