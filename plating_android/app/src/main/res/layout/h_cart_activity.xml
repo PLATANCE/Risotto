@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:singleLine="true"
-            android:text="모든 메뉴는 전자렌지 조리용입니다."
+            android:text="모든 메인요리는 전자렌지 조리용입니다."
             android:textColor="@color/colorPrimary"
             android:textSize="13dp" />
 

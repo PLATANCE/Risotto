@@ -68,10 +68,37 @@
             android:textSize="16dp" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/daily_announcement_layout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/tool_bar_layout"
+        android:background="@color/app_card_background_grey_color"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/daily_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="모든 메인요리는 전자렌지 조리용입니다."
+            android:textColor="@color/colorPrimary"
+            android:textSize="13dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/app_shawdow_color" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tool_bar_layout"
+        android:layout_below="@+id/daily_announcement_layout"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:scrollbars="none">

@@ -64,7 +64,7 @@ public class MyCouponListActivity extends PlatingActivity {
         mAdapter.updateData(couponListRowArrayList);
         mAdapter.notifyDataSetChanged();
         if(couponListRowArrayList.size() > 0) {
-            coupon_count.setText("사용 가능 쿠폰 : " + couponListRowArrayList.size() + "개");
+            coupon_count.setText("보유 쿠폰 : " + couponListRowArrayList.size() + "개");
         } else {
             coupon_count.setText("보유한 쿠폰이 없습니다.");
         }
@@ -91,7 +91,7 @@ public class MyCouponListActivity extends PlatingActivity {
             setResult(RESULT_OK, intent);
             finish();
         } else {
-            ToastAPI.showToast(msg);
+            ToastAPI.showToastLong(msg);
         }
     }
 }

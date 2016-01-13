@@ -68,6 +68,7 @@ public class MyCouponListAdapter extends RecyclerView.Adapter<MyCouponListAdapte
         if (extras != null) {
             if (extras.getBoolean("btVisible")) {
                 viewHolder.bt_area_layout.setVisibility(View.VISIBLE);
+                viewHolder.coupon_image.setEnabled(true);
             }
         }
     }
@@ -85,19 +86,18 @@ public class MyCouponListAdapter extends RecyclerView.Adapter<MyCouponListAdapte
     class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         RelativeLayout bt_area_layout;
         ImageView coupon_image;
-        ImageButton bt_use;
+        TextView bt_use;
         //ImageLoader imageLoader;
 
         public MenuViewHolder(View itemView) {
             super(itemView);
             //itemView.setOnClickListener(this);
             coupon_image = (ImageView) itemView.findViewById(R.id.coupon_image);
+            coupon_image.setOnClickListener(this);
+            coupon_image.setEnabled(false);
             bt_area_layout = (RelativeLayout) itemView.findViewById(R.id.bt_area_layout);
-            //imageLoader = VolleySingleton.getsInstance().getmImageLoader();
 
-            // Image Load
-
-            bt_use = (ImageButton) itemView.findViewById(R.id.bt_use);
+            bt_use = (TextView) itemView.findViewById(R.id.bt_use);
             bt_use.setOnClickListener(this);
         }
 
@@ -105,12 +105,8 @@ public class MyCouponListAdapter extends RecyclerView.Adapter<MyCouponListAdapte
         public void onClick(View v) {
             MixPanel.mixPanel_trackWithOutProperties("Select Coupon");
             int position = getAdapterPosition();
-            //Intent intent = new Intent();
 
             ((MyCouponListActivity) mContext).sendDataToServer(data.get(position).getIdx());
-
-
-            //((OrderHistoryListActivity) mContext).startOrderHistoryActivity(data.get(position));
 
         }
     }

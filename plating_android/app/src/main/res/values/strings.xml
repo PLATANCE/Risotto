@@ -50,4 +50,5 @@
     <string name="not_to_show_today"><u>오늘 그만 보기</u></string>
     <string name="text_delete"><u>삭제</u></string>
     <string name="show_delivery_coverage"><u>배달 가능 지역 보기</u></string>
+    <string name="use_coupon"><u>쿠폰 사용하기</u></string>
 </resources>

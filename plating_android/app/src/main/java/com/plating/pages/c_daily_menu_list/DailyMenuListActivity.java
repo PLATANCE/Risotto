@@ -207,7 +207,6 @@ public class DailyMenuListActivity extends PlatingActivity {
     public void moveToBannerActivity() {
         Intent intent = new Intent(this, MainBannerActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.transition_slide_in_from_bottom, R.anim.transition_slide_out_to_top);
     }
 
 

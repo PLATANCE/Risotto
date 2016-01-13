@@ -11,4 +11,7 @@ public class ToastAPI {
     public static void showToast(String message) {
         Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_SHORT).show();
     }
+    public static void showToastLong(String message) {
+        Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();
+    }
 }

@@ -25,6 +25,13 @@
                 android:background="@color/app_card_background_grey_color"
                 android:scaleType="centerCrop" />
 
+            <ImageView
+                android:id="@+id/imageView_event_tag"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:background="@drawable/event_tag"
+                android:layout_alignParentRight="true"/>
+
             <LinearLayout
                 android:id="@+id/daily_menu_sold_out_layout"
                 android:layout_width="match_parent"

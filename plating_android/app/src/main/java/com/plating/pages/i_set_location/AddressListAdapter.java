@@ -65,6 +65,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         if (getItemViewType(position) == TYPE_ITEM) {
             AddressListRow addressListRow = data.get(position);
 
+            holder.textView_addr1.setTextColor(mContext.getResources().getColor(R.color.usual_main_text_black));
+            holder.textView_addr2.setTextColor(mContext.getResources().getColor(R.color.usual_main_text_black));
+
             // In_use 에 따른 이미지 변경
             if (addressListRow.getIn_use() == 0) {
                 holder.imageView_use_check.setBackgroundResource(R.drawable.address_check_no);
