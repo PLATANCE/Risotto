@@ -11,7 +11,7 @@ import com.plating.sdk_tools.circleindicator.CircleIndicator;
  * Created by home on 15. 12. 28..
  */
 public class TutorialActivity extends PlatingActivity {
-    TutorialPagerAdapter pagerAdapter;
+
     ViewPager viewPager;
     CircleIndicator indicator;
 
@@ -21,11 +21,11 @@ public class TutorialActivity extends PlatingActivity {
 
         setContentView(R.layout.ab_tutorial_activity);
 
-
-        pagerAdapter = new TutorialPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setAdapter(new TutorialPagerAdapter(getSupportFragmentManager()));
+
         indicator = (CircleIndicator) findViewById(R.id.indicator);
-        viewPager.setAdapter(pagerAdapter);
         indicator.setViewPager(viewPager);
+
     }
 }
