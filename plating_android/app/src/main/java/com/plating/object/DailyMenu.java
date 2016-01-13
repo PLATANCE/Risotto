@@ -22,6 +22,7 @@ public class DailyMenu {
     public int stock;
     public double rating;
     public int numOfReviews;
+    public int is_event;
 
 //    public DailyMenu() {
 //

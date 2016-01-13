@@ -2,6 +2,7 @@ package com.plating.pages.c_daily_menu_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
 import com.plating.application.Constant;
+import com.plating.application.PlatingActivity;
 import com.plating.helperAPI.PriceAPI;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
@@ -31,6 +33,11 @@ import com.plating.object_singleton.Cart;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.sdk_tools.mix_panel.MixPanelProperty;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -61,7 +68,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
     public MenuViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Log.d(LOG_TAG, "onCreateViewHolder: Start");
         View view;
-        if(viewType == TYPE_ITEM) {
+        if (viewType == TYPE_ITEM) {
             view = inflater.inflate(R.layout.d_daily_menu_list_row, viewGroup, false);
         } else {
             view = inflater.inflate(R.layout.d_daily_menu_list_header, viewGroup, false);
@@ -72,7 +79,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
 
     @Override
     public int getItemViewType(int position) {
-        if(isPositionHeader(position)) {
+        if (isPositionHeader(position)) {
             return TYPE_HEADER;
         }
         return TYPE_ITEM;
@@ -84,24 +91,15 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
 
     @Override
     public void onBindViewHolder(final MenuViewHolder viewHolder, int position) {
-        Log.d(LOG_TAG, "onBindViewHolder: Start" + position + getItemViewType(position));
-        if(getItemViewType(position) == TYPE_ITEM) {
-            DailyMenu dailyMenu = data.get(position-1);
+        Log.d(LOG_TAG, "onBindViewHolder: Start");
+        if (getItemViewType(position) == TYPE_ITEM) {
+            DailyMenu dailyMenu = data.get(position - 1);
 
             // Load image with volley for food image
             VolleySingleton.getsInstance().loadImageToImageView(viewHolder.menuImage, RequestURL.DAILY_MENU_IMAGE_URL + dailyMenu.imageUrlMenu);
-
-            // Load dummy image
-/*        int[] dummyImageResrouce = {
-                R.drawable.dummy_food_image__canelloni,
-                R.drawable.dummy_food_image__beef_stew,
-                R.drawable.dummy_food_image__salmon_steak,
-                R.drawable.dummy_food_image__chicken,
-                R.drawable.dummy_food_image__basil_pesto_pasta,
-                R.drawable.dummy_food_image__home_party,
-                R.drawable.dummy_food_image__evian,
-                R.drawable.dummy_food_image__san_pellegrino};
-        viewHolder.menuImage.setImageResource(dummyImageResrouce[position]);*/
+            if(dailyMenu.is_event == 0) {
+                viewHolder.imageView_event_tag.setVisibility(View.GONE);
+            }
 
             // Load image with volley for chef image
             VolleySingleton.getsInstance().loadImageToImageView(viewHolder.chefImage, RequestURL.CHEF_IMAGE_URL + dailyMenu.imageUrlChef);
@@ -142,16 +140,18 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
             // Update "Number of item in cart" textview. Yellow color
             viewHolder.updateNumberOfItemAddedInCartTextView();
         } else {
-            VolleySingleton.getsInstance().loadImageToImageView(viewHolder.imageView_banner, RequestURL.BANNER_IMAGE_URL + "admin_banner.png");
+            String url = RequestURL.BANNER_IMAGE_URL + "admin_banner.png";
+            VolleySingleton.getsInstance().loadImageToImageView(viewHolder.imageView_banner, url);
         }
     }
 
+
     public void setReviewRatingStars(final MenuViewHolder viewHolder, double rating) {
-        if(rating >= 4.6 ) {
+        if (rating >= 4.6) {
             viewHolder.reviewStar5.setBackgroundResource(R.drawable.icon_star_filled_yellow);
-        } else if(rating < 4.6 && rating >=4.2) {
+        } else if (rating < 4.6 && rating >= 4.2) {
             viewHolder.reviewStar5.setBackgroundResource(R.drawable.icon_star_half_yellow);
-        } else if(rating < 4.2) {
+        } else if (rating < 4.2) {
             viewHolder.reviewStar5.setBackgroundResource(R.drawable.icon_star_empty_yellow);
         }
     }
@@ -178,6 +178,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
         LinearLayout RL_menu_price_alt;
         ImageButton putToCartButton;
         private ImageView imageView_banner;
+        private ImageView imageView_event_tag;
 
         TextView numOfReviewsTextView;
 
@@ -193,6 +194,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
             if (viewType == TYPE_ITEM) {
                 itemView.setOnClickListener(this);
                 menuImage = (ImageView) itemView.findViewById(R.id.menu_image);
+                imageView_event_tag = (ImageView) itemView.findViewById(R.id.imageView_event_tag);
                 menuSoldOutImageLayout = (LinearLayout) itemView.findViewById(R.id.daily_menu_sold_out_layout);
                 menuStatusMainTextview = (TextView) itemView.findViewById(R.id.menu_status_main_textview);
                 menuStatusSubTextview = (TextView) itemView.findViewById(R.id.menu_status_sub_textview);
@@ -216,7 +218,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
                     @Override
                     public void onClick(View view) {
                         MixPanel.mixPanel_trackWithOutProperties("Add Item To Cart");
-                        int position = getAdapterPosition();
+                        int position = getAdapterPosition() - 1;
                         int count = 1;
 
                         ((DailyMenuListActivity) mContext).putMenuToCart(position, count);
@@ -233,8 +235,8 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
 
         @Override
         public void onClick(View v) {
-            if(v == imageView_banner) {
-                ((DailyMenuListActivity)mContext).moveToBannerActivity();
+            if (v == imageView_banner) {
+                ((DailyMenuListActivity) mContext).moveToBannerActivity();
             } else {
                 int position = getAdapterPosition() - 1;
                 ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
@@ -248,11 +250,11 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
 
 
         public void updateNumberOfItemAddedInCartTextView() {
-            int position = getAdapterPosition();
+            int position = getAdapterPosition() - 1;
 
             ArrayList<MenuInCart> menuInCartArrayList = Cart.getCartInstance().getMenuList();
 
-            if(menuInCartArrayList.size() == 0) {
+            if (menuInCartArrayList.size() == 0) {
                 numOfItemAddedToCart.setVisibility(View.GONE);
                 return;
             }
@@ -261,7 +263,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
                 if (data.get(position).idx == menuInCartArrayList.get(i).menu_idx) {
                     if (menuInCartArrayList.get(i).count > 0) {
                         // If visibility is gone, make it visible with fade-in animation
-                        if(numOfItemAddedToCart.getVisibility() == View.GONE) {
+                        if (numOfItemAddedToCart.getVisibility() == View.GONE) {
                             numOfItemAddedToCart.setVisibility(View.VISIBLE);
                             Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.anim.transition_fade_in_fast);
                             numOfItemAddedToCart.startAnimation(fadeInAnimation);
@@ -272,7 +274,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
                 }
 
                 // If there was no item found. This is why there is 'return' above.
-                if(i == menuInCartArrayList.size()-1) {
+                if (i == menuInCartArrayList.size() - 1) {
                     numOfItemAddedToCart.setVisibility(View.GONE);
                 }
             }

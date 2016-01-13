@@ -69,6 +69,7 @@ public class getMenuListFromServer {
                 dailyMenu.stock = response.optJSONObject(i).optInt("stock", 0);
                 dailyMenu.rating = response.optJSONObject(i).optDouble("rating", 4.5);
                 dailyMenu.numOfReviews = response.optJSONObject(i).optInt("review_count", 34);
+                dailyMenu.is_event = response.optJSONObject(i).optInt("is_event", 1);
 
                 dailyMenuArrayList.add(dailyMenu);
             }
