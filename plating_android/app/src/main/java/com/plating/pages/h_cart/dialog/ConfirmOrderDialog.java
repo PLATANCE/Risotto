@@ -34,8 +34,9 @@ public class ConfirmOrderDialog {
     private static TextView totalPriceTextView;
     private static TextView payMethodTextView;
     private static TextView isCouponUsedTextView;
+    private static TextView includeCutleryTextView;
 
-    public static void showDialog(final Context context, String deliveryTime, String address, String phoneNumber, String totalPrice, int freeCredit, int pay_method, int coupon_price) {
+    public static void showDialog(final Context context, String deliveryTime, String address, String phoneNumber, String totalPrice, int freeCredit, int pay_method, int coupon_price, int include_cutlery) {
         mContext = context;
         mOrderConfirmDialog = new AlertDialog.Builder(context)
                 .setView(((Activity)context).getLayoutInflater().inflate(R.layout.z_dialog_confirm_order, null))
@@ -43,26 +44,28 @@ public class ConfirmOrderDialog {
         mOrderConfirmDialog.show();
 
         // Set all textviews
-        setAllTextViews(deliveryTime, address, phoneNumber, totalPrice, pay_method, coupon_price);
+        setAllTextViews(deliveryTime, address, phoneNumber, totalPrice, pay_method, coupon_price,  include_cutlery);
 
 
         // Set confirm order button
         setConfirmOrderButton();
     }
 
-    public static void setAllTextViews(String deliveryTime, String address, String phoneNumber, String totalPrice, int pay_method, int coupon_price) {
+    public static void setAllTextViews(String deliveryTime, String address, String phoneNumber, String totalPrice, int pay_method, int coupon_price, int include_cutlery) {
         deliveryTimeTextView = (TextView) mOrderConfirmDialog.findViewById(R.id.delivery_time);
         addressTextView = (TextView) mOrderConfirmDialog.findViewById(R.id.address);
         phoneNumberTextView = (TextView) mOrderConfirmDialog.findViewById(R.id.phone_number);
         totalPriceTextView = (TextView) mOrderConfirmDialog.findViewById(R.id.total_price);
         payMethodTextView = (TextView) mOrderConfirmDialog.findViewById(R.id.pay_method);
         isCouponUsedTextView = (TextView) mOrderConfirmDialog.findViewById(R.id.is_coupon_used);
+        includeCutleryTextView = (TextView) mOrderConfirmDialog.findViewById(R.id.include_cutlery);
 
         deliveryTimeTextView.setText(deliveryTime);
         addressTextView.setText(address);
         phoneNumberTextView.setText(phoneNumber);
         totalPriceTextView.setText(totalPrice);
         isCouponUsedTextView.setText((coupon_price > 0) ? "사용" : "사용안함");
+        includeCutleryTextView.setText((include_cutlery == 1) ? "포함" : "미포함");
 
         if(pay_method == 1) {
             payMethodTextView.setText(Constant.PAY_METHOD_CARD);

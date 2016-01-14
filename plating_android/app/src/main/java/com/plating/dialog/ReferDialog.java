@@ -68,9 +68,12 @@ public class ReferDialog extends Dialog implements View.OnClickListener {
         if(v == image) {
             MixPanel.mixPanel_trackWithOutProperties("Click Image Dialog");
             ((WriteReviewListActivity)mContext).moveToReferActivity();
+            dismiss();
+            ((WriteReviewListActivity)mContext).finish();
         } else if(v == bt_close) {
             MixPanel.mixPanel_trackWithOutProperties("Click Close Dialog");
             dismiss();
+            ((WriteReviewListActivity)mContext).finish();
         }
     }
 }

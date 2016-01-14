@@ -154,7 +154,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:gravity="center_vertical">
@@ -177,7 +177,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:gravity="center_vertical">
@@ -200,7 +200,7 @@
                     <RelativeLayout
                         android:id="@+id/RL_discount"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:gravity="center_vertical"
@@ -235,7 +235,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:gravity="center_vertical">
@@ -259,7 +259,7 @@
                     <RelativeLayout
                         android:id="@+id/RL_coupon"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="48dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:gravity="center_vertical"
@@ -447,6 +447,56 @@
                                                     android:background="@drawable/icon_expand_below_pink_a400" />-->
                     </LinearLayout>
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/set_request_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="포크 / 나이프를 넣어주세요"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/set_request_textview_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="12dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/radio_cutlery_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radio_cutlery_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tag="1"
+                                android:text="예" />
+
+                            <RadioButton
+                                android:id="@+id/radio_cutlery_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tag="0"
+                                android:text="아니오" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/set_way_of_payment_layout"

@@ -79,9 +79,14 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     private RelativeLayout IB_time, IB_phone, IB_address, IB_payment, IB_addcard;
     private Button Btn_order;
 
-    // Radio Button
+    // Radio Button For payment
     private RadioGroup radio_pay_group;
     private RadioButton radio_pay_card, radio_pay_direct_card, radio_pay_direct_credit;
+
+    // Radio Button For Cutlery
+    private RadioGroup radio_cutlery_group;
+    private RadioButton radio_cutlery_yes, radio_cutlery_no;
+    private int include_cutlery;
 
     private ArrayList<TimeSlotBox> time_slot_list;
 
@@ -152,6 +157,13 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         radio_pay_direct_credit = (RadioButton) findViewById(R.id.radio_pay_direct_credit);
         radio_pay_direct_credit.setOnClickListener(this);
 
+        // Radio Button for Setting Cutlery
+        radio_cutlery_group = (RadioGroup) findViewById(R.id.radio_cutlery_group);
+        radio_cutlery_yes = (RadioButton) findViewById(R.id.radio_cutlery_yes);
+        radio_cutlery_no = (RadioButton) findViewById(R.id.radio_cutlery_no);
+
+        // initailze radio_cutlery_yes to check
+        radio_cutlery_yes.setChecked(true);
 
         // Buttons for setting user information (address, phone number, credit card, and so on)
         IB_address = (RelativeLayout) findViewById(R.id.set_user_address_layout);
@@ -299,7 +311,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 mixPanelPropertyArrayList.add(new MixPanelProperty("Pay Method", "Cash"));
             }
 
-
+            include_cutlery = Integer.parseInt((String) findViewById(radio_cutlery_group.getCheckedRadioButtonId()).getTag());
             mixPanelPropertyArrayList.add(new MixPanelProperty("Coupon", (coupon_price > 0) ? true : false));
 
 
@@ -309,7 +321,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             Log.d(LOG_TAG, "pay_method :" + pay_method);
 
             if (delivery_available) {
-                ConfirmOrderDialog.showDialog(this, deliveryTime, address, phoneNumber, totalPrice, freeCredit, pay_method, coupon_price);
+                ConfirmOrderDialog.showDialog(this, deliveryTime, address, phoneNumber, totalPrice, freeCredit, pay_method, coupon_price, include_cutlery);
             }
 
 
@@ -333,7 +345,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             Intent intent = new Intent(mContext, AddCreditCardActivity.class);
             startActivity(intent);
         } else if (view == radio_pay_card) {
-            if (cart_order_detail_layout.getChildCount() == 4) {
+            if (cart_order_detail_layout.getChildCount() == 5) {
                 View child = getLayoutInflater().inflate(R.layout.h_regist_card_layout, null);
                 IB_addcard = (RelativeLayout) child.findViewById(R.id.set_credit_card_layout);
                 IB_addcard.setOnClickListener(this);
@@ -343,13 +355,13 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             }
             enableOrDisablePlaceOrderButton();
         } else if (view == radio_pay_direct_card) {
-            if (cart_order_detail_layout.getChildCount() == 5) {
-                cart_order_detail_layout.removeViewAt(4);
+            if (cart_order_detail_layout.getChildCount() == 6) {
+                cart_order_detail_layout.removeViewAt(5);
             }
             enableOrDisablePlaceOrderButton();
         } else if (view == radio_pay_direct_credit) {
-            if (cart_order_detail_layout.getChildCount() == 5) {
-                cart_order_detail_layout.removeViewAt(4);
+            if (cart_order_detail_layout.getChildCount() == 6) {
+                cart_order_detail_layout.removeViewAt(5);
             }
             enableOrDisablePlaceOrderButton();
         } else if (view == bt_add_coupon) {
@@ -628,6 +640,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
                 // update coupon_txn set is_used = 1 where user_idx = 1471 and coupon_idx = coupon_idx
                 params.put("coupon_idx", Integer.toString(coupon_idx));
+                params.put("include_cutlery", Integer.toString(include_cutlery));
 
                 Log.d(LOG_TAG, "PARAMETERS = " + params.toString());
                 return params;
