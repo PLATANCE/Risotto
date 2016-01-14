@@ -36,7 +36,7 @@ public class MainBannerActivity extends PlatingActivity {
 
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
-
+        webView.clearCache(true);
         webView.loadUrl("http://plating.co.kr/admin/admin_banner_main.php");
     }
 }

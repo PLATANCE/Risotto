@@ -364,7 +364,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             Bundle bundle = data.getExtras();
-            if(bundle != null) {
+            if (bundle != null) {
                 coupon_price = bundle.getInt("coupon_price");
                 coupon_idx = bundle.getInt("coupon_idx");
                 String msg = bundle.getString("msg");
@@ -527,7 +527,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
 
     public void place_order(final AlertDialog orderConfirmDialog, final CircularProgressButton confirmOrderButton) {
-        StringRequest myReq = new StringRequest(Request.Method.POST,
+        final StringRequest myReq = new StringRequest(Request.Method.POST,
                 "http://api.plating.co.kr/place_order",
                 new Response.Listener<String>() {
                     @Override
@@ -557,7 +557,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
                             SVUtil.SetOrderIdx(cx, order_idx);
                             Cart.getCartInstance().emptyCart();
-
 
                             // Change button state to "complete"
                             confirmOrderButton.setProgress(100);

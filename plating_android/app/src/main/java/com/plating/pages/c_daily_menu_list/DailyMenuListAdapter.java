@@ -141,6 +141,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
             viewHolder.updateNumberOfItemAddedInCartTextView();
         } else {
             String url = RequestURL.BANNER_IMAGE_URL + "admin_banner.png";
+            VolleySingleton.getsInstance().getRequestQueue().getCache().remove(url);
             VolleySingleton.getsInstance().loadImageToImageView(viewHolder.imageView_banner, url);
         }
     }
