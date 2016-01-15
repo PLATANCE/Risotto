@@ -13,7 +13,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.plating.application.Constant;
 import com.plating.application.Debug;
 import com.plating.object_singleton.Cart;
-import com.plating.pages.p_write_review_activity.WriteReviewListActivity;
 import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.util.SVUtil;
 

@@ -70,27 +70,26 @@
             -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginRight="16dp"
+            android:gravity="bottom">
 
             <ImageView
                 android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="7dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/address_search" />
 
             <EditText
+                android:gravity="bottom"
                 android:id="@+id/set_location_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="25dp"
                 android:hint="동 이름을 입력해주세요. 예) 신사, 신사동"
                 android:imeOptions="actionSearch"
-                android:paddingLeft="30dp"
                 android:singleLine="true"
-                android:textSize="14dp" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView

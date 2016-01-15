@@ -248,7 +248,9 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         // Update location
         if(GPS.isGpsTurnedOn()) {
             startLocationUpdates();
-            setUserLocation(SVUtil.GetUserIdx(getApplicationContext()), Constant.currentLocation.getLatitude(), Constant.currentLocation.getLongitude());
+            if(Constant.currentLocation != null) {
+                setUserLocation(SVUtil.GetUserIdx(getApplicationContext()), Constant.currentLocation.getLatitude(), Constant.currentLocation.getLongitude());
+            }
         } else {
             // If GPS is off, send null to MixPanel
             MixPanel.mixPanel_SendUserLocation(Constant.currentLocation);
