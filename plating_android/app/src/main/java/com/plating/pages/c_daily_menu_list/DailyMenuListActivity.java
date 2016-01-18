@@ -22,6 +22,11 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.application.PlatingActivity;
@@ -45,6 +50,10 @@ import com.plating.pages.p_write_review_activity.WriteReviewListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.util.PreCachingLayoutManager;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

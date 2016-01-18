@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
 import com.plating.application.Constant;
@@ -97,7 +98,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
 
             // Load image with volley for food image
             VolleySingleton.getsInstance().loadImageToImageView(viewHolder.menuImage, RequestURL.DAILY_MENU_IMAGE_URL + dailyMenu.imageUrlMenu);
-            if(dailyMenu.is_event == 0) {
+            if (dailyMenu.is_event == 0) {
                 viewHolder.imageView_event_tag.setVisibility(View.GONE);
             }
 
@@ -142,9 +143,27 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
         } else {
             String url = RequestURL.BANNER_IMAGE_URL + "admin_banner.png";
             VolleySingleton.getsInstance().getRequestQueue().getCache().remove(url);
-            VolleySingleton.getsInstance().loadImageToImageView(viewHolder.imageView_banner, url);
-        }
+
+            VolleySingleton.getsInstance().getmImageLoader().get(url, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
+                    Log.d(LOG_TAG, response.toString());
+                    viewHolder.imageView_banner.setImageBitmap(response.getBitmap());
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    viewHolder.imageView_banner.setVisibility(View.GONE);
+                    Log.d(LOG_TAG, error.toString());
+                }
+            });
+
+        //loadImageToImageView(viewHolder.imageView_banner, url);
+
+        //viewHolder.imageView_banner.setVisibility(View.GONE);
+
     }
+}
 
 
     public void setReviewRatingStars(final MenuViewHolder viewHolder, double rating) {
@@ -166,119 +185,119 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
         this.data = dailyMenus;
     }
 
-    class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView menuImage;
-        LinearLayout menuSoldOutImageLayout;
-        TextView menuStatusMainTextview;
-        TextView menuStatusSubTextview;
-        TextView numOfItemAddedToCart;
-        ImageView chefImage;
-        TextView menuDescription;
-        TextView chefName;
-        TextView menuPrice, menuPrice_alt;
-        LinearLayout RL_menu_price_alt;
-        ImageButton putToCartButton;
-        private ImageView imageView_banner;
-        private ImageView imageView_event_tag;
+class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    ImageView menuImage;
+    LinearLayout menuSoldOutImageLayout;
+    TextView menuStatusMainTextview;
+    TextView menuStatusSubTextview;
+    TextView numOfItemAddedToCart;
+    ImageView chefImage;
+    TextView menuDescription;
+    TextView chefName;
+    TextView menuPrice, menuPrice_alt;
+    LinearLayout RL_menu_price_alt;
+    ImageButton putToCartButton;
+    ImageView imageView_banner;
+    ImageView imageView_event_tag;
 
-        TextView numOfReviewsTextView;
+    TextView numOfReviewsTextView;
 
-        // Ratings & Review
-        ImageView reviewStar1;
-        ImageView reviewStar2;
-        ImageView reviewStar3;
-        ImageView reviewStar4;
-        ImageView reviewStar5;
+    // Ratings & Review
+    ImageView reviewStar1;
+    ImageView reviewStar2;
+    ImageView reviewStar3;
+    ImageView reviewStar4;
+    ImageView reviewStar5;
 
-        public MenuViewHolder(View itemView, int viewType) {
-            super(itemView);
-            if (viewType == TYPE_ITEM) {
-                itemView.setOnClickListener(this);
-                menuImage = (ImageView) itemView.findViewById(R.id.menu_image);
-                imageView_event_tag = (ImageView) itemView.findViewById(R.id.imageView_event_tag);
-                menuSoldOutImageLayout = (LinearLayout) itemView.findViewById(R.id.daily_menu_sold_out_layout);
-                menuStatusMainTextview = (TextView) itemView.findViewById(R.id.menu_status_main_textview);
-                menuStatusSubTextview = (TextView) itemView.findViewById(R.id.menu_status_sub_textview);
-                numOfItemAddedToCart = (TextView) itemView.findViewById(R.id.num_of_item_added_to_cart);
-                chefImage = (ImageView) itemView.findViewById(R.id.chef_image);
-                menuDescription = (TextView) itemView.findViewById(R.id.menu_description);
-                chefName = (TextView) itemView.findViewById(R.id.chef_name);
-                menuPrice = (TextView) itemView.findViewById(R.id.menu_price);
-                menuPrice_alt = (TextView) itemView.findViewById(R.id.menu_price_alt);
-                RL_menu_price_alt = (LinearLayout) itemView.findViewById(R.id.menu_price_altRL);
-                putToCartButton = (ImageButton) itemView.findViewById(R.id.put_to_cart_button);
+    public MenuViewHolder(View itemView, int viewType) {
+        super(itemView);
+        if (viewType == TYPE_ITEM) {
+            itemView.setOnClickListener(this);
+            menuImage = (ImageView) itemView.findViewById(R.id.menu_image);
+            imageView_event_tag = (ImageView) itemView.findViewById(R.id.imageView_event_tag);
+            menuSoldOutImageLayout = (LinearLayout) itemView.findViewById(R.id.daily_menu_sold_out_layout);
+            menuStatusMainTextview = (TextView) itemView.findViewById(R.id.menu_status_main_textview);
+            menuStatusSubTextview = (TextView) itemView.findViewById(R.id.menu_status_sub_textview);
+            numOfItemAddedToCart = (TextView) itemView.findViewById(R.id.num_of_item_added_to_cart);
+            chefImage = (ImageView) itemView.findViewById(R.id.chef_image);
+            menuDescription = (TextView) itemView.findViewById(R.id.menu_description);
+            chefName = (TextView) itemView.findViewById(R.id.chef_name);
+            menuPrice = (TextView) itemView.findViewById(R.id.menu_price);
+            menuPrice_alt = (TextView) itemView.findViewById(R.id.menu_price_alt);
+            RL_menu_price_alt = (LinearLayout) itemView.findViewById(R.id.menu_price_altRL);
+            putToCartButton = (ImageButton) itemView.findViewById(R.id.put_to_cart_button);
 
-                numOfReviewsTextView = (TextView) itemView.findViewById(R.id.num_of_reviews_textview);
-                reviewStar1 = (ImageView) itemView.findViewById(R.id.review_star_1);
-                reviewStar2 = (ImageView) itemView.findViewById(R.id.review_star_2);
-                reviewStar3 = (ImageView) itemView.findViewById(R.id.review_star_3);
-                reviewStar4 = (ImageView) itemView.findViewById(R.id.review_star_4);
-                reviewStar5 = (ImageView) itemView.findViewById(R.id.review_star_5);
+            numOfReviewsTextView = (TextView) itemView.findViewById(R.id.num_of_reviews_textview);
+            reviewStar1 = (ImageView) itemView.findViewById(R.id.review_star_1);
+            reviewStar2 = (ImageView) itemView.findViewById(R.id.review_star_2);
+            reviewStar3 = (ImageView) itemView.findViewById(R.id.review_star_3);
+            reviewStar4 = (ImageView) itemView.findViewById(R.id.review_star_4);
+            reviewStar5 = (ImageView) itemView.findViewById(R.id.review_star_5);
 
-                putToCartButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        MixPanel.mixPanel_trackWithOutProperties("Add Item To Cart");
-                        int position = getAdapterPosition() - 1;
-                        int count = 1;
+            putToCartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MixPanel.mixPanel_trackWithOutProperties("Add Item To Cart");
+                    int position = getAdapterPosition() - 1;
+                    int count = 1;
 
-                        ((DailyMenuListActivity) mContext).putMenuToCart(position, count);
+                    ((DailyMenuListActivity) mContext).putMenuToCart(position, count);
 
-                        // Show how many items are in cart
-                        updateNumberOfItemAddedInCartTextView();
-                    }
-                });
-            } else {
-                imageView_banner = (ImageView) itemView.findViewById(R.id.imageView_banner);
-                imageView_banner.setOnClickListener(this);
-            }
+                    // Show how many items are in cart
+                    updateNumberOfItemAddedInCartTextView();
+                }
+            });
+        } else {
+            imageView_banner = (ImageView) itemView.findViewById(R.id.imageView_banner);
+            imageView_banner.setOnClickListener(this);
         }
+    }
 
-        @Override
-        public void onClick(View v) {
-            if (v == imageView_banner) {
-                ((DailyMenuListActivity) mContext).moveToBannerActivity();
-            } else {
-                int position = getAdapterPosition() - 1;
-                ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
-                mixPanelPropertyArrayList.add(new MixPanelProperty("Position", position + 1));
-                mixPanelPropertyArrayList.add(new MixPanelProperty("Menu Name", data.get(position).nameMenu));
-                MixPanel.mixPanel_trackWithProperties("Show Menu Detail", mixPanelPropertyArrayList);
-
-                ((DailyMenuListActivity) mContext).startMenuActivity(data.get(position).idx, data.get(position).menu_d_idx, data.get(position).stock);
-            }
-        }
-
-
-        public void updateNumberOfItemAddedInCartTextView() {
+    @Override
+    public void onClick(View v) {
+        if (v == imageView_banner) {
+            ((DailyMenuListActivity) mContext).moveToBannerActivity();
+        } else {
             int position = getAdapterPosition() - 1;
+            ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
+            mixPanelPropertyArrayList.add(new MixPanelProperty("Position", position + 1));
+            mixPanelPropertyArrayList.add(new MixPanelProperty("Menu Name", data.get(position).nameMenu));
+            MixPanel.mixPanel_trackWithProperties("Show Menu Detail", mixPanelPropertyArrayList);
 
-            ArrayList<MenuInCart> menuInCartArrayList = Cart.getCartInstance().getMenuList();
+            ((DailyMenuListActivity) mContext).startMenuActivity(data.get(position).idx, data.get(position).menu_d_idx, data.get(position).stock);
+        }
+    }
 
-            if (menuInCartArrayList.size() == 0) {
-                numOfItemAddedToCart.setVisibility(View.GONE);
-                return;
+
+    public void updateNumberOfItemAddedInCartTextView() {
+        int position = getAdapterPosition() - 1;
+
+        ArrayList<MenuInCart> menuInCartArrayList = Cart.getCartInstance().getMenuList();
+
+        if (menuInCartArrayList.size() == 0) {
+            numOfItemAddedToCart.setVisibility(View.GONE);
+            return;
+        }
+
+        for (int i = 0; i < menuInCartArrayList.size(); i++) {
+            if (data.get(position).idx == menuInCartArrayList.get(i).menu_idx) {
+                if (menuInCartArrayList.get(i).count > 0) {
+                    // If visibility is gone, make it visible with fade-in animation
+                    if (numOfItemAddedToCart.getVisibility() == View.GONE) {
+                        numOfItemAddedToCart.setVisibility(View.VISIBLE);
+                        Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.anim.transition_fade_in_fast);
+                        numOfItemAddedToCart.startAnimation(fadeInAnimation);
+                    }
+                    numOfItemAddedToCart.setText(menuInCartArrayList.get(i).count + " 개가 장바구니에 있습니다.");
+                    return;
+                }
             }
 
-            for (int i = 0; i < menuInCartArrayList.size(); i++) {
-                if (data.get(position).idx == menuInCartArrayList.get(i).menu_idx) {
-                    if (menuInCartArrayList.get(i).count > 0) {
-                        // If visibility is gone, make it visible with fade-in animation
-                        if (numOfItemAddedToCart.getVisibility() == View.GONE) {
-                            numOfItemAddedToCart.setVisibility(View.VISIBLE);
-                            Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.anim.transition_fade_in_fast);
-                            numOfItemAddedToCart.startAnimation(fadeInAnimation);
-                        }
-                        numOfItemAddedToCart.setText(menuInCartArrayList.get(i).count + " 개가 장바구니에 있습니다.");
-                        return;
-                    }
-                }
-
-                // If there was no item found. This is why there is 'return' above.
-                if (i == menuInCartArrayList.size() - 1) {
-                    numOfItemAddedToCart.setVisibility(View.GONE);
-                }
+            // If there was no item found. This is why there is 'return' above.
+            if (i == menuInCartArrayList.size() - 1) {
+                numOfItemAddedToCart.setVisibility(View.GONE);
             }
         }
     }
+}
 }
