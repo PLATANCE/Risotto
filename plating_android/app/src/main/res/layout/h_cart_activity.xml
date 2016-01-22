@@ -585,7 +585,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="카드를 등록해주세요" />
+                            android:text="신용카드를 등록해주세요" />
 
 
                         <ImageView
