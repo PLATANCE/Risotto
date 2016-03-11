@@ -40,6 +40,7 @@ public class RequestURL {
 
     // URL UserCode
     public static final String SERVER__GET_USERCODE = FULL_URL + "/user/user_code";
+    public static final String SERVER__GET_POLICY_REFER_POINT = FULL_URL + "/policy/policy_refer_point";
 
     // URL User Address List
     public static final String SERVER__GET_ADDRESS_LIST = FULL_URL + "/user/get_address_list";

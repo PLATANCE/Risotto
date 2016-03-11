@@ -22,6 +22,7 @@ import com.plating.helperAPI.DialogAPI;
 import com.plating.helperAPI.ToastAPI;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
+import com.plating.network.s_recommend.GetPolicyReferPointFromServer;
 import com.plating.network.s_recommend.GetUserCodeFromServer;
 
 /**
@@ -37,9 +38,12 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     private String detail;
     private TextView user_code;
     private TextView detail_text;
+    private TextView center_text;
     private SpannableString content;
     private String refer_link;
     private String refer_code;
+    private String numReferPoint;
+    private String korReferPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
 
         setAllViews();
         getUserCodeFromServer();
+        getPolicyReferPointFromServer();
     }
 
     public void setAllViews() {
@@ -65,16 +70,17 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
 
         // user_code
         user_code = (TextView) findViewById(R.id.user_code);
+        numReferPoint = "";
+        korReferPoint = "";
 
         // 자세히 underLine
         detail_text = (TextView) findViewById(R.id.detail_text);
+        center_text = (TextView) findViewById(R.id.center_text);
         content = new SpannableString(detail_text.getText().toString());
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         detail_text.setText(content);
         detail_text.setOnClickListener(this);
 
-        detail = "초대받은 친구가 추천 코드를 입력하고 첫 주문을 하면, 초대하신 분께 1만원 포인트를 드립니다.";
-        refer_text = "셰프의 요리를 집에서 즐겨요! 지금 플레이팅 앱을 다운받고 첫 주문 1만원 할인 받으세요.";
         refer_link = "http://goo.gl/t5lrSL";
     }
 
@@ -85,6 +91,20 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     public void getUserCodeFromServer_Callback(String userCode) {
         user_code.setText(userCode);
         this.refer_code = userCode;
+    }
+
+    public void getPolicyReferPointFromServer() {
+        GetPolicyReferPointFromServer.getDataFromServer(this, mRequestQueue);
+    }
+
+    public void getPolicyReferPointFromServer_Callback(String numReferPoint, String korReferPoint) {
+        this.numReferPoint = numReferPoint;
+        this.korReferPoint = korReferPoint;
+
+        center_text.setText("나에게도 " + this.numReferPoint + "이 바로 적립!");
+
+        detail = "초대받은 친구가 추천 코드를 입력하고 첫 주문을 하면, 초대하신 분께 "+  this.numReferPoint +" 포인트를 드립니다.";
+        refer_text = "셰프의 요리를 집에서 즐겨요! 지금 플레이팅 앱을 다운받고 첫 주문 " +  this.korReferPoint + " 할인 받으세요.";
     }
 
     @Override

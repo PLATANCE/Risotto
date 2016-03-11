@@ -540,7 +540,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void place_order(final AlertDialog orderConfirmDialog, final CircularProgressButton confirmOrderButton) {
         final StringRequest myReq = new StringRequest(Request.Method.POST,
-                "http://api.plating.co.kr/place_order",
+                "http://api.plating.co.kr/place_order_t",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

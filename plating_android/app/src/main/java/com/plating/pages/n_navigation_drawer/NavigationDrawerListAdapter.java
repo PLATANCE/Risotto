@@ -61,7 +61,6 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
         NavigationDrawerMenu current = data.get(position);
         viewHolder.image.setImageResource(current.iconId);
         viewHolder.title.setText(current.title);
-        viewHolder.moreInfo.setText(current.moreInfo);
     }
 
     @Override
@@ -73,14 +72,12 @@ public class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navigation
     class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView image;
         TextView title;
-        TextView moreInfo;
 
         public MenuViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             image = (ImageView) itemView.findViewById(R.id.list_icon);
             title = (TextView) itemView.findViewById(R.id.list_text);
-            moreInfo = (TextView) itemView.findViewById(R.id.list_moreInfo);
         }
 
         //"친구 초대", "프로모션 코드 등록", "내 쿠폰함", "주문 내역", "고객 지원", "리뷰 써주기", "Plating 이란?"
