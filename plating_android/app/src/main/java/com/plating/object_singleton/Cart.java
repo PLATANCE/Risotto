@@ -205,16 +205,16 @@ public class Cart {
     }
 
 
-    public int getPriceToPayWithoutPoint(int delivery_fee){
+    public int getPriceToPayWithoutPoint(int delivery_fee, int coupon_price){
         int totalAltPrice = 0;
         for(int i = 0 ; i < mMenuList.size(); i++){
             totalAltPrice += mMenuList.get(i).alt_price * mMenuList.get(i).count;
         }
-        return totalAltPrice + delivery_fee;
+        return totalAltPrice + delivery_fee - coupon_price;
     }
 
-    public int getAvailablePoint(int currentMyPoint, int delivery_fee) {
-        return Math.min(getPriceToPayWithoutPoint(delivery_fee), currentMyPoint);
+    public int getAvailablePoint(int currentMyPoint, int delivery_fee, int coupon_price) {
+        return Math.min(getPriceToPayWithoutPoint(delivery_fee, coupon_price), currentMyPoint);
     }
     private final Comparator<MenuInCart> myComparator = new Comparator<MenuInCart>() {
         @Override

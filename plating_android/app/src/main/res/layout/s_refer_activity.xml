@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="@color/white"
             android:text="친구가 첫 주문을 하면"/>
 
@@ -92,7 +92,7 @@
                 android:gravity="center"
                 android:text="나에게도 10,000원이 바로 적립!"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_centerInParent="true"/>
             <TextView
                 android:id="@+id/detail_text"
@@ -102,7 +102,7 @@
                 android:textColor="@color/munchery_orange"
                 android:layout_toRightOf="@id/center_text"
                 android:layout_alignBottom="@id/center_text"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_marginLeft="5dp"/>
         </RelativeLayout>
 

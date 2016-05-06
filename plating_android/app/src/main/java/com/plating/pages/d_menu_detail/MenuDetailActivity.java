@@ -1,6 +1,7 @@
 package com.plating.pages.d_menu_detail;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -198,6 +199,9 @@ public class MenuDetailActivity extends PlatingActivity {
         mMenuName_eng.setText(singleMenu.nameMenu_eng.replace(".", "\n"));
         if (singleMenu.price == singleMenu.altPrice) {
             RL_price_original.setVisibility(View.GONE);
+        } else {
+            RL_price_original.setVisibility(View.VISIBLE);
+            mPrice.setPaintFlags(mPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         mPrice.setText(PriceAPI.intPriceToStringPriceWonTextFormat(singleMenu.price));

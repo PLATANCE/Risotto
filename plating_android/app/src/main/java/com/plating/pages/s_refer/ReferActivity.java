@@ -59,7 +59,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     public void setAllViews() {
         refer_image_top = (ImageView) findViewById(R.id.refer_image_top);
 
-        VolleySingleton.getsInstance().loadImageToImageView(refer_image_top, RequestURL.REFER_IMAGE_URL + "2015.12.23-refer_top.jpg");
+        VolleySingleton.getsInstance().loadImageToImageView(refer_image_top, RequestURL.REFER_IMAGE_URL + "refer_top.jpg");
 
         recommend_layout_kakao = (LinearLayout) findViewById(R.id.recommend_layout_kakao);
         recommend_layout_kakao.setOnClickListener(this);

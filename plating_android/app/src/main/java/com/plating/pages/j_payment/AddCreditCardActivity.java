@@ -95,6 +95,7 @@ public class AddCreditCardActivity extends PlatingActivity {
         @JavascriptInterface
         public void payResult(String bk_len, String paramString2, String paramString3)
         {
+            Log.d("AddCreditCardActivity", bk_len + paramString2 + paramString3);
             if (Integer.parseInt(bk_len) != 40){
                 Toast.makeText(mContext, "카드 등록 실패", Toast.LENGTH_SHORT).show();
             } else {
@@ -167,6 +168,7 @@ public class AddCreditCardActivity extends PlatingActivity {
 
     public void loadPage(String paramString1, String paramString2)
     {
+        Log.d("AddCreditCardActivity", paramString1 + paramString2);
         wv.postUrl(paramString1, SVUtil.getBytes(paramString2, "BASE64"));
     }
 }

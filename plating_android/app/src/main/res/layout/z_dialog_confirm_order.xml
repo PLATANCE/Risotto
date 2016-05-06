@@ -6,19 +6,28 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="결제 정보"
-            android:textColor="@color/grey_800"
-            android:textSize="16dp"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="결제 정보"
+                    android:textColor="@color/grey_800"
+                    android:textSize="16dp"/>
+            </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -219,6 +228,7 @@
             android:textColor="@color/grey_700"/>
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -264,4 +274,7 @@
         app:cpb_textComplete="성공"
         app:cpb_textError="실패"
         app:cpb_textIdle="결제하기" />
+
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

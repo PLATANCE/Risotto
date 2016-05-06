@@ -2,6 +2,7 @@ package com.plating.pages.c_daily_menu_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -131,6 +132,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
 
             } else {
                 viewHolder.RL_menu_price_alt.setVisibility(View.VISIBLE);
+                viewHolder.menuPrice.setPaintFlags(viewHolder.menuPrice.getPaddingBottom() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
 
             viewHolder.putToCartButton.setTag(position);

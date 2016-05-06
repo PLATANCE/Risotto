@@ -540,7 +540,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void place_order(final AlertDialog orderConfirmDialog, final CircularProgressButton confirmOrderButton) {
         final StringRequest myReq = new StringRequest(Request.Method.POST,
-                "http://api.plating.co.kr/place_order_t",
+                "http://api.plating.co.kr/place_order",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -548,18 +548,21 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                         Log.d("place_order", "result : " + response);
 
                         String status = "";
+                        String description = "";
                         int order_idx = 0;
                         ArrayList<String> oos_list = new ArrayList<>();
 
                         try {
                             JSONObject jo = new JSONObject(response);
                             status = jo.getString("status");
+                            description = jo.getString("description");
                             if (status.equals("done")) {
                                 order_idx = jo.getInt("order_idx");
                             } else if (status.equals("oos")) {
                                 JSONArray oos_ja = jo.getJSONArray("oos_list");
-
-                                oos_list.add(oos_ja.getString(0));
+                                for(int i = 0; i < oos_ja.length(); i++) {
+                                    oos_list.add(oos_ja.getString(i));
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -588,18 +591,20 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
                         } else if (status.equals("oos")) {
                             String msg = "";
+
                             for (String item : oos_list) {
                                 msg += item;
-                                msg += ", ";
+                                msg += "\n";
                             }
-                            msg = msg.substring(0, msg.length() - 2);
 
                             confirmOrderButton.setProgress(-1);
                             confirmOrderButton.setErrorText("재고 부족");
+                            DialogAPI.showDialog(orderConfirmDialog.getContext(), "재고 부족", msg, "확인", null);
                             orderConfirmDialog.setCancelable(true);
                         } else if (status.equals("fail_to_pay")) {
                             confirmOrderButton.setProgress(-1);
                             confirmOrderButton.setErrorText("결제가 정상적으로 이루어지지 않았습니다.");
+                            DialogAPI.showDialog(orderConfirmDialog.getContext(), "결제 실패", description, "확인", null);
                             orderConfirmDialog.setCancelable(true);
                         }
                     }
@@ -634,7 +639,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 params.put("menu_d_idx", menu_d_idx);
                 params.put("order_amount", order_amount);
                 params.put("credit_used", credit_used + "");
-                params.put("point", Integer.toString(Cart.getCartInstance().getAvailablePoint(myPoint, deliveryFee)) + "");
+                params.put("point", Integer.toString(Cart.getCartInstance().getAvailablePoint(myPoint, deliveryFee, coupon_price)) + "");
                 params.put("total_price", total_price + "");
                 params.put("pay_method", pay_method + "");
 
@@ -685,8 +690,8 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void getCartInformation() {
         RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(this);
-        String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.GetUserIdx(cx);
-
+        String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.GetUserIdx(cx) + "&coupon_idx=" + coupon_idx;
+        Log.d(LOG_TAG, url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
