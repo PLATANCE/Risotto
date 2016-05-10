@@ -1,9 +1,11 @@
 package com.plating.application;
 
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
@@ -19,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 import com.plating.BuildConfig;
@@ -60,6 +63,7 @@ public class MyApplication extends MultiDexApplication {
 
         // Facebook SDK initialization
         FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
         // KakaoAPI SDK initialization
         Session.initialize(this, AuthType.KAKAO_TALK);
@@ -69,18 +73,52 @@ public class MyApplication extends MultiDexApplication {
 
         AppsFlyerLib.setAppsFlyerKey("5aJTmR8RGtTwQBiia8vPzh");
         AppsFlyerLib.sendTracking(getApplicationContext());
-        AppsFlyerLib.registerConversionListener(getApplicationContext(), new AppsFlyerConversionListener() {
+
+        AppsFlyerLib.registerConversionListener(this, new AppsFlyerConversionListener() {
             @Override
             public void onInstallConversionDataLoaded(Map<String, String> conversionData) {
                 String media_source = "";
                 String campaign_name = "";
                 for (String attrName : conversionData.keySet()) {
-                    Log.d("AppsFlyer", "attribute: " + attrName + " = " + conversionData.get(attrName));
+                    Log.d(AppsFlyerLib.LOG_TAG, "attribute: " + attrName + " = " +
+                            conversionData.get(attrName));
+                    media_source = conversionData.get(attrName);
+                    campaign_name = conversionData.get(attrName);
+                }
+                SVUtil.Set_AppsFlyer_media_source(getApplicationContext(), media_source);
+                SVUtil.Set_AppsFlyer_campaign(getApplicationContext(), campaign_name);
+            }
+            @Override
+            public void onInstallConversionFailure(String errorMessage) {
+                Log.d(AppsFlyerLib.LOG_TAG, "error getting conversion data: " +
+                        errorMessage);
+            }
+            @Override
+            public void onAppOpenAttribution(Map<String, String> conversionData) {
+            }
+            @Override
+            public void onAttributionFailure(String errorMessage) {
+                Log.d(AppsFlyerLib.LOG_TAG, "error onAttributionFailure : " + errorMessage);
+            }
+        });
+        /*
+        AppsFlyerLib.registerConversionListener(getApplicationContext(), new AppsFlyerConversionListener() {
+            @Override
+            public void onInstallConversionDataLoaded(Map<String, String> conversionData) {
+                String media_source = "";
+                String campaign_name = "";
+                Log.d("AppsFlyer", "attribute:");
+                /*
+                for (String attrName : conversionData.keySet()) {
+                    //Log.d("AppsFlyer", "attribute: " + attrName + " = " + conversionData.get(attrName));
+                    Log.d("AppsFlyer", conversionData.get(attrName));
+                    /*
                     if (attrName == "media_source") {
                         media_source = conversionData.get(attrName);
                     } else if (attrName == "campaign_name") {
                         campaign_name = conversionData.get(attrName);
                     }
+
                 }
 
                 SVUtil.Set_AppsFlyer_media_source(getApplicationContext(), media_source);
@@ -104,6 +142,8 @@ public class MyApplication extends MultiDexApplication {
 
             }
         });
+        */
+
 
 
         Log.d("Alias", "GetUserIdx : "+SVUtil.GetUserIdx(getApplicationContext())+
