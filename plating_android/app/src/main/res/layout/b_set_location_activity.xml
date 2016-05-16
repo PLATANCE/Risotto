@@ -75,18 +75,14 @@
             android:layout_marginRight="16dp"
             android:gravity="bottom">
 
-            <ImageView
-                android:layout_width="23dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/address_search" />
 
             <EditText
                 android:gravity="bottom"
                 android:id="@+id/set_location_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="25dp"
-                android:hint="동 이름을 입력해주세요. 예) 신사, 신사동"
+                android:paddingLeft="3dp"
+                android:hint="주소 입력(동 + 지번) 예) 신사동 123-4"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
                 android:textSize="14sp" />

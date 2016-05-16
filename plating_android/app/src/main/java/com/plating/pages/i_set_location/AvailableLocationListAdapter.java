@@ -72,7 +72,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
         if (getItemViewType(position) == TYPE_ITEM) {
             AvailableLocation availableLocation = data.get(position);
 
-            viewHolder.locationName.setText(availableLocation.name);
+            viewHolder.locationName.setText(availableLocation.jibunAddress);
 
             if (availableLocation.available) {
                 viewHolder.locationName.setTextColor(mContext.getResources().getColor(R.color.grey_700));
@@ -153,7 +153,8 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
                 alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String address_d = input.getText().toString();
-                        UpdateAddress(availableLocation.name, address_d, availableLocation.lat, availableLocation.lon, availableLocation.available);
+                        UpdateAddress(availableLocation.roadNameAddress, availableLocation.jibunAddress, address_d, availableLocation.available, availableLocation.latitude, availableLocation.longitude,
+                                availableLocation.area, availableLocation.reservationType);
                     }
                 });
 
@@ -174,7 +175,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
 
     }
 
-    private void UpdateAddress(final String address, final String detail, final double lat, final double lon, final boolean isAvailable) {
+    private void UpdateAddress(final String roadNameAddress, final String jibunAddress, final String detail, final boolean isAvailable, final double lat, final double lon, final String area, final int reservationType) {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         StringRequest myReq = new StringRequest(Request.Method.POST,
                 "http://api.plating.co.kr/update_info",
@@ -200,11 +201,14 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("user_idx", SVUtil.GetUserIdx(mContext) + "");
-                params.put("address", address);
+                params.put("address", jibunAddress);
+                params.put("road_name_address", roadNameAddress);
                 params.put("address_detail", detail);
                 params.put("delivery_available", isAvailable ? "1" : "0");
                 params.put("lat", lat + "");
                 params.put("lon", lon + "");
+                params.put("area", area);
+                params.put("reservation_type", Integer.toString(reservationType));
 
                 return params;
             }

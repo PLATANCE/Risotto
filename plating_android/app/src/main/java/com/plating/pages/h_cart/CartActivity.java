@@ -69,6 +69,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     private TextView mAddress;
     private TextView mPhoneNumber;
     private TextView mDeliveryTime, TV_card;
+    private TextView messageText;
 
     private RelativeLayout RL_discount;
     private RelativeLayout RL_coupon;
@@ -76,6 +77,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     private String card_no;
 
     private LinearLayout cart_order_detail_layout;
+    private LinearLayout messageBox;
     private RelativeLayout IB_time, IB_phone, IB_address, IB_payment, IB_addcard;
     private Button Btn_order;
 
@@ -96,9 +98,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     private int total_price, bk_len;
     private boolean delivery_available, card_exist;
     private int credit_used;
-    private boolean reservation_available;
-    private String reservation_type;
-    private int reservation_available_hour;
 
     private ImageButton bt_add_coupon;
     private int coupon_price;
@@ -109,6 +108,9 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     public String LOG_TAG;
     public int pay_method;
     public int min_total_price;
+
+    public String message;
+    public boolean canOrder;
 
 
     @Override
@@ -133,6 +135,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         mDiscountedPrice = (TextView) findViewById(R.id.discounted_price);
         mDeliveryFee = (TextView) findViewById(R.id.delivery_fee);
         mTotalPaymentFee = (TextView) findViewById(R.id.total_payment_fee);
+        messageText = (TextView) findViewById(R.id.messageText);
 
         RL_discount = (RelativeLayout) findViewById(R.id.RL_discount);
 
@@ -140,6 +143,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         RL_coupon = (RelativeLayout) findViewById(R.id.RL_coupon);
 
         cart_order_detail_layout = (LinearLayout) findViewById(R.id.cart_order_detail_layout);
+        messageBox = (LinearLayout) findViewById(R.id.messageBox);
 
         // Textviews regarding delivery information (address, phone number, credit card, and so on)
         mAddress = (TextView) findViewById(R.id.set_user_address_textview);
@@ -454,16 +458,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             mDeliveryFee.setText(PriceAPI.intPriceToStringPriceWonSymbolFormat(deliveryFee));
         }
 
-        if (reservation_type.equals("reservation_only") && reservation_available == false) {
-            mDeliveryTime.setText("당일 " + reservation_available_hour + "시 이전까지만 예약 가능합니다.");
-            mDeliveryTime.setTextColor(getResources().getColor(R.color.orange_300));
-            IB_time.setEnabled(false);
-        } else {
-            mDeliveryTime.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
-            mDeliveryTime.setTextColor(getResources().getColor(R.color.orange_300));
-            IB_time.setEnabled(true);
-        }
-
 
         // 쿠폰 추가 시, RL_discount visible
         //Log.d(LOG_TAG, "setCartInformation : coupon_price" + coupon_price);
@@ -743,19 +737,24 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                             }
 
                             if (time_slot_list.size() == 0) {
-                                mDeliveryTime.setText("금일 주문이 마감되었습니다");
+                                mDeliveryTime.setText(Constant.DELIVERY_IS_FINISHED);
                                 selected_time_slot = -1;
                             } else {
-//                                selected_time_slot = 0;
-//                                mDeliveryTime.setText(time_slot_list.get(0).time_slot);
-//                                Cart.time_slot_idx = time_slot_list.get(0).idx;
-//                                mDeliveryTime.setText(time_slot_list.get(Cart.time_slot_idx).time_slot);
+                                mDeliveryTime.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
+                                mDeliveryTime.setTextColor(getResources().getColor(R.color.orange_300));
+                                IB_time.setEnabled(true);
+                                selected_time_slot = 1;
                             }
 
-                            reservation_type = my_info.getString("reservation_type");
-                            reservation_available = jo.getBoolean("reservation_available");
-                            reservation_available_hour = jo.getInt("reservation_available_hour");
-
+                            message = jo.getString("message");
+                            canOrder = jo.getBoolean("can_order");
+                            if(!canOrder) {
+                                messageBox.setVisibility(View.VISIBLE);
+                                messageText.setText(message);
+                            } else {
+                                messageBox.setVisibility(View.GONE);
+                                messageText.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
+                            }
 
                             setCartInformation();
                             enableOrDisablePlaceOrderButton();
@@ -839,13 +838,9 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             Btn_order.setEnabled(false);
             Btn_order.setText("배달 시간을 선택해 주세요");
             isEnables = false;
-        } else if (mDeliveryTime.getText().equals("당일 " + reservation_available_hour + "시 이전까지만 예약 가능합니다.")) {
+        }  else if (mDeliveryTime.getText().equals(Constant.DELIVERY_IS_FINISHED)) {
             Btn_order.setEnabled(false);
-            Btn_order.setText("해당 지역은 오후 4시까지만 예약 가능합니다.");
-            isEnables = false;
-        } else if (mDeliveryTime.getText().equals(Constant.DELIVERY_IS_FINISHED)) {
-            Btn_order.setEnabled(false);
-            Btn_order.setText("배달 시간을 선택해 주세요");
+            Btn_order.setText(Constant.DELIVERY_IS_FINISHED);
             isEnables = false;
         } else if (!radioChecked) {
             Btn_order.setEnabled(false);

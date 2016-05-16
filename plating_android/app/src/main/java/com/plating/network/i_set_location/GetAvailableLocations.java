@@ -50,7 +50,7 @@ public class GetAvailableLocations {
     }
 
     public static String getRequestUrl(String address) {
-        return RequestURL.SERVER__GET_AVAILABLE_LOCATIONS + "?text=" + address;
+        return RequestURL.SERVER__GET_AVAILABLE_LOCATIONS + "?query=" + address;
     }
 
     private static ArrayList<AvailableLocation> convertJsonToAvailableAddresses(JSONArray response) {
@@ -60,12 +60,14 @@ public class GetAvailableLocations {
 
         if (response != null || response.length() > 0) {
             for (int i = 0; i < response.length(); i++) {
-                String name = response.optJSONObject(i).optString("title", "N/A");
+                String roadNameAddress = response.optJSONObject(i).optString("roadNameAddress", "N/A");
+                String jibunAddress = response.optJSONObject(i).optString("jibunAddress", "N/A");
                 boolean available = response.optJSONObject(i).optBoolean("available", false);
-                double lat = response.optJSONObject(i).optDouble("frontLat", 0);
-                double lon = response.optJSONObject(i).optDouble("frontLon", 0);
-
-                AvailableLocation availableLocation = new AvailableLocation(name, available, lat, lon);
+                double latitude = response.optJSONObject(i).optDouble("latitude", 0);
+                double longitude = response.optJSONObject(i).optDouble("longitude", 0);
+                String area = response.optJSONObject(i).optString("area", "N/A");
+                int reservationType = response.optJSONObject(i).optInt("longitude", 0);
+                AvailableLocation availableLocation = new AvailableLocation(roadNameAddress, jibunAddress, available, latitude, longitude, area, reservationType);
                 availableLocationArrayList.add(availableLocation);
             }
 

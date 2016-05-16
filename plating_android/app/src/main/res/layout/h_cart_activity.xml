@@ -760,6 +760,26 @@
                                 </RelativeLayout>-->
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/messageBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/messageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:textColor="@color/munchery_orange"
+                    android:text="송파구 지역은 오후 3시 이전에만 주문 및 예약이 가능합니다."/>
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/cart_activity_orderButton"
                 android:layout_width="match_parent"

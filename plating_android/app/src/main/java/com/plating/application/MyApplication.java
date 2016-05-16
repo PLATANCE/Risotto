@@ -77,14 +77,9 @@ public class MyApplication extends MultiDexApplication {
         AppsFlyerLib.registerConversionListener(this, new AppsFlyerConversionListener() {
             @Override
             public void onInstallConversionDataLoaded(Map<String, String> conversionData) {
-                String media_source = "";
-                String campaign_name = "";
-                for (String attrName : conversionData.keySet()) {
-                    Log.d(AppsFlyerLib.LOG_TAG, "attribute: " + attrName + " = " +
-                            conversionData.get(attrName));
-                    media_source = conversionData.get(attrName);
-                    campaign_name = conversionData.get(attrName);
-                }
+                String media_source = conversionData.get("media_source");
+                String campaign_name = conversionData.get("campaign");
+
                 SVUtil.Set_AppsFlyer_media_source(getApplicationContext(), media_source);
                 SVUtil.Set_AppsFlyer_campaign(getApplicationContext(), campaign_name);
             }

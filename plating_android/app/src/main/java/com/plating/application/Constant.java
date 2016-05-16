@@ -44,7 +44,7 @@ public class Constant {
     public static String PLEASE_ENTER_ADDRESS = "주소를 입력해주세요";
     public static String PLEASE_ENTER_PHONE_NUMBER = "전화번호를 입력해주세요";
     public static String PLEASE_ENTER_DELIVERY_TIME = "배달 시간을 선택해주세요";
-    public static String DELIVERY_IS_FINISHED = "금일 주문이 마감되었습니다";
+    public static String DELIVERY_IS_FINISHED = "선택 가능한 배달 시간이 없습니다.";
     public static String PLEASE_ENTER_CREDIT_CARD = "카드를 등록해주세요";
 
     // Chef Constants

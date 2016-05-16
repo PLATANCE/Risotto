@@ -27,7 +27,7 @@ public class RequestURL {
     public static final String SERVER__GET_MENU_DETAIL = FULL_URL + "/menu_detail";
     public static final String SERVER__GET_MORE_REVIEW_FROM_SERVER = FULL_URL + "/review/view_more";
     public static final String SERVER__PLACE_ORDER = FULL_URL + "/place_order";
-    public static final String SERVER__GET_AVAILABLE_LOCATIONS = FULL_URL + "/address_search";
+    public static final String SERVER__GET_AVAILABLE_LOCATIONS = "https://address.plating.co.kr/";
     public static final String SERVER__GET_ORDER_HISTORY = FULL_URL + "/order/history";
     public static final String SERVER__GET_ORDER_HISTORY_DETAIL = FULL_URL + "/order/detail";
     public static final String SERVER__SET_USER_GPS_LOCATION = FULL_URL + "/update_info";
