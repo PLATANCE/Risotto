@@ -310,7 +310,7 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
                             String mixPanelIdentity = user_idx + "-" + firstName;
                             mixPanel_signUpOrLogIn("FacebookAPI", signUpOrLogIn, mixPanelIdentity);
 
-                            startDailyMenuListActivity();
+                            startDailyMenuListActivity(signUpOrLogIn);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -362,7 +362,7 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
         mixPanel_signUpOrLogIn("KakaoAPI", signUpOrLogIn, mixPanelIdentity);
 
         // Go to DailyMenuListActivity
-        startDailyMenuListActivity();
+        startDailyMenuListActivity(signUpOrLogIn);
     }
 
     // ApiType is either KakaoAPI or FacebookAPI
@@ -393,10 +393,11 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
         SVUtil.CreatedAlias(getApplicationContext());
     }
 
-    private void startDailyMenuListActivity() {
+    private void startDailyMenuListActivity(String signUpOrLogIn) {
         Intent intent;
         intent = new Intent(this, DailyMenuListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("SignUpOrLogin", signUpOrLogIn);
         startActivity(intent);
 
         //Apply splash exit (fade out) and main entry (fade in) animation transitions.

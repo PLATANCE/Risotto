@@ -66,7 +66,7 @@ public class GetAvailableLocations {
                 double latitude = response.optJSONObject(i).optDouble("latitude", 0);
                 double longitude = response.optJSONObject(i).optDouble("longitude", 0);
                 String area = response.optJSONObject(i).optString("area", "N/A");
-                int reservationType = response.optJSONObject(i).optInt("longitude", 0);
+                int reservationType = response.optJSONObject(i).optInt("reservationType", 0);
                 AvailableLocation availableLocation = new AvailableLocation(roadNameAddress, jibunAddress, available, latitude, longitude, area, reservationType);
                 availableLocationArrayList.add(availableLocation);
             }

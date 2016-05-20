@@ -104,7 +104,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         center_text.setText("나에게도 " + this.numReferPoint + "이 바로 적립!");
 
         detail = "초대받은 친구가 추천 코드를 입력하고 첫 주문을 하면, 초대하신 분께 "+  this.numReferPoint +" 포인트를 드립니다.";
-        refer_text = "셰프의 요리를 집에서 즐겨요! 지금 플레이팅 앱을 다운받고 첫 주문 " +  this.korReferPoint + " 할인 받으세요.";
+        refer_text = "오늘 저녁 뭐 먹지? 고민은 그만! 지금 바로 플레이팅 하세요 :) 신규 가입 시 " +  this.korReferPoint + " 할인 쿠폰 증정.";
     }
 
     @Override
@@ -125,7 +125,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         try {
             KakaoLink kakaoLink = KakaoLink.getKakaoLink(this);
             final KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-            kakaoTalkLinkMessageBuilder.addText(refer_text + "\n추천인 코드:" + refer_code);
+            kakaoTalkLinkMessageBuilder.addText(refer_text + "\n[추천인 코드: " + refer_code + "]");
             kakaoTalkLinkMessageBuilder.addAppButton("집에서 셰프의 요리를!",
                     new AppActionBuilder().addActionInfo(AppActionInfoBuilder.createAndroidActionInfoBuilder()
                             .setMarketParam("referrer=kakaotalklink")
