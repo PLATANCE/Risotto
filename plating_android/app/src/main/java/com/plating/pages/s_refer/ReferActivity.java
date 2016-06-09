@@ -34,12 +34,9 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     private LinearLayout recommend_layout_kakao;
     private LinearLayout recommend_layout_sms;
     private LinearLayout recommend_layout_url;
-    private String refer_text;
-    private String detail;
     private TextView user_code;
-    private TextView detail_text;
-    private TextView center_text;
-    private SpannableString content;
+    private String refer_text;
+
     private String refer_link;
     private String refer_code;
     private String numReferPoint;
@@ -59,7 +56,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     public void setAllViews() {
         refer_image_top = (ImageView) findViewById(R.id.refer_image_top);
 
-        VolleySingleton.getsInstance().loadImageToImageView(refer_image_top, RequestURL.REFER_IMAGE_URL + "refer_top.jpg");
+        VolleySingleton.getsInstance().loadImageToImageView(refer_image_top, RequestURL.REFER_IMAGE_URL + "new_refer_friend.png");
 
         recommend_layout_kakao = (LinearLayout) findViewById(R.id.recommend_layout_kakao);
         recommend_layout_kakao.setOnClickListener(this);
@@ -69,17 +66,9 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         recommend_layout_url.setOnClickListener(this);
 
         // user_code
-        user_code = (TextView) findViewById(R.id.user_code);
+        user_code = (TextView)findViewById(R.id.user_code);
         numReferPoint = "";
         korReferPoint = "";
-
-        // 자세히 underLine
-        detail_text = (TextView) findViewById(R.id.detail_text);
-        center_text = (TextView) findViewById(R.id.center_text);
-        content = new SpannableString(detail_text.getText().toString());
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        detail_text.setText(content);
-        detail_text.setOnClickListener(this);
 
         refer_link = "http://goo.gl/t5lrSL";
     }
@@ -101,10 +90,8 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         this.numReferPoint = numReferPoint;
         this.korReferPoint = korReferPoint;
 
-        center_text.setText("나에게도 " + this.numReferPoint + "이 바로 적립!");
-
-        detail = "초대받은 친구가 추천 코드를 입력하고 첫 주문을 하면, 초대하신 분께 "+  this.numReferPoint +" 포인트를 드립니다.";
-        refer_text = "오늘 저녁 뭐 먹지? 고민은 그만! 지금 바로 플레이팅 하세요 :) 신규 가입 시 " +  this.korReferPoint + " 할인 쿠폰 증정.";
+        refer_text = "집에서 간편하게 셰프의 요리를 즐겨요!\n 지금 플레이팅 앱을 다운받고 첫끼를 무료로 맛보세요!\n" +
+                "[추천 코드: " + refer_code + "]";
     }
 
     @Override
@@ -115,8 +102,6 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
             recommendMsgForSms();
         } else if (v == recommend_layout_url) {
             copyURL();
-        } else if(v == detail_text) {
-            DialogAPI.showDialog(this, "친구를 초대하세요!", detail, "닫기", null);
         }
     }
 
@@ -125,7 +110,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         try {
             KakaoLink kakaoLink = KakaoLink.getKakaoLink(this);
             final KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-            kakaoTalkLinkMessageBuilder.addText(refer_text + "\n[추천인 코드: " + refer_code + "]");
+            kakaoTalkLinkMessageBuilder.addText(refer_text + "\n[추천 코드: " + refer_code + "]");
             kakaoTalkLinkMessageBuilder.addAppButton("집에서 셰프의 요리를!",
                     new AppActionBuilder().addActionInfo(AppActionInfoBuilder.createAndroidActionInfoBuilder()
                             .setMarketParam("referrer=kakaotalklink")
@@ -146,7 +131,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         //DialogAPI.showDialog(this, "고객 지원", "문자 눌렸음", "확인", null);
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.putExtra("sms_body", refer_text + "\n다운로드 링크: " + refer_link + "\n추천인 코드: " + refer_code);
+        intent.putExtra("sms_body", refer_text + "\n다운로드 링크: " + refer_link);
         intent.setType("vnd.android-dir/mms-sms");
         startActivity(intent);
     }
@@ -154,7 +139,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     public void copyURL() {
         //DialogAPI.showDialog(this, "고객 지원", "URL 복사 눌렸음", "확인", null);
         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("refer_text", refer_text + "\n다운로드 링크: " + refer_link + "\n추천인 코드: " + refer_code);
+        ClipData clipData = ClipData.newPlainText("refer_text", refer_text + "\n다운로드 링크: " + refer_link);
         clipboardManager.setPrimaryClip(clipData);
         ToastAPI.showToast("복사 되었습니다.");
     }

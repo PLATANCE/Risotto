@@ -89,8 +89,6 @@ public class DailyMenuListActivity extends PlatingActivity {
 
         setUpLeftNavigationDrawer();
 
-        //openWelcomeDialog();
-
         getAllViews();
 
         setUpRecyclerView();
@@ -108,15 +106,6 @@ public class DailyMenuListActivity extends PlatingActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-    }
-
-    public void openWelcomeDialog() {
-        if(getIntent().hasExtra("SignUpOrLogin")) {
-            String signUpOrLogIn = getIntent ().getExtras().getString("SignUpOrLogin");
-            if(signUpOrLogIn.equals("u")) {
-                DialogAPI.showDialog(this, "Welcome to Plating",  "신규가입 1만원 할인 쿠폰이 지급되었습니다. '내 쿠폰함'을 확인해보세요.", "확인",  null);
-            }
-        }
     }
 
     public void getAddressInUseFromServer() {
@@ -267,8 +256,6 @@ public class DailyMenuListActivity extends PlatingActivity {
                         startEventDialog.show();
                     }
                 }, 600);
-
-                openWelcomeDialog();
             }
         }
     }
