@@ -98,8 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corner_2dp_radius_layout_plating_background"
-                android:orientation="vertical"
-                android:paddingBottom="12dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/cart_menu_list"
@@ -300,18 +299,50 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_corner_2dp_radius_layout_plating_background"
-                android:orientation="vertical"
-                android:paddingBottom="12dp">
-                <!--
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="52dp"
-                                    android:layout_marginLeft="12dp"
-                                    android:gravity="center_vertical"
-                                    android:text="배달 정보"
-                                    android:textColor="@color/grey_700"
-                                    android:textStyle="bold"
-                                    android:textSize="16.5dp" />-->
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/set_delivery_time_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="배달 시간"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/set_delivery_time_textview_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="12dp">
+
+                        <TextView
+                            android:id="@+id/set_delivery_time_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="배달 시간을 선택해주세요" />
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="0.8dp"
+                            android:background="@drawable/icon_arrow_right"
+                            android:gravity="center"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/set_user_address_layout"
@@ -368,7 +399,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:gravity="center"
-                        android:text="연락처"
+                        android:text="내 연락처"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -387,6 +418,7 @@
                             android:text="전화번호를 입력해주세요" />
 
                         <ImageView
+                            android:id="@+id/mobile_arrow_imageview"
                             android:layout_width="12dp"
                             android:layout_height="12dp"
                             android:layout_gravity="center_vertical"
@@ -398,9 +430,8 @@
                     </LinearLayout>
                 </RelativeLayout>
 
-
                 <RelativeLayout
-                    android:id="@+id/set_delivery_time_layout"
+                    android:id="@+id/set_recipient_layout"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginLeft="16dp"
@@ -411,11 +442,11 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:gravity="center"
-                        android:text="배달 시간"
+                        android:text="어느 분이 음식을 받습니까?"
                         android:textStyle="bold" />
 
                     <LinearLayout
-                        android:id="@+id/set_delivery_time_textview_layout"
+                        android:id="@+id/set_recipient_textview_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
@@ -423,11 +454,11 @@
                         android:paddingRight="12dp">
 
                         <TextView
-                            android:id="@+id/set_delivery_time_textview"
+                            android:id="@+id/set_recipient_textview"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="배달 시간을 선택해주세요" />
+                            android:text="본인" />
 
                         <ImageView
                             android:layout_width="12dp"
@@ -438,66 +469,20 @@
                             android:background="@drawable/icon_arrow_right"
                             android:gravity="center"
                             android:scaleType="fitXY" />
-                        <!--
-                                                <ImageView
-                                                    android:layout_width="12dp"
-                                                    android:layout_height="12dp"
-                                                    android:layout_gravity="center_vertical"
-                                                    android:layout_marginLeft="4dp"
-                                                    android:layout_marginTop="2dp"
-                                                    android:background="@drawable/icon_expand_below_pink_a400" />-->
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/set_request_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:text="포크 / 나이프를 넣어주세요"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:id="@+id/set_request_textview_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:paddingRight="12dp">
-
-
-                        <RadioGroup
-                            android:id="@+id/radio_cutlery_group"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/radio_cutlery_yes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:tag="1"
-                                android:text="예" />
-
-                            <RadioButton
-                                android:id="@+id/radio_cutlery_no"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:tag="0"
-                                android:text="아니오" />
-                        </RadioGroup>
 
                     </LinearLayout>
+
                 </RelativeLayout>
 
+             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cart_payment_detail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_corner_2dp_radius_layout_plating_background"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/set_way_of_payment_layout"
@@ -598,166 +583,68 @@
                             android:background="@drawable/icon_arrow_right"
                             android:gravity="center"
                             android:scaleType="fitXY" />
-                        <!--
-                                                <ImageView
-                                                    android:layout_width="12dp"
-                                                    android:layout_height="12dp"
-                                                    android:layout_gravity="center_vertical"
-                                                    android:layout_marginLeft="4dp"
-                                                    android:layout_marginTop="2dp"
-                                                    android:background="@drawable/icon_expand_below_pink_a400" />-->
                     </LinearLayout>
                 </RelativeLayout>
 
+            </LinearLayout>
 
-                <!--
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical">
+            <LinearLayout
+                android:id="@+id/cart_cutlery_detail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_corner_2dp_radius_layout_plating_background"
+                android:orientation="vertical">
 
-                                    <TextView
-                                        android:id="@+id/title_edit_address"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:text="배달 주소"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/colorPrimary" />
+                <RelativeLayout
+                    android:id="@+id/set_request_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp">
 
-                                    <TextView
-                                        android:id="@+id/cart_address"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_below="@id/title_edit_address"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="주소를 입력해주세요." />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="포크 / 나이프를 넣어주세요"
+                        android:textStyle="bold" />
 
-                                    <ImageButton
-                                        android:id="@+id/cart_activity_addressIB"
-                                        android:layout_width="48dp"
-                                        android:layout_height="48dp"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="16dp"
-                                        android:background="@color/transparent"
-                                        android:padding="14dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/order_edit_button" />
-                                </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/set_request_textview_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="12dp">
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical">
 
-                                    <TextView
-                                        android:id="@+id/title_edit_phone_number"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:text="연락처"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/colorPrimary" />
+                        <RadioGroup
+                            android:id="@+id/radio_cutlery_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
-                                    <TextView
-                                        android:id="@+id/cart_phone_number"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_below="@id/title_edit_phone_number"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="전화번호를 입력해주세요" />
+                            <RadioButton
+                                android:id="@+id/radio_cutlery_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tag="1"
+                                android:text="예" />
 
-                                    <ImageButton
-                                        android:id="@+id/cart_phone_IB"
-                                        android:layout_width="48dp"
-                                        android:layout_height="48dp"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="16dp"
-                                        android:background="@color/transparent"
+                            <RadioButton
+                                android:id="@+id/radio_cutlery_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tag="0"
+                                android:text="아니오" />
+                        </RadioGroup>
 
-                                        android:padding="14dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/order_edit_button" />
-                                </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical">
-
-                                    <TextView
-                                        android:id="@+id/title_edit_delivery_time"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:text="배달 시간"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/colorPrimary" />
-
-                                    <TextView
-                                        android:id="@+id/cart_delivery_time"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_below="@id/title_edit_delivery_time"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="5:00pm - 6:00pm" />
-
-                                    <ImageButton
-                                        android:id="@+id/cart_activity_timeIB"
-                                        android:layout_width="48dp"
-                                        android:layout_height="48dp"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="16dp"
-                                        android:background="@color/transparent"
-                                        android:padding="14dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/order_edit_button" />
-                                </RelativeLayout>
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical">
-
-                                    <TextView
-                                        android:id="@+id/title_edit_delivery_time2"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:textSize="15sp"
-                                        android:text="결제 방법"
-                                        android:textColor="@color/colorPrimary" />
-
-                                    <TextView
-                                        android:id="@+id/cart_cardTV"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_below="@id/title_edit_delivery_time2"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="신한 7777-7777-****-****" />
-
-                                    <ImageButton
-                                        android:id="@+id/cart_addcardIB"
-                                        android:layout_width="48dp"
-                                        android:layout_height="48dp"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="16dp"
-                                        android:background="@color/transparent"
-                                        android:padding="14dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/order_edit_button" />
-                                </RelativeLayout>-->
             </LinearLayout>
 
             <LinearLayout

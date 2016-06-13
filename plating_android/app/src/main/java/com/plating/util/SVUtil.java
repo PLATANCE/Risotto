@@ -135,6 +135,7 @@ public class SVUtil {
     }
 
     public static void SetUserIdx(Context cx, int idx) {
+        Log.d("SVUtil", "SetUserIdx" + idx);
         SharedPreferences prefs = cx.getSharedPreferences(plating, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 

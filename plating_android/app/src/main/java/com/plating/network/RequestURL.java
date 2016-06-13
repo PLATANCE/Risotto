@@ -60,6 +60,7 @@ public class RequestURL {
 
     public static final String BANNER_IMAGE_URL = "http://plating.co.kr/app/media/banner/";
 
-
+    public static final String REQUEST_AUTH_NUMBER = "https://smsauth.plating.co.kr/user/{userIdx}/requestAuthNumber";
+    public static final String VALIDATE_AUTH_NUMBER = "https://smsauth.plating.co.kr/user/{userIdx}/validateAuthNumber";
 
 }

@@ -67,7 +67,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     private TextView mDeliveryFee;
     private TextView mTotalPaymentFee;
     private TextView mAddress;
-    private TextView mPhoneNumber;
+    private TextView mPhoneNumber, mRecipient;
     private TextView mDeliveryTime, TV_card;
     private TextView messageText;
 
@@ -76,10 +76,13 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     private String card_no;
 
-    private LinearLayout cart_order_detail_layout;
+    private LinearLayout cart_delivery_detail_layout;
+    private LinearLayout cart_payment_detail_layout;
+    private LinearLayout cart_cutlery_detail_layout;
     private LinearLayout messageBox;
-    private RelativeLayout IB_time, IB_phone, IB_address, IB_payment, IB_addcard;
+    private RelativeLayout IB_time, IB_phone, IB_address, IB_payment, IB_addcard, IB_recipient;
     private Button Btn_order;
+    private ImageView mobileArrowImageview;
 
     // Radio Button For payment
     private RadioGroup radio_pay_group;
@@ -92,7 +95,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     private ArrayList<TimeSlotBox> time_slot_list;
 
-    private int selected_time_slot;
+    private int selected_time_slot, selectedRecipient;
     private int free_credit, deliveryFee, myPoint;
 
     private int total_price, bk_len;
@@ -142,12 +145,13 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         // coupon button layout
         RL_coupon = (RelativeLayout) findViewById(R.id.RL_coupon);
 
-        cart_order_detail_layout = (LinearLayout) findViewById(R.id.cart_order_detail_layout);
+        cart_payment_detail_layout = (LinearLayout) findViewById(R.id.cart_payment_detail_layout);
         messageBox = (LinearLayout) findViewById(R.id.messageBox);
 
         // Textviews regarding delivery information (address, phone number, credit card, and so on)
         mAddress = (TextView) findViewById(R.id.set_user_address_textview);
         mPhoneNumber = (TextView) findViewById(R.id.set_user_phone_number_textview);
+        mRecipient = (TextView) findViewById(R.id.set_recipient_textview);
         mDeliveryTime = (TextView) findViewById(R.id.set_delivery_time_textview);
         TV_card = (TextView) findViewById(R.id.set_credit_card_textview);
 
@@ -179,11 +183,16 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         IB_payment = (RelativeLayout) findViewById(R.id.set_way_of_payment_layout);
         IB_addcard = (RelativeLayout) findViewById(R.id.set_credit_card_layout);
         IB_addcard.setOnClickListener(this);
+        IB_recipient = (RelativeLayout) findViewById(R.id.set_recipient_layout);
+        IB_recipient.setOnClickListener(this);
 
 
         // Add Coupon Button
         bt_add_coupon = (ImageButton) findViewById(R.id.bt_add_coupon);
         bt_add_coupon.setOnClickListener(this);
+
+        // mobile Arrow Image
+        mobileArrowImageview = (ImageView) findViewById(R.id.mobile_arrow_imageview);
 
         // Place order button
         Btn_order = (Button) findViewById(R.id.cart_activity_orderButton);
@@ -283,6 +292,9 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             MixPanel.mixPanel_trackWithOutProperties("Show Delivery Time Slot");
 
             showTimeSlot();
+        } else if(view == IB_recipient) {
+            MixPanel.mixPanel_trackWithOutProperties("Show Recipient");
+            showRecipient();
         } else if (view == Btn_order) {
 
             Cart cart = Cart.getCartInstance();
@@ -298,7 +310,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             credit_used = freeCredit;
             String deliveryTime = mDeliveryTime.getText().toString();
             String address = mAddress.getText().toString();
-            String phoneNumber = mPhoneNumber.getText().toString();
+            String phoneNumber = mRecipient.getText().toString();
             String totalPrice = PriceAPI.intPriceToStringPriceWonSymbolFormat(total_price);
             // 결제 수단 추가
             int selectedId = radio_pay_group.getCheckedRadioButtonId();
@@ -330,9 +342,11 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
 
         } else if (view == IB_phone) {
-            MixPanel.mixPanel_trackWithOutProperties("Edit Phone Number");
-
-            EnterPhoneNumberDialog.showDialog(this);
+            if (mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW)) {
+                MixPanel.mixPanel_trackWithOutProperties("Edit Phone Number");
+                Intent intent = new Intent(mContext, InputMobileForAuthActivity.class);
+                startActivity(intent);
+            }
         } else if (view == IB_address) {
             MixPanel.mixPanel_trackWithOutProperties("Edit Address");
 
@@ -349,23 +363,23 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             Intent intent = new Intent(mContext, AddCreditCardActivity.class);
             startActivity(intent);
         } else if (view == radio_pay_card) {
-            if (cart_order_detail_layout.getChildCount() == 5) {
+            if (cart_payment_detail_layout.getChildCount() == 1) {
                 View child = getLayoutInflater().inflate(R.layout.h_regist_card_layout, null);
                 IB_addcard = (RelativeLayout) child.findViewById(R.id.set_credit_card_layout);
                 IB_addcard.setOnClickListener(this);
                 TV_card = (TextView) child.findViewById(R.id.set_credit_card_textview);
                 TV_card.setText(card_no);
-                cart_order_detail_layout.addView(child);
+                cart_payment_detail_layout.addView(child);
             }
             enableOrDisablePlaceOrderButton();
         } else if (view == radio_pay_direct_card) {
-            if (cart_order_detail_layout.getChildCount() == 6) {
-                cart_order_detail_layout.removeViewAt(5);
+            if (cart_payment_detail_layout.getChildCount() == 2) {
+                cart_payment_detail_layout.removeViewAt(1);
             }
             enableOrDisablePlaceOrderButton();
         } else if (view == radio_pay_direct_credit) {
-            if (cart_order_detail_layout.getChildCount() == 6) {
-                cart_order_detail_layout.removeViewAt(5);
+            if (cart_payment_detail_layout.getChildCount() == 2) {
+                cart_payment_detail_layout.removeViewAt(1);
             }
             enableOrDisablePlaceOrderButton();
         } else if (view == bt_add_coupon) {
@@ -392,12 +406,40 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     }
 
     public void EnterPhoneNumberDialog_Callback(String phoneNumber) {
-        mPhoneNumber.setText(phoneNumber);
-        update_phone(phoneNumber);
-
-        enableOrDisablePlaceOrderButton();
+        mRecipient.setText(phoneNumber);
     }
 
+    private void showRecipient() {
+        String[] array = {"본인", "아니요, 지인이 받습니다"};
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle("어느 분이 음식을 받습니까?");
+        ab.setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Log.d("CartActivity", i + "");
+                selectedRecipient = i;
+            }
+        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Log.d("CartActivity", selectedRecipient + "");
+                // 지인을 선택하면
+                if (selectedRecipient == 1) {
+                    // 지인 전화번호 입력하는 dialog 를 출력
+                    EnterPhoneNumberDialog.showDialog(mContext);
+                    selectedRecipient = 0;
+                } else {
+                    mRecipient.setText("본인");
+                }
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Log.d("CartActivity", i + "");
+            }
+        });
+        ab.show();
+    }
 
     private void showTimeSlot() {
         if (selected_time_slot == -1) {
@@ -628,6 +670,10 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 menu_d_idx = menu_d_idx.substring(0, menu_d_idx.length() - 1);
                 order_amount = order_amount.substring(0, order_amount.length() - 1);
 
+                // recipient가 본인이면 내 연락처를, 아니면 recipient 의 텍스트를
+                String recipient = mRecipient.getText().toString();
+                String mobile = (recipient.equals("본인")) ? mPhoneNumber.getText().toString() : recipient;
+
                 params.put("user_idx", SVUtil.GetUserIdx(cx) + "");
                 params.put("time_slot", Cart.time_slot_idx + "");
                 params.put("menu_d_idx", menu_d_idx);
@@ -636,6 +682,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 params.put("point", Integer.toString(Cart.getCartInstance().getAvailablePoint(myPoint, deliveryFee, coupon_price)) + "");
                 params.put("total_price", total_price + "");
                 params.put("pay_method", pay_method + "");
+                params.put("mobile", mobile + "");
 
                 // update coupon_txn set is_used = 1 where user_idx = 1471 and coupon_idx = coupon_idx
                 params.put("coupon_idx", Integer.toString(coupon_idx));
@@ -650,36 +697,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         myReq.setRetryPolicy(policy);
         mRequestQueue.add(myReq);
-    }
-
-
-    private void update_phone(final String phone_no) {
-        RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(this);
-        StringRequest myReq = new StringRequest(Request.Method.POST,
-                "http://api.plating.co.kr/update_info?phone_no=" + phone_no,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("update_phone", "result : " + response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("phone_no", phone_no + "");
-                params.put("user_idx", SVUtil.GetUserIdx(cx) + "");
-
-                return params;
-            }
-        };
-        queue.add(myReq);
     }
 
     public void getCartInformation() {
@@ -719,7 +736,12 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                             myPoint = my_info.getInt("point");
                             String phoneNumber = my_info.getString("mobile");
                             if (my_info.getString("mobile") != "null") {
-                                mPhoneNumber.setText(my_info.getString("mobile"));
+                                if(my_info.getString("mobile").equals(Constant.PLEASE_ENTER_PHONE_NUMBER)) {
+                                    mPhoneNumber.setText(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW);
+                                } else {
+                                    mPhoneNumber.setText(my_info.getString("mobile"));
+                                    mobileArrowImageview.setVisibility(View.INVISIBLE);
+                                }
                             } else {
                                 mPhoneNumber.setText(PhoneNumberAPI.getPhoneNumber());
                             }
@@ -794,7 +816,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         } else {
             mAddress.setTextColor(getResources().getColor(R.color.grey_600));
         }
-        if (mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER)) {
+        if (mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW)) {
             mPhoneNumber.setTextColor(getResources().getColor(R.color.orange_300));
         } else {
             mPhoneNumber.setTextColor(getResources().getColor(R.color.grey_600));
@@ -830,9 +852,9 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             Btn_order.setEnabled(false);
             Btn_order.setText("주소를 입력해주세요");
             isEnables = false;
-        } else if (mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER)) {
+        } else if (mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW)) {
             Btn_order.setEnabled(false);
-            Btn_order.setText("전화번호를 입력해주세요");
+            Btn_order.setText(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW);
             isEnables = false;
         } else if (mDeliveryTime.getText().equals(Constant.PLEASE_ENTER_DELIVERY_TIME)) {
             Btn_order.setEnabled(false);

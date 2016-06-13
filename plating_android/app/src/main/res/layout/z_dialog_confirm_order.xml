@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:text="연락처"
+            android:text="받는 분의 연락처"
             android:textColor="@color/grey_800"
             android:textSize="14dp"
             android:textStyle="bold" />

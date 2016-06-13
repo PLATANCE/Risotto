@@ -29,6 +29,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_cart">CartActivity</string>
+    <string name="title_activity_input_mobile">InputMobileForAuthActivity</string>
+    <string name="title_activity_input_auth">InputAuthNumberActivity</string>
     <string name="title_activity_chef">ChefActivity</string>
     <string name="title_activity_set_location">SetLocationActivity</string>
     <string name="title_activity_addess_cover">AddressCoverActivity</string>

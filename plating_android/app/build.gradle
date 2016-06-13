@@ -18,8 +18,8 @@ android {
         applicationId "com.plating"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 52
-        versionName "0.1.52"
+        versionCode 54
+        versionName "0.1.54"
         multiDexEnabled = true
     }
 
