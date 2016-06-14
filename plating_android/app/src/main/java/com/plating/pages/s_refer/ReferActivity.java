@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,7 +51,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
 
         setAllViews();
         getUserCodeFromServer();
-        getPolicyReferPointFromServer();
+        //getPolicyReferPointFromServer();
     }
 
     public void setAllViews() {
@@ -79,7 +80,10 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
 
     public void getUserCodeFromServer_Callback(String userCode) {
         user_code.setText(userCode);
-        this.refer_code = userCode;
+        refer_code = userCode;
+        refer_text = "집에서 간편하게 셰프의 요리를 즐겨요!\n지금 플레이팅 앱을 다운받고 첫끼를 무료로 맛보세요!\n" +
+                "[추천 코드: " + refer_code + "]";
+        Log.d("ReferActivity", refer_text);
     }
 
     public void getPolicyReferPointFromServer() {
@@ -89,9 +93,6 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     public void getPolicyReferPointFromServer_Callback(String numReferPoint, String korReferPoint) {
         this.numReferPoint = numReferPoint;
         this.korReferPoint = korReferPoint;
-
-        refer_text = "집에서 간편하게 셰프의 요리를 즐겨요!\n 지금 플레이팅 앱을 다운받고 첫끼를 무료로 맛보세요!\n" +
-                "[추천 코드: " + refer_code + "]";
     }
 
     @Override
@@ -110,7 +111,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
         try {
             KakaoLink kakaoLink = KakaoLink.getKakaoLink(this);
             final KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-            kakaoTalkLinkMessageBuilder.addText(refer_text + "\n[추천 코드: " + refer_code + "]");
+            kakaoTalkLinkMessageBuilder.addText(refer_text);
             kakaoTalkLinkMessageBuilder.addAppButton("집에서 셰프의 요리를!",
                     new AppActionBuilder().addActionInfo(AppActionInfoBuilder.createAndroidActionInfoBuilder()
                             .setMarketParam("referrer=kakaotalklink")
