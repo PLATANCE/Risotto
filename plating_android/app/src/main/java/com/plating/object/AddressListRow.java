@@ -12,6 +12,7 @@ public class AddressListRow {
     private String reservation_type;
     private double lat;
     private double lon;
+    private String area;
 
     public int getIdx() {
         return idx;
@@ -36,6 +37,8 @@ public class AddressListRow {
     public void setAddress_detail(String address_detail) {
         this.address_detail = address_detail;
     }
+
+    public void setArea(String area) { this.area = area; }
 
     public int getIn_use() {
         return in_use;
@@ -75,5 +78,9 @@ public class AddressListRow {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public String getArea() {
+        return area;
     }
 }

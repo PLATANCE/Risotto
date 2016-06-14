@@ -67,6 +67,7 @@ public class GetAddressInUseFromServer {
             addressListRow.setAddress_detail(addressJsonObject.optString("address_detail", ""));
             addressListRow.setIn_use(addressJsonObject.optInt("in_use", -1));
             addressListRow.setReservation_type(addressJsonObject.optString("reservation_type", ""));
+            addressListRow.setArea(addressJsonObject.optString("area", ""));
 
             return addressListRow;
         }

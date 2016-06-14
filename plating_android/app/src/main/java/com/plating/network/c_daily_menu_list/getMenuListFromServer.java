@@ -1,6 +1,7 @@
 package com.plating.network.c_daily_menu_list;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,6 +24,29 @@ import java.util.ArrayList;
  */
 public class getMenuListFromServer {
     public static String LOG_TAG = Constant.APP_NAME + "getMenuListFromServer";
+
+    public static void getDataFromServer(final Context context, RequestQueue requestQueue, String area) {
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                getRequestUrl(area),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Debug.d(LOG_TAG, "getMenuListFromServer.response: " + response.toString());
+                        ArrayList<DailyMenu> dailyMenuArrayList = convertJsonToDailyMenuArrayList(response);
+                        ((DailyMenuListActivity) context).getMenuListFromServer_Callback(dailyMenuArrayList);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Debug.d(LOG_TAG, "getMenuListFromServer.error: " + error.toString());
+                        Toast.makeText(context, Constant.SERVER_CONNECTION_FAILURE, Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+        requestQueue.add(request);
+    }
 
     public static void getDataFromServer(final Context context, RequestQueue requestQueue) {
         JsonArrayRequest request = new JsonArrayRequest(
@@ -47,7 +71,13 @@ public class getMenuListFromServer {
         requestQueue.add(request);
     }
 
+    public static String getRequestUrl(String area) {
+        Log.d(LOG_TAG, RequestURL.SERVER__DAILY_MENU + "?area=" + area);
+        return RequestURL.SERVER__DAILY_MENU + "?area=" + area;
+    }
+
     public static String getRequestUrl() {
+        Log.d(LOG_TAG, RequestURL.SERVER__DAILY_MENU);
         return RequestURL.SERVER__DAILY_MENU;
     }
 

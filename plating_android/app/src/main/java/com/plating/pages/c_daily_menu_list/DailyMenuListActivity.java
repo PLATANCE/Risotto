@@ -97,7 +97,7 @@ public class DailyMenuListActivity extends PlatingActivity {
 
         setFutureMenuDateLayout();
 
-        getMenuListFromServer();
+        //getMenuListFromServer();
 
         getAddressInUseFromServer();
 
@@ -114,10 +114,13 @@ public class DailyMenuListActivity extends PlatingActivity {
 
     public void getAddressInUseFromServer_Callback(AddressListRow addressListRow) {
         this.addressListRow = addressListRow;
+        Log.d(LOG_TAG, "PlatingActivity.getMenuListFromServer" + addressListRow.getAddress() + addressListRow.toString());
         if (addressListRow.getAddress() == null) {
-            text_my_address.setText("요리가 배달될 주소를 입력하세요.");
+            text_my_address.setText("먼저, 배달 가능 지역을 확인해주세요 :)");
+            getMenuListFromServer();
         } else {
             text_my_address.setText(addressListRow.getAddress() + " " + addressListRow.getAddress_detail());
+            getMenuListFromServer(addressListRow.getArea());
         }
     }
 
@@ -224,6 +227,10 @@ public class DailyMenuListActivity extends PlatingActivity {
      ***********************/
     public void getMenuListFromServer() {
         getMenuListFromServer.getDataFromServer(this, mRequestQueue);
+    }
+
+    public void getMenuListFromServer(String area) {
+        getMenuListFromServer.getDataFromServer(this, mRequestQueue, area);
     }
 
 
