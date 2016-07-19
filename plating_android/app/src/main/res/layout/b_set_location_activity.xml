@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="요리가 배달될 주소 입력"
+            android:text="배달 주소 입력"
             android:textColor="@color/white"
             android:textSize="15dp" />
 
@@ -41,52 +41,63 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/tool_bar_layout"
         android:orientation="vertical">
-        <!--
-            <RelativeLayout
-                android:id="@+id/search_delivery_coverage"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="5dp">
 
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/transparent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/shape_button_rounded_corner_2dp_color_transparent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textview_delivery_coverage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="배달 가능 지역 보기"
-                    android:textColor="@color/usual_main_text_orange"
-                    android:textSize="13dp" />
-            </RelativeLayout>
-            -->
-        <RelativeLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주소 입력 (동 + 지번)"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예) 신사동 123-4"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:gravity="bottom">
-
+            android:orientation="horizontal">
 
             <EditText
-                android:gravity="bottom"
                 android:id="@+id/set_location_edit_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="6"
                 android:layout_height="match_parent"
-                android:paddingLeft="3dp"
-                android:hint="주소 입력(동 + 지번) 예) 신사동 123-4"
+                android:paddingLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:hint="예) 신사동 123-4"
+                android:background="@color/grey_200"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
                 android:textSize="14sp" />
-        </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/set_location_linear_layout"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/address_input"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
 
@@ -95,6 +106,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="6dp"
             android:visibility="visible" />
+
+
     </LinearLayout>
 
 </RelativeLayout>

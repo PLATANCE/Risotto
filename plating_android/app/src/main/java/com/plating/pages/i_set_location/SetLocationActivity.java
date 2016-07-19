@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.plating.R;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 public class SetLocationActivity extends PlatingActivity {
     String LOG_TAG = Constant.APP_NAME + "SetLocationActivity";
 
+    private LinearLayout mSetLocationLinearLayout;
     private EditText mSetLocationEditText;
     private RecyclerView mRecyclerView;
     private AvailableLocationListAdapter mAdapter;
@@ -46,6 +48,8 @@ public class SetLocationActivity extends PlatingActivity {
     }
 
     public void getAllViews() {
+        mSetLocationLinearLayout = (LinearLayout) findViewById(R.id.set_location_linear_layout);
+
         mSetLocationEditText = (EditText) findViewById(R.id.set_location_edit_text);
         Log.d(LOG_TAG, mSetLocationEditText.getBackground().toString());
         mRecyclerView = (RecyclerView) findViewById(R.id.available_location_recycler_view);
@@ -58,10 +62,8 @@ public class SetLocationActivity extends PlatingActivity {
     }
 
     public void moveToAddressCoverActivity() {
-
         Intent intent = new Intent(this, AddressCoverActivity.class);
         startActivity(intent);
-
     }
 
     public void setOnClickListener() {
@@ -73,6 +75,12 @@ public class SetLocationActivity extends PlatingActivity {
                 } else {
                     return false;
                 }
+            }
+        });
+        mSetLocationLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getAvailableLocationsFromServer();
             }
         });
     }
@@ -93,7 +101,9 @@ public class SetLocationActivity extends PlatingActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        GetAvailableLocations.getDataFromServer(this, mRequestQueue, text);
+        if (mSetLocationEditText.getText().toString().length() > 0) {
+            GetAvailableLocations.getDataFromServer(this, mRequestQueue, text);
+        }
     }
 
     public void getAvailableLocationsFromServer_Callback(ArrayList<AvailableLocation> availableLocationArrayList) {
