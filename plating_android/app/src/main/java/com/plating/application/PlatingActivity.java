@@ -19,6 +19,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.plating.R;
 import com.plating.dialog.MakePhoneCallDialog;
 import com.plating.helperAPI.GPS;
@@ -35,6 +36,7 @@ import java.util.Calendar;
  * Created by cheehoonha on 7/18/15.
  */
 public class PlatingActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+    public FirebaseAnalytics mFirebaseAnalytics;
     public static String LOG_TAG_PREFIX = "PlatingActivity.";
     public String LOG_TAG;
 
@@ -78,6 +80,7 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mVolleySingleton = VolleySingleton.getsInstance();
         mRequestQueue = mVolleySingleton.getRequestQueue();
         mImageLoader = mVolleySingleton.getmImageLoader();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
     }
 

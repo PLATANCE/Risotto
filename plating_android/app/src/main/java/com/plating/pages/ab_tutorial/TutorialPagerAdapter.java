@@ -1,14 +1,8 @@
 package com.plating.pages.ab_tutorial;
 
-
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.util.SparseArray;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Created by home on 15. 12. 29..
