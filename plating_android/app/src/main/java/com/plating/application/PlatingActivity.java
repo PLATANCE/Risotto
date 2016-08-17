@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.plating.R;
 import com.plating.dialog.MakePhoneCallDialog;
 import com.plating.helperAPI.GPS;
 import com.plating.network.i_set_location.SetUserGPSLocation;
+import com.plating.pages.ab_tutorial.TutorialActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.network.VolleySingleton;
 import com.plating.object_singleton.Cart;
@@ -157,6 +160,16 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
          MixPanel.flush();
     }
 
+    public void sendLogEventToFirebase(
+            @NonNull String itemName,
+            @NonNull String value
+    ) {
+        Bundle args = new Bundle();
+        args.putString(FirebaseAnalytics.Param.ITEM_NAME, itemName);
+        args.putString(FirebaseAnalytics.Param.VALUE, value);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM, args);
+        Log.d(LOG_TAG, "sendLogEventToFirebase");
+    }
 
     /*********************
      * * SYSTEM OPERATION *
