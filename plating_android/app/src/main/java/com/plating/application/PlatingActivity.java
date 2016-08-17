@@ -162,12 +162,13 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
 
     public void sendLogEventToFirebase(
             @NonNull String itemName,
-            @NonNull String value
+            @NonNull String value,
+            @NonNull String eventName
     ) {
         Bundle args = new Bundle();
         args.putString(FirebaseAnalytics.Param.ITEM_NAME, itemName);
         args.putString(FirebaseAnalytics.Param.VALUE, value);
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM, args);
+        mFirebaseAnalytics.logEvent(eventName, args);
         Log.d(LOG_TAG, "sendLogEventToFirebase");
     }
 
