@@ -1,6 +1,7 @@
 package com.plating.application;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,8 +17,9 @@ public class PlatingFragment extends Fragment {
     public final String TAG = this.getClass().getSimpleName();
 
     public void sendLogEventToFirebase(
-            @Nullable String itemName,
-            @Nullable String value) {
+            @NonNull String itemName,
+            @NonNull String value
+    ) {
         Bundle args = new Bundle();
         args.putString(FirebaseAnalytics.Param.ITEM_NAME, itemName);
         args.putString(FirebaseAnalytics.Param.VALUE, value);
