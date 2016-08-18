@@ -26,6 +26,7 @@ import com.plating.R;
 import com.plating.dialog.MakePhoneCallDialog;
 import com.plating.helperAPI.GPS;
 import com.plating.network.i_set_location.SetUserGPSLocation;
+import com.plating.object.AnalyticsEvent;
 import com.plating.pages.ab_tutorial.TutorialActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.network.VolleySingleton;
@@ -160,16 +161,8 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
          MixPanel.flush();
     }
 
-    public void sendLogEventToFirebase(
-            @NonNull String itemName,
-            @NonNull String value,
-            @NonNull String eventName
-    ) {
-        Bundle args = new Bundle();
-        args.putString(FirebaseAnalytics.Param.ITEM_NAME, itemName);
-        args.putString(FirebaseAnalytics.Param.VALUE, value);
-        mFirebaseAnalytics.logEvent(eventName, args);
-        Log.d(LOG_TAG, "sendLogEventToFirebase");
+    public void sendLogEventToFirebase(AnalyticsEvent event) {
+        mFirebaseAnalytics.logEvent(event.getEventName(), event.getEventArguments());
     }
 
     /*********************
