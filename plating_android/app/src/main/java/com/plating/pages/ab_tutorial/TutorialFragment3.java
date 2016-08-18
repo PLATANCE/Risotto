@@ -10,20 +10,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.plating.R;
+import com.plating.application.PlatingActivity;
+import com.plating.object.AnalyticsEvent;
 import com.plating.pages.b_login.LogInActivity;
 
 /**
  * Created by home on 15. 12. 29..
  */
 public class TutorialFragment3 extends Fragment implements View.OnClickListener {
+
     ImageButton imageView_showLogin;
+    private AnalyticsEvent event;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.ab_tutorial_fragment_3, container, false);
 
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "finished_tutorial");
+        event = new AnalyticsEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, params);
+        ((PlatingActivity) getActivity()).sendLogEventToFirebase(event);
         imageView_showLogin = (ImageButton) view.findViewById(R.id.imageView_showLogin);
         imageView_showLogin.setOnClickListener(this);
 

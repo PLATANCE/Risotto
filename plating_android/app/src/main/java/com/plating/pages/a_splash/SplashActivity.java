@@ -12,6 +12,7 @@ import com.plating.R;
 import com.plating.application.PlatingActivity;
 import com.plating.gcm.RegistrationIntentService;
 import com.plating.helperAPI.AndroidVersionAPI;
+import com.plating.object.AnalyticsEvent;
 import com.plating.pages.a_splash.dialog.UpdateDialog;
 import com.plating.network.a_splash.CheckForAppUpdate;
 import com.plating.pages.ab_tutorial.TutorialActivity;
@@ -28,6 +29,8 @@ public class SplashActivity extends PlatingActivity {
     // Google play service constant
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
 
+    private AnalyticsEvent event;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class SplashActivity extends PlatingActivity {
 
         MixPanel.mixPanel_orderPeopleListByLatestUsage();
         registerGCM();
+
     }
 
     @Override
@@ -48,6 +52,13 @@ public class SplashActivity extends PlatingActivity {
         // Check for any app updates.
         // If there is no update, start the next activity
         checkForAppUpdateAndStartNextActivityIfThereIsNoUpdateAvailable();
+
+        Bundle params = new Bundle();
+        params.putString("activity", "SplashActivity");
+
+        event = new AnalyticsEvent("splash", params);
+        sendLogEventToFirebase(event);
+
     }
 
     // CHECK FOR UPDATE
