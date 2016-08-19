@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,11 +25,13 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
+import com.plating.application.AnalyticsConstant;
 import com.plating.application.Constant;
 import com.plating.application.PlatingActivity;
 import com.plating.helperAPI.PriceAPI;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
+import com.plating.object.AnalyticsEvent;
 import com.plating.object.DailyMenu;
 import com.plating.object.MenuInCart;
 import com.plating.object_singleton.Cart;
@@ -258,6 +261,9 @@ class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == imageView_banner) {
+            Bundle args = new Bundle();
+            AnalyticsEvent event = new AnalyticsEvent(AnalyticsConstant.Event.SPLASH, args);
+            ((DailyMenuListActivity) mContext).sendLogEventToFirebase(event);
             ((DailyMenuListActivity) mContext).moveToBannerActivity();
         } else {
             int position = getAdapterPosition() - 1;
