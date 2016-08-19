@@ -41,6 +41,7 @@ import java.util.Calendar;
  */
 public class PlatingActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     public FirebaseAnalytics mFirebaseAnalytics;
+    private AnalyticsEvent mEvent;
     public static String LOG_TAG_PREFIX = "PlatingActivity.";
     public String LOG_TAG;
 
@@ -62,10 +63,6 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
     public static int UPDATE_INTERVAL = 2000; // 2 sec
     public static int FATEST_INTERVAL = 1000; // 1 sec
     public static int DISPLACEMENT = 5; // 10 meters
-
-    // Make sure this is done in both onCreate and onStart
-    // If you only do in onCreate, onStop will make everything null.
-    // Also, if you only do in onStart, none of these variables are instantiated on onCreate.
 
 
     @Override
@@ -161,6 +158,14 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
          MixPanel.flush();
     }
 
+    @Override
+    public void finish() {
+        Bundle args = new Bundle();
+        mEvent = new AnalyticsEvent(AnalyticsConstant.Event.EXIT_POINT, args);
+        sendLogEventToFirebase(mEvent);
+        super.finish();
+    }
+
     public void sendLogEventToFirebase(AnalyticsEvent event) {
         mFirebaseAnalytics.logEvent(event.getEventName(), event.getEventArguments());
     }
@@ -188,7 +193,10 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
 
     @Override
     public void onBackPressed() {
-        MixPanel.mixPanel_trackWithOutProperties("Pressed Back Button");
+//        MixPanel.mixPanel_trackWithOutProperties("Pressed Back Button");
+        Bundle args = new Bundle();
+        mEvent = new AnalyticsEvent(AnalyticsConstant.Event.BACK_BUTTON_CLICK, args);
+        sendLogEventToFirebase(mEvent);
         super.onBackPressed();
         overridePendingTransition(R.anim.transition_slide_in_from_left, R.anim.transition_slide_out_to_right);
     }
