@@ -10,8 +10,8 @@ public class AnalyticsConstant {
         public static String ENROLL_PROMOTION_CODE = "enroll_promotion_code";
         public static String MY_COUPON = "my_coupon";
         public static String EXIT_POINT = "exit_point";
-        public static String BACK_BUTTON_CLICK = "back_button_click";
-
+        public static String HARDWARE_BACK_BUTTON_CLICK = "hardware_back_button_click";
+        public static String NAVIGATION_BACK_BUTTON_CLICK = "navigation_back_button_click";
     }
 
     public static final class Params {

@@ -175,15 +175,12 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
      *********************/
     // Navigate back. Same as pressing back button
     public void onClickNavigateBack(View view) {
-        MixPanel.mixPanel_trackWithOutProperties("Navigate Back");
+//        MixPanel.mixPanel_trackWithOutProperties("Navigate Back");
+        Bundle args = new Bundle();
+        mEvent = new AnalyticsEvent(AnalyticsConstant.Event.NAVIGATION_BACK_BUTTON_CLICK, args);
+        sendLogEventToFirebase(mEvent);
         finish();
         overridePendingTransition(R.anim.transition_slide_in_from_left, R.anim.transition_slide_out_to_right);
-    }
-
-    public void onClickNavigateBackToptoBottom(View view) {
-        MixPanel.mixPanel_trackWithOutProperties("Navigate Back");
-        finish();
-        overridePendingTransition(R.anim.transition_slide_in_from_top, R.anim.transition_slide_out_to_bottom);
     }
 
     public void onClickCallPlating(View view) {
@@ -195,7 +192,7 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
     public void onBackPressed() {
 //        MixPanel.mixPanel_trackWithOutProperties("Pressed Back Button");
         Bundle args = new Bundle();
-        mEvent = new AnalyticsEvent(AnalyticsConstant.Event.BACK_BUTTON_CLICK, args);
+        mEvent = new AnalyticsEvent(AnalyticsConstant.Event.HARDWARE_BACK_BUTTON_CLICK, args);
         sendLogEventToFirebase(mEvent);
         super.onBackPressed();
         overridePendingTransition(R.anim.transition_slide_in_from_left, R.anim.transition_slide_out_to_right);
