@@ -95,8 +95,10 @@ public class SplashActivity extends PlatingActivity {
             /*
              * Tutorial Activity Start
              */
-            showTutorial();
-            //ShowLoginPage();
+//            showTutorial();
+//            임시적으로 지리산과 아이들을 보이지 않도록 한다
+//            TODO: 추후에 튜토리얼을 바꿔야한다.
+            ShowLoginPage();
         } else {
             ShowDailyMenuList();
         }
