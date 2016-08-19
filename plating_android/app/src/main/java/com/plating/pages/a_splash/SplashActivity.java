@@ -9,6 +9,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import com.plating.R;
+import com.plating.application.AnalyticsConstant;
 import com.plating.application.PlatingActivity;
 import com.plating.gcm.RegistrationIntentService;
 import com.plating.helperAPI.AndroidVersionAPI;
@@ -56,7 +57,7 @@ public class SplashActivity extends PlatingActivity {
         Bundle params = new Bundle();
         params.putString("activity", "SplashActivity");
 
-        event = new AnalyticsEvent("splash", params);
+        event = new AnalyticsEvent(AnalyticsConstant.Event.SPLASH, params);
         sendLogEventToFirebase(event);
 
     }
