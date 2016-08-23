@@ -58,4 +58,10 @@ public class Constant {
     public static String PAY_METHOD_CARD = "카드";
     public static String PAY_METHOD_DIRECT_CARD = "현장카드";
     public static String PAY_METHOD_DIRECT_CREDIT = "현금";
+
+    private static String APPS_FLYER_KEY = "5aJTmR8RGtTwQBiia8vPzh";
+
+    public static String getAppsFlyerKey() {
+        return APPS_FLYER_KEY;
+    }
 }

@@ -23,7 +23,9 @@ android {
         multiDexEnabled true
     }
 
-
+    aaptOptions {
+        cruncherEnabled false
+    }
 
     buildTypes {
         release {
@@ -68,7 +70,8 @@ dependencies {
     compile group: 'com.kakao.sdk', name: 'util', version: project.KAKAO_SDK_VERSION
     // Kakaolink library
     compile group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
-    compile files('libs/AF-Android-SDK-v3.3.0.jar')
+//    compile files('libs/AF-Android-SDK-v3.3.0.jar')
+    compile 'com.appsflyer:af-android-sdk:4+@aar'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'

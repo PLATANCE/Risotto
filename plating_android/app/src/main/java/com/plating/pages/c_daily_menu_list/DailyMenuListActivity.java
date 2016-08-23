@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
@@ -102,6 +103,10 @@ public class DailyMenuListActivity extends PlatingActivity {
         getAddressInUseFromServer();
 
         showOrderConfirmedMarkLayoutIfOrderIsPlaced();
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri data = intent.getData();
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
