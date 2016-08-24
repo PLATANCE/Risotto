@@ -8,7 +8,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.plating.application.Constant;
 import com.plating.application.Debug;
@@ -16,7 +15,6 @@ import com.plating.object_singleton.Cart;
 import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.util.SVUtil;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +28,7 @@ public class GetCouponAvailableFromServer {
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 getRequestUrl(),
-                createJsonForPost(SVUtil.GetUserIdx(context), coupon_idx),
+                createJsonForPost(SVUtil.getUserIdx(context), coupon_idx),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

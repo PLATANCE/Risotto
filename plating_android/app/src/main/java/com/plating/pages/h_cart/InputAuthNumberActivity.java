@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -146,7 +144,7 @@ public class InputAuthNumberActivity extends PlatingActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("phone_no", phone_no + "");
-                params.put("user_idx", SVUtil.GetUserIdx(mContext) + "");
+                params.put("user_idx", SVUtil.getUserIdx(mContext) + "");
 
                 return params;
             }

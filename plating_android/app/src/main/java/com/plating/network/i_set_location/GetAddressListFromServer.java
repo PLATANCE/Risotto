@@ -12,11 +12,7 @@ import com.plating.application.Constant;
 import com.plating.application.Debug;
 import com.plating.network.RequestURL;
 import com.plating.object.AddressListRow;
-import com.plating.object.CouponListRow;
-import com.plating.pages.c_daily_menu_list.DailyMenuListActivity;
-import com.plating.pages.h_cart.CartActivity;
 import com.plating.pages.i_set_location.AddressListActivity;
-import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.util.SVUtil;
 
 import org.json.JSONArray;
@@ -32,7 +28,7 @@ public class GetAddressListFromServer {
     public static void getDataFromServer(final Context context, RequestQueue requestQueue) {
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                getRequestUrl(SVUtil.GetUserIdx(context)),
+                getRequestUrl(SVUtil.getUserIdx(context)),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

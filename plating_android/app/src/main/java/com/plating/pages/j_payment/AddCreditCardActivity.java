@@ -55,7 +55,7 @@ public class AddCreditCardActivity extends PlatingActivity {
         SimpleDateFormat localSimpleDateFormat1 = new SimpleDateFormat("yyyyMMddHHmmss");
         Calendar localCalendar = Calendar.getInstance();
         String mid = "plating001";
-        String orderid = System.currentTimeMillis()+"_"+ SVUtil.GetUserIdx(this);
+        String orderid = System.currentTimeMillis()+"_"+ SVUtil.getUserIdx(this);
         String timestamp = localSimpleDateFormat1.format(localCalendar.getTime());
         String merchantkey = "V0pLcWJOR2RpYWx6ZjBxMUkzRXRVQT09";
         String hashdata = SVUtil.sha256(mid + orderid + timestamp + merchantkey);
@@ -77,9 +77,9 @@ public class AddCreditCardActivity extends PlatingActivity {
         }
 
         StringBuilder localStringBuilder = new StringBuilder();
-        localStringBuilder.append("mid=").append("plating001").append("&buyername=").append(SVUtil.GetUserIdx(this));
+        localStringBuilder.append("mid=").append("plating001").append("&buyername=").append(SVUtil.getUserIdx(this));
         localStringBuilder.append("&goodname=플레이팅 카드등록&price=0&orderid=").append(orderid).append("&returnurl=").append("http://api.plating.co.kr/payResult");
-        localStringBuilder.append("&timestamp=").append(timestamp).append("&period=").append("").append("&p_noti=").append(SVUtil.GetUserIdx(this) + "-" + versionCode).append("&hashdata=").append(hashdata);
+        localStringBuilder.append("&timestamp=").append(timestamp).append("&period=").append("").append("&p_noti=").append(SVUtil.getUserIdx(this) + "-" + versionCode).append("&hashdata=").append(hashdata);
 
         loadPage("http://inilite.inicis.com/inibill/inibill_card.jsp", localStringBuilder.toString());
 //        wv.loadUrl("http://api.plating.co.kr/payResult.php");

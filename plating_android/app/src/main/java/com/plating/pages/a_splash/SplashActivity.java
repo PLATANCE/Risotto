@@ -91,7 +91,7 @@ public class SplashActivity extends PlatingActivity {
 
         // if user is logged in, start dailyMenuList activity
         // Otherwise, start Sign up activity
-        if (SVUtil.GetUserIdx(mContext) == 0) {
+        if (SVUtil.getUserIdx(mContext) == 0) {
             /*
              * Tutorial Activity Start
              */

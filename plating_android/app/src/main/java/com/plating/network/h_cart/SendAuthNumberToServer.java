@@ -13,7 +13,6 @@ import com.plating.application.Constant;
 import com.plating.application.Debug;
 import com.plating.network.RequestURL;
 import com.plating.pages.h_cart.InputAuthNumberActivity;
-import com.plating.pages.h_cart.InputMobileForAuthActivity;
 import com.plating.util.SVUtil;
 
 import org.json.JSONException;
@@ -56,7 +55,7 @@ public class SendAuthNumberToServer {
 
     public static String getRequestUrl(Context context) {
         String url =  RequestURL.VALIDATE_AUTH_NUMBER;
-        url = url.replace("{userIdx}", Integer.toString(SVUtil.GetUserIdx(context)));
+        url = url.replace("{userIdx}", Integer.toString(SVUtil.getUserIdx(context)));
         Log.d(LOG_TAG, url);
         return url;
     }

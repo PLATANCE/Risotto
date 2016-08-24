@@ -138,7 +138,7 @@ public class SetLocationDialog {
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("user_idx", SVUtil.GetUserIdx(mContext)+"");
+                params.put("user_idx", SVUtil.getUserIdx(mContext)+"");
                 params.put("address", address);
                 params.put("address_detail", detail);
                 params.put("delivery_available", isAvailable? "1":"0");

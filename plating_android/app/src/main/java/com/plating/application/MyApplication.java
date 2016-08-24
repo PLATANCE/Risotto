@@ -84,10 +84,10 @@ public class MyApplication extends MultiDexApplication {
             }
         });
 
-        Log.d("Alias", "GetUserIdx : " + SVUtil.GetUserIdx(getApplicationContext()) +
+        Log.d("Alias", "getUserIdx : " + SVUtil.getUserIdx(getApplicationContext()) +
                 " isCreatedAlias : " + SVUtil.isCreatedAlias(getApplicationContext()));
 
-        if ((SVUtil.GetUserIdx(getApplicationContext()) != 0) && (SVUtil.isCreatedAlias(getApplicationContext()) == false)) {
+        if ((SVUtil.getUserIdx(getApplicationContext()) != 0) && (SVUtil.isCreatedAlias(getApplicationContext()) == false)) {
             Log.d("Alias", "Creating Alias for existing user");
             getNameFromServer();
         }
@@ -101,7 +101,7 @@ public class MyApplication extends MultiDexApplication {
 
     private void getNameFromServer() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://api.plating.co.kr/user/name?user_idx=" + SVUtil.GetUserIdx(getApplicationContext());
+        String url = "http://api.plating.co.kr/user/name?user_idx=" + SVUtil.getUserIdx(getApplicationContext());
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -114,7 +114,7 @@ public class MyApplication extends MultiDexApplication {
                             String user_name = jo.getString("name");
 
 
-                            String identity = SVUtil.GetUserIdx(getApplicationContext()) + " - " + user_name;
+                            String identity = SVUtil.getUserIdx(getApplicationContext()) + " - " + user_name;
                             MixPanel.getMixPanelInstance().alias(identity, null);
 
                             MixPanel.getMixPanelInstance().getPeople().identify(identity);

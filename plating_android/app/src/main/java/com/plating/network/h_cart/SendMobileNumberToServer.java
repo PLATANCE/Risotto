@@ -12,7 +12,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.plating.application.Constant;
 import com.plating.application.Debug;
 import com.plating.network.RequestURL;
-import com.plating.object.PlaceOrderResult;
 import com.plating.pages.h_cart.InputMobileForAuthActivity;
 import com.plating.util.SVUtil;
 
@@ -57,7 +56,7 @@ public class SendMobileNumberToServer {
 
     public static String getRequestUrl(Context context) {
         String url =  RequestURL.REQUEST_AUTH_NUMBER;
-        url = url.replace("{userIdx}", Integer.toString(SVUtil.GetUserIdx(context)));
+        url = url.replace("{userIdx}", Integer.toString(SVUtil.getUserIdx(context)));
         Log.d(LOG_TAG, url);
         return url;
     }

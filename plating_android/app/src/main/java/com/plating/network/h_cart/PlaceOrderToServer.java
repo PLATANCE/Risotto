@@ -74,7 +74,7 @@ public class PlaceOrderToServer {
 
         JSONObject json = new JSONObject();
         try {
-            json.put("user_idx", SVUtil.GetUserIdx(cx));
+            json.put("user_idx", SVUtil.getUserIdx(cx));
             json.put("menu_idx", menu_idx);
             json.put("time_slot", Cart.time_slot_idx);
             json.put("order_amount", order_amount);

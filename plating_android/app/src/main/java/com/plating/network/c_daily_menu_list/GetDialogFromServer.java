@@ -7,23 +7,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.plating.application.Constant;
 import com.plating.application.Debug;
-import com.plating.helperAPI.ToastAPI;
 import com.plating.network.RequestURL;
-import com.plating.object.CouponListRow;
-import com.plating.object.DailyMenu;
-import com.plating.object.UserDialog;
 import com.plating.pages.c_daily_menu_list.DailyMenuListActivity;
-import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.util.SVUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by home on 15. 12. 15..
@@ -34,7 +25,7 @@ public class GetDialogFromServer {
     public static void getDataFromServer(final Context context, RequestQueue requestQueue) {
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                getRequestUrl(SVUtil.GetUserIdx(context)),
+                getRequestUrl(SVUtil.getUserIdx(context)),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

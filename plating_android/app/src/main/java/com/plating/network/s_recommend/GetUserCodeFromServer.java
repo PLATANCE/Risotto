@@ -25,7 +25,7 @@ public class GetUserCodeFromServer {
     public static void getDataFromServer(final Context context, RequestQueue requestQueue) {
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                getRequestUrl(SVUtil.GetUserIdx(context)),
+                getRequestUrl(SVUtil.getUserIdx(context)),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

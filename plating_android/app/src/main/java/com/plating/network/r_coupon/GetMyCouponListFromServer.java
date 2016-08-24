@@ -1,7 +1,6 @@
 package com.plating.network.r_coupon;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -9,7 +8,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.plating.application.Constant;
 import com.plating.application.Debug;
 import com.plating.network.RequestURL;
@@ -19,7 +17,6 @@ import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.util.SVUtil;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -32,7 +29,7 @@ public class GetMyCouponListFromServer {
     public static void getDataFromServer(final Context context, RequestQueue requestQueue) {
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                getRequestUrl(SVUtil.GetUserIdx(context)),
+                getRequestUrl(SVUtil.getUserIdx(context)),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

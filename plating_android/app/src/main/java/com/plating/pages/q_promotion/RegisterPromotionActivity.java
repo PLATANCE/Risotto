@@ -70,7 +70,7 @@ public class RegisterPromotionActivity extends PlatingActivity implements View.O
     private void promo_code_register(String code) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://api.plating.co.kr//promo/register?" +
-                "user_idx="+ SVUtil.GetUserIdx(getApplicationContext()) +
+                "user_idx="+ SVUtil.getUserIdx(getApplicationContext()) +
                 "&code="+code;
 
         // Request a string response from the provided URL.
@@ -135,7 +135,7 @@ public class RegisterPromotionActivity extends PlatingActivity implements View.O
 
     private void get_my_point_from_server() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://api.plating.co.kr/promo/point?user_idx="+ SVUtil.GetUserIdx(getApplicationContext());
+        String url ="http://api.plating.co.kr/promo/point?user_idx="+ SVUtil.getUserIdx(getApplicationContext());
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

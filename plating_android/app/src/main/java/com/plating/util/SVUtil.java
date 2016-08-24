@@ -142,7 +142,7 @@ public class SVUtil {
         editor.putInt("user_idx", idx);
         editor.commit();
     }
-    public static int GetUserIdx(Context cx) {
+    public static int getUserIdx(Context cx) {
         SharedPreferences prefs = cx.getSharedPreferences(plating, Activity.MODE_PRIVATE);
         return prefs.getInt("user_idx", 0);
     }

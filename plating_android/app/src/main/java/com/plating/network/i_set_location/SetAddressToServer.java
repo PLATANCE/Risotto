@@ -10,10 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.plating.application.Constant;
 import com.plating.application.Debug;
-import com.plating.application.PlatingActivity;
 import com.plating.network.RequestURL;
 import com.plating.pages.i_set_location.AddressListActivity;
-import com.plating.pages.i_set_location.AddressListAdapter;
 import com.plating.util.SVUtil;
 
 import org.json.JSONException;
@@ -29,7 +27,7 @@ public class SetAddressToServer {
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 getRequestUrl(),
-                createJsonForPost(idx, SVUtil.GetUserIdx(context), mode),
+                createJsonForPost(idx, SVUtil.getUserIdx(context), mode),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

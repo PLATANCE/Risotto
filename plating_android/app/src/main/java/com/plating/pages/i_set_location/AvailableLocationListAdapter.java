@@ -3,15 +3,12 @@ package com.plating.pages.i_set_location;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -200,7 +197,7 @@ public class AvailableLocationListAdapter extends RecyclerView.Adapter<Available
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("user_idx", SVUtil.GetUserIdx(mContext) + "");
+                params.put("user_idx", SVUtil.getUserIdx(mContext) + "");
                 params.put("address", jibunAddress);
                 params.put("road_name_address", roadNameAddress);
                 params.put("address_detail", detail);

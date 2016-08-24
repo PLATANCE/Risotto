@@ -526,7 +526,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     private void get_my_point_from_server() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://api.plating.co.kr/promo/point?user_idx=" + SVUtil.GetUserIdx(getApplicationContext());
+        String url = "http://api.plating.co.kr/promo/point?user_idx=" + SVUtil.getUserIdx(getApplicationContext());
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -673,7 +673,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                 String recipient = mRecipient.getText().toString();
                 String mobile = (recipient.equals("본인")) ? mPhoneNumber.getText().toString() : recipient;
 
-                params.put("user_idx", SVUtil.GetUserIdx(cx) + "");
+                params.put("user_idx", SVUtil.getUserIdx(cx) + "");
                 params.put("time_slot", Cart.time_slot_idx + "");
                 params.put("menu_d_idx", menu_d_idx);
                 params.put("order_amount", order_amount);
@@ -700,7 +700,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void getCartInformation() {
         RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(this);
-        String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.GetUserIdx(cx) + "&coupon_idx=" + coupon_idx;
+        String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.getUserIdx(cx) + "&coupon_idx=" + coupon_idx;
         Log.d(LOG_TAG, url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
