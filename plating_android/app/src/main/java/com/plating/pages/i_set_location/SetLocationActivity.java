@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.plating.R;
 import com.plating.application.Constant;
@@ -20,9 +19,7 @@ import com.plating.application.PlatingActivity;
 import com.plating.network.i_set_location.GetAvailableLocations;
 import com.plating.object.AvailableLocation;
 import com.plating.sdk_tools.mix_panel.MixPanel;
-import com.plating.sdk_tools.mix_panel.MixPanelProperty;
-
-import org.w3c.dom.Text;
+import com.plating.object.MixPanelProperty;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;

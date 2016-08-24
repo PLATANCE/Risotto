@@ -22,11 +22,14 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.plating.R;
 import com.plating.dialog.MakePhoneCallDialog;
 import com.plating.helperAPI.GPS;
 import com.plating.network.i_set_location.SetUserGPSLocation;
 import com.plating.object.AnalyticsEvent;
+import com.plating.object.MixPanelEvent;
+import com.plating.object.MixPanelProperty;
 import com.plating.pages.ab_tutorial.TutorialActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.network.VolleySingleton;
@@ -34,7 +37,9 @@ import com.plating.object_singleton.Cart;
 import com.plating.pages.h_cart.CartActivity;
 import com.plating.util.SVUtil;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * Created by cheehoonha on 7/18/15.
@@ -58,15 +63,12 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
     public GoogleApiClient mGoogleApiClient;
     public LocationRequest mLocationRequest;
 
+    private MixpanelAPI mMixpanelAPI;
+
     // GPS location updates intervals in sec
     public static int UPDATE_INTERVAL = 2000; // 2 sec
     public static int FATEST_INTERVAL = 1000; // 1 sec
     public static int DISPLACEMENT = 5; // 10 meters
-
-    // Make sure this is done in both onCreate and onStart
-    // If you only do in onCreate, onStop will make everything null.
-    // Also, if you only do in onStart, none of these variables are instantiated on onCreate.
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mRequestQueue = mVolleySingleton.getRequestQueue();
         mImageLoader = mVolleySingleton.getmImageLoader();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mMixpanelAPI = MixpanelAPI.getInstance(this, this.getString(R.string.mixpanel_token_release_version));
 
     }
 
@@ -112,13 +115,6 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mContext = null;
         mActivity = null;
 
-        // Set up volley network connection queue
-        // This is just a reference. Don't really need to set it to null
-/*
-        mVolleySingleton = null;
-        mRequestQueue = null;
-        mImageLoader = null;
-*/
     }
 
     @Override
@@ -158,27 +154,40 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
 
         // Mix panel sends data every 60 seconds.
         // So if the user exits app, send the existing data.
-         MixPanel.flush();
+        mMixpanelAPI.flush();
     }
 
     public void sendLogEventToFirebase(AnalyticsEvent event) {
         mFirebaseAnalytics.logEvent(event.getEventName(), event.getEventArguments());
     }
 
-    /*********************
-     * * SYSTEM OPERATION *
-     *********************/
+    public void mixPanelTrackingWithOutProperties(@NonNull String eventName) {
+        mMixpanelAPI.track(eventName);
+    }
+
+    public void mixPanelTrackingWithProperties(@NonNull String eventName,
+                                               @NonNull ArrayList<MixPanelProperty> properties) {
+        MixPanelEvent event = new MixPanelEvent(properties);
+        mMixpanelAPI.track(eventName, event.getProperties());
+    }
+
+    public void setMixPanelUserIdentity(@NonNull String userIdentity) {
+        mMixpanelAPI.getPeople().identify(userIdentity);
+        mMixpanelAPI.getPeople().initPushHandling(this.getString(R.string.GCM_project_number));
+        mMixpanelAPI.alias(userIdentity, null);
+    }
+
+    public void setProfileProperty(String propertyName, String propertyInfo) {
+        // Profile Property를 설정하기 전에 identify를 먼저 호출해야한다.
+        mMixpanelAPI.getPeople().identify(String.valueOf(SVUtil.GetUserIdx(this)));
+        mMixpanelAPI.getPeople().set(propertyName, propertyInfo);
+    }
+
     // Navigate back. Same as pressing back button
     public void onClickNavigateBack(View view) {
         MixPanel.mixPanel_trackWithOutProperties("Navigate Back");
         finish();
         overridePendingTransition(R.anim.transition_slide_in_from_left, R.anim.transition_slide_out_to_right);
-    }
-
-    public void onClickNavigateBackToptoBottom(View view) {
-        MixPanel.mixPanel_trackWithOutProperties("Navigate Back");
-        finish();
-        overridePendingTransition(R.anim.transition_slide_in_from_top, R.anim.transition_slide_out_to_bottom);
     }
 
     public void onClickCallPlating(View view) {
@@ -207,10 +216,6 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         overridePendingTransition(R.anim.transition_slide_in_from_right, R.anim.transition_slide_out_to_left);
     }
 
-
-    /**********************
-     * GPS RELATED
-     **********************/
     public void updateGpsLocationOnce() {
         startGettingGPSLocation();
     }

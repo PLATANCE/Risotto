@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -49,7 +48,7 @@ import com.plating.pages.i_set_location.SetLocationActivity;
 import com.plating.pages.j_payment.AddCreditCardActivity;
 import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
-import com.plating.sdk_tools.mix_panel.MixPanelProperty;
+import com.plating.object.MixPanelProperty;
 import com.plating.util.SVUtil;
 
 import org.json.JSONArray;

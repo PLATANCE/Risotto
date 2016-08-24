@@ -12,9 +12,7 @@ import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.pages.h_cart.CartActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
-import com.plating.sdk_tools.mix_panel.MixPanelProperty;
-
-import org.w3c.dom.Text;
+import com.plating.object.MixPanelProperty;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,7 @@
 package com.plating.pages.c_daily_menu_list;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,21 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
 import com.plating.application.Constant;
-import com.plating.application.PlatingActivity;
 import com.plating.helperAPI.PriceAPI;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
@@ -33,13 +25,8 @@ import com.plating.object.DailyMenu;
 import com.plating.object.MenuInCart;
 import com.plating.object_singleton.Cart;
 import com.plating.sdk_tools.mix_panel.MixPanel;
-import com.plating.sdk_tools.mix_panel.MixPanelProperty;
+import com.plating.object.MixPanelProperty;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
