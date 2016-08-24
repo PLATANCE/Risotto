@@ -65,14 +65,6 @@
         <activity
             android:name=".pages.ab_tutorial.TutorialActivity"
             android:label="@string/title_activity_tutorial"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".pages.b_login.LogInActivity"
-            android:label="@string/title_activity_my_information"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".pages.c_daily_menu_list.DailyMenuListActivity"
-            android:label="@string/title_activity_menu_list"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -80,11 +72,17 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http"
-                    android:host="www.plating.co.kr"
-                    android:pathPrefix="/menus"/>
-
+                    android:host="www.plating.co.kr"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".pages.b_login.LogInActivity"
+            android:label="@string/title_activity_my_information"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pages.c_daily_menu_list.DailyMenuListActivity"
+            android:label="@string/title_activity_menu_list"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pages.c_daily_menu_list.MainBannerActivity"
             android:label="@string/title_main_banner"

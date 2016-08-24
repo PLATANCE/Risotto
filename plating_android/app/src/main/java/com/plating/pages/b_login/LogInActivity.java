@@ -336,7 +336,7 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
                 params.put("push_token", SVUtil.GetGcmtoken(mContext));
                 params.put("os_version", os_version);
                 params.put("device", device);
-                params.put("device_name", device_name);
+                params.put("device_name", "device_name");
 
                 params.put("firstName", firstName);
                 params.put("lastName", lastName);

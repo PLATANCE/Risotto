@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +29,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.appinvite.AppInviteInvitationResult;
+import com.google.android.gms.appinvite.AppInviteReferral;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.application.PlatingActivity;
@@ -69,6 +75,7 @@ public class DailyMenuListActivity extends PlatingActivity {
     private TextView mTotalNumberOfItemsInCart;
     private RecyclerView mRecyclerView;
     private DailyMenuListAdapter mAdapter;
+    private GoogleApiClient mGoogleApiClient;
 
     // Arraylist for keeping daily menu. When a user press on "장바구니" button, this list gets used.
     private ArrayList<DailyMenu> mDailyMenuArrayList;
@@ -104,9 +111,24 @@ public class DailyMenuListActivity extends PlatingActivity {
 
         showOrderConfirmedMarkLayoutIfOrderIsPlaced();
 
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        Uri data = intent.getData();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(AppInvite.API)
+                .build();
+
+        boolean autoLaunchDeepLink = false;
+        AppInvite.AppInviteApi.getInvitation(mGoogleApiClient, this, autoLaunchDeepLink)
+                .setResultCallback(new ResultCallback<AppInviteInvitationResult>() {
+                    @Override
+                    public void onResult(@NonNull AppInviteInvitationResult appInviteInvitationResult) {
+                        if (appInviteInvitationResult.getStatus().isSuccess()) {
+                            Intent intent = appInviteInvitationResult.getInvitationIntent();
+                            String deepLink = AppInviteReferral.getDeepLink(intent);
+                        } else {
+                            Log.d("DailyMenuListActivity", "getInvitation: no deep link found.");
+                        }
+                    }
+                });
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
