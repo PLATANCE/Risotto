@@ -20,7 +20,7 @@ public class MixPanelEvent {
     public JSONObject getProperties() {
         for (MixPanelProperty event: eventInfo) {
             try {
-                properties.put(event.getEventName(), event.getEventObject());
+                properties.put(event.getPropertyName(), event.getPropertyObject());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

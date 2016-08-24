@@ -9,6 +9,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class MixPanelProperty {
-    public String eventName;
-    public String eventObject;
+    public String propertyName;
+    public String propertyObject;
 }
