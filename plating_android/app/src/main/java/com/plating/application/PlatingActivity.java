@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
  */
 public class PlatingActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     public FirebaseAnalytics mFirebaseAnalytics;
+    public AppEventsLogger mAppEventsLogger;
     public static String LOG_TAG_PREFIX = "PlatingActivity.";
     public String LOG_TAG;
 
@@ -117,6 +119,8 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         super.onResume();
         Log.d(LOG_TAG, "onResume: Starts");
 
+        AppEventsLogger.activateApp(this, this.getString(R.string.facebook_app_id));
+
         // Everytime a user enters a new activity, send the name of activity to mixpanel
         String className = this.getClass().getSimpleName().replace("Activity", "");
         String mixPanel_screenTrack = "(SCREEN) ";
@@ -129,8 +133,12 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         }
         // String mixPanel_screenTrack = "(SCREEN) " + this.getClass().getSimpleName().replace("Activity", "");
         MixPanel.mixPanel_trackWithOutProperties(mixPanel_screenTrack);
+    }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppEventsLogger.deactivateApp(this, this.getString(R.string.facebook_app_id));
     }
 
     // update latitude and longitude of user_table
