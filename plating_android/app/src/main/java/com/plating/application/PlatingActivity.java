@@ -4,11 +4,9 @@ package com.plating.application;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +28,6 @@ import com.plating.network.i_set_location.SetUserGPSLocation;
 import com.plating.object.AnalyticsEvent;
 import com.plating.object.MixPanelEvent;
 import com.plating.object.MixPanelProperty;
-import com.plating.pages.ab_tutorial.TutorialActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.network.VolleySingleton;
 import com.plating.object_singleton.Cart;
@@ -38,8 +35,6 @@ import com.plating.pages.h_cart.CartActivity;
 import com.plating.util.SVUtil;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Map;
 
 /**
  * Created by cheehoonha on 7/18/15.
@@ -177,10 +172,14 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mMixpanelAPI.alias(userIdentity, null);
     }
 
-    public void setProfileProperty(String propertyName, String propertyInfo) {
+    public void setProfileProperty(MixPanelProperty property) {
         // Profile Property를 설정하기 전에 identify를 먼저 호출해야한다.
-        mMixpanelAPI.getPeople().identify(String.valueOf(SVUtil.GetUserIdx(this)));
-        mMixpanelAPI.getPeople().set(propertyName, propertyInfo);
+        mMixpanelAPI.getPeople().identify(String.valueOf(SVUtil.getUserIdx(this)));
+        mMixpanelAPI.getPeople().set(property.getPropertyName(), property.getPropertyObject());
+    }
+
+    public void updateNumericProperty(MixPanelProperty property) {
+        mMixpanelAPI.getPeople().increment(property.propertyName, Integer.valueOf(property.propertyObject));
     }
 
     // Navigate back. Same as pressing back button
@@ -264,7 +263,7 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         if(GPS.isGpsTurnedOn()) {
             startLocationUpdates();
             if(Constant.currentLocation != null) {
-                setUserLocation(SVUtil.GetUserIdx(getApplicationContext()), Constant.currentLocation.getLatitude(), Constant.currentLocation.getLongitude());
+                setUserLocation(SVUtil.getUserIdx(getApplicationContext()), Constant.currentLocation.getLatitude(), Constant.currentLocation.getLongitude());
             }
         } else {
             // If GPS is off, send null to MixPanel
