@@ -18,6 +18,8 @@ public class RequestURL {
     // URL header for getting data
     public static final String FULL_URL = "http://" + CURRENTLY_USING_IP_ADDRESS;
 
+    public static final String SERVER__USER_INFOMATION = FULL_URL + "/user";
+
     // URLs for getting data
     public static final String SERVER__APP_UPDATE_AVAILABLE = FULL_URL + "/check_app_update_available";
     public static final String SERVER__CHECK_FOR_WHICH_SCREEN = FULL_URL + "/which_screen";
