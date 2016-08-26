@@ -405,6 +405,8 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
             setProfileProperty(userProperty);
         }
 
+        mixPanelTrackingWithOutProperties(signUpOrLogin);
+
         VolleySingleton.getInstance().getRequestQueue().add(new StringRequest(
                 Request.Method.POST,
                 RequestURL.SERVER__USER_INFOMATION,
