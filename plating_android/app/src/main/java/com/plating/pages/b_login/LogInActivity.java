@@ -1,18 +1,14 @@
 package com.plating.pages.b_login;
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -37,13 +33,17 @@ import com.kakao.util.helper.log.Logger;
 import com.plating.R;
 import com.plating.application.PlatingActivity;
 import com.plating.helperAPI.ToastAPI;
+import com.plating.network.RequestURL;
+import com.plating.network.VolleySingleton;
 import com.plating.network.b_login.KakaoSignUpRegistrationToPlatingServer;
 import com.plating.pages.c_daily_menu_list.DailyMenuListActivity;
 import com.plating.pages.z_other.ActWebView;
 import com.plating.sdk_tools.mix_panel.MixPanel;
-import com.plating.sdk_tools.mix_panel.MixPanelProperty;
+import com.plating.object.MixPanelProperty;
 import com.plating.util.SVUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -310,6 +310,8 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
                             String mixPanelIdentity = user_idx + "-" + firstName;
                             mixPanel_signUpOrLogIn("FacebookAPI", signUpOrLogIn, mixPanelIdentity);
 
+                            mixPanelLogin(getApplicationContext(), signUpOrLogIn, mixPanelIdentity);
+
                             startDailyMenuListActivity();
 
                         } catch (Exception e) {
@@ -391,6 +393,52 @@ public class LogInActivity extends PlatingActivity implements View.OnClickListen
         MixPanel.getMixPanelInstance().getPeople().set("campaign", SVUtil.AppsFlyer_campaign(getApplicationContext()));
 
         SVUtil.CreatedAlias(getApplicationContext());
+    }
+
+    public void mixPanelLogin(final Context context, String signUpOrLogin, String userIdentity) {
+        if (signUpOrLogin.equals("u")) signUpOrLogin = "Log In Success";
+        else {
+            signUpOrLogin = "Sign Up Success";
+            MixPanelProperty userProperty = new MixPanelProperty("name", userIdentity);
+            setMixPanelUserIdentity(userProperty);
+            linkAliasProperty(userProperty);
+            setProfileProperty(userProperty);
+        }
+
+        VolleySingleton.getInstance().getRequestQueue().add(new StringRequest(
+                Request.Method.POST,
+                RequestURL.SERVER__USER_INFOMATION,
+                (Response.Listener<String>) response -> {
+            try {
+                JSONArray message = new JSONArray(response);
+
+                String createdAt = message.getJSONObject(0).getString("created_at");
+                String loginType = message.getJSONObject(0).getString("login_type");
+                int totalPurchasedMoney =
+                        Integer.valueOf(message.getJSONObject(1).getString("sum(order_meta.point_used)"))
+                        + Integer.valueOf(message.getJSONObject(1).getString("sum(order_meta.total_price)"));
+                int totalPurchasedCount = message.getJSONObject(1).getInt("count(*)");
+
+                setMixPanelUserIdentity(new MixPanelProperty("signUpDate", createdAt));
+                setMixPanelUserIdentity(new MixPanelProperty("loginType", loginType));
+
+                if ((SVUtil.getTotalPurchasedCount(context) != totalPurchasedCount)
+                        && (SVUtil.getTotalPurchasedMoney(context) != totalPurchasedMoney)) {
+                    updateNumericProperty(new MixPanelProperty("total_purchased_money", totalPurchasedMoney));
+                    updateNumericProperty(new MixPanelProperty("total_purchased_count", totalPurchasedCount));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, (Response.ErrorListener) VolleyError::printStackTrace) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_idx", String.valueOf(SVUtil.getUserIdx(context)));
+                return params;
+            }
+        });
     }
 
     private void startDailyMenuListActivity() {
