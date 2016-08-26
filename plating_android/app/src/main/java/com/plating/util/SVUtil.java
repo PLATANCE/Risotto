@@ -155,6 +155,32 @@ public class SVUtil {
         editor.commit();
     }
 
+    public static void setTotalPurchasedMoney(Context context, int money) {
+        SharedPreferences prefs = context.getSharedPreferences(plating, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putInt("total_purchased_money", money);
+        editor.commit();
+    }
+
+    public static int getTotalPurchasedMoney(Context context) {
+        return context.getSharedPreferences(plating, Activity.MODE_PRIVATE)
+                .getInt("total_purchased_money", 0);
+    }
+
+    public static void setTotalPurchasedCount(Context context, int count) {
+        SharedPreferences prefs = context.getSharedPreferences(plating, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putInt("total_purchased_count", count);
+        editor.commit();
+    }
+
+    public static int getTotalPurchasedCount(Context context) {
+        return context.getSharedPreferences(plating, Activity.MODE_PRIVATE)
+                .getInt("total_purchased_count", 0);
+    }
+
     public static String getDeviceName() {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
