@@ -574,81 +574,75 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     public void place_order(final AlertDialog orderConfirmDialog, final CircularProgressButton confirmOrderButton) {
         final StringRequest myReq = new StringRequest(Request.Method.POST,
                 "http://api.plating.co.kr/place_order",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                (Response.Listener<String>) response -> {
 
-                        Log.d("place_order", "result : " + response);
+                    Log.d("place_order", "result : " + response);
 
-                        String status = "";
-                        String description = "";
-                        int order_idx = 0;
-                        ArrayList<String> oos_list = new ArrayList<>();
+                    String status = "";
+                    String description = "";
+                    int order_idx = 0;
+                    ArrayList<String> oos_list = new ArrayList<>();
 
-                        try {
-                            JSONObject jo = new JSONObject(response);
-                            status = jo.getString("status");
-                            description = jo.getString("description");
-                            if (status.equals("done")) {
-                                order_idx = jo.getInt("order_idx");
-                            } else if (status.equals("oos")) {
-                                JSONArray oos_ja = jo.getJSONArray("oos_list");
-                                for(int i = 0; i < oos_ja.length(); i++) {
-                                    oos_list.add(oos_ja.getString(i));
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
+                    try {
+                        JSONObject jo = new JSONObject(response);
+                        status = jo.getString("status");
+                        description = jo.getString("description");
                         if (status.equals("done")) {
-
-                            SVUtil.SetOrderIdx(cx, order_idx);
-                            Cart.getCartInstance().emptyCart();
-
-                            // Change button state to "complete"
-                            confirmOrderButton.setProgress(100);
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Dismiss the dialog.
-                                    orderConfirmDialog.dismiss();
-
-                                    // Start new activity
-                                    Intent intent = new Intent(cx, DailyMenuListActivity.class);
-                                    intent.putExtra(Constant.ORDER_PLACED, true);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
-                            }, 1000);
-
+                            order_idx = jo.getInt("order_idx");
                         } else if (status.equals("oos")) {
-                            String msg = "";
-
-                            for (String item : oos_list) {
-                                msg += item;
-                                msg += "\n";
+                            JSONArray oos_ja = jo.getJSONArray("oos_list");
+                            for(int i = 0; i < oos_ja.length(); i++) {
+                                oos_list.add(oos_ja.getString(i));
                             }
-
-                            confirmOrderButton.setProgress(-1);
-                            confirmOrderButton.setErrorText("재고 부족");
-                            DialogAPI.showDialog(orderConfirmDialog.getContext(), "재고 부족", msg, "확인", null);
-                            orderConfirmDialog.setCancelable(true);
-                        } else if (status.equals("fail_to_pay")) {
-                            confirmOrderButton.setProgress(-1);
-                            confirmOrderButton.setErrorText("결제가 정상적으로 이루어지지 않았습니다.");
-                            DialogAPI.showDialog(orderConfirmDialog.getContext(), "결제 실패", description, "확인", null);
-                            orderConfirmDialog.setCancelable(true);
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+
+                    if (status.equals("done")) {
+
+                        SVUtil.SetOrderIdx(cx, order_idx);
+                        Cart.getCartInstance().emptyCart();
+
+                        // Change button state to "complete"
+                        confirmOrderButton.setProgress(100);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Dismiss the dialog.
+                                orderConfirmDialog.dismiss();
+
+                                // Start new activity
+                                Intent intent = new Intent(cx, DailyMenuListActivity.class);
+                                intent.putExtra(Constant.ORDER_PLACED, true);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        }, 1000);
+
+                    } else if (status.equals("oos")) {
+                        String msg = "";
+
+                        for (String item : oos_list) {
+                            msg += item;
+                            msg += "\n";
+                        }
+
                         confirmOrderButton.setProgress(-1);
-                        confirmOrderButton.setErrorText("네트워크 상태가 불안정합니다.");
+                        confirmOrderButton.setErrorText("재고 부족");
+                        DialogAPI.showDialog(orderConfirmDialog.getContext(), "재고 부족", msg, "확인", null);
+                        orderConfirmDialog.setCancelable(true);
+                    } else if (status.equals("fail_to_pay")) {
+                        confirmOrderButton.setProgress(-1);
+                        confirmOrderButton.setErrorText("결제가 정상적으로 이루어지지 않았습니다.");
+                        DialogAPI.showDialog(orderConfirmDialog.getContext(), "결제 실패", description, "확인", null);
                         orderConfirmDialog.setCancelable(true);
                     }
+                },
+                (Response.ErrorListener) error -> {
+                    confirmOrderButton.setProgress(-1);
+                    confirmOrderButton.setErrorText("네트워크 상태가 불안정합니다.");
+                    orderConfirmDialog.setCancelable(true);
                 }) {
 
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
@@ -701,108 +695,100 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.getUserIdx(cx) + "&coupon_idx=" + coupon_idx;
         Log.d(LOG_TAG, url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d(LOG_TAG, "result : " + response);
-                        try {
-                            JSONObject jo = new JSONObject(response);
-                            JSONObject my_info = jo.getJSONObject("my_info");
-                            min_total_price = jo.getInt("min_total_price");
-                            bk_len = jo.getInt("bk_len");
-                            card_no = jo.getString("card_no");
-                            // user has already registerd credit card, inflate view and check radio button valued 'CARD'
+                response -> {
+                    Log.d(LOG_TAG, "result : " + response);
+                    try {
+                        JSONObject jo = new JSONObject(response);
+                        JSONObject my_info = jo.getJSONObject("my_info");
+                        min_total_price = jo.getInt("min_total_price");
+                        bk_len = jo.getInt("bk_len");
+                        card_no = jo.getString("card_no");
+                        // user has already registerd credit card, inflate view and check radio button valued 'CARD'
 
-                            TV_card.setText(card_no);
-                            radio_pay_card.setChecked(true);
+                        TV_card.setText(card_no);
+                        radio_pay_card.setChecked(true);
 
 
-                            deliveryFee = jo.getInt("delivery_fee");
+                        deliveryFee = jo.getInt("delivery_fee");
 
-                            String address = (my_info.getString("address_detail").equals("")) ? my_info.getString("address") : my_info.getString("address") + "\n" + my_info.getString("address_detail");
-                            Log.d(LOG_TAG, "ADDRESS: " + address);
-                            mAddress.setText(address);
-                            int available = my_info.getInt("delivery_available");
-                            if (available == 1) {
-                                delivery_available = true;
-                            } else {
-                                delivery_available = false;
-                            }
-
-                            free_credit = my_info.getInt("free_credit");
-                            myPoint = my_info.getInt("point");
-                            String phoneNumber = my_info.getString("mobile");
-                            if (my_info.getString("mobile") != "null") {
-                                if(my_info.getString("mobile").equals(Constant.PLEASE_ENTER_PHONE_NUMBER)) {
-                                    mPhoneNumber.setText(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW);
-                                } else {
-                                    mPhoneNumber.setText(my_info.getString("mobile"));
-                                    mobileArrowImageview.setVisibility(View.INVISIBLE);
-                                }
-                            } else {
-                                mPhoneNumber.setText(PhoneNumberAPI.getPhoneNumber());
-                            }
-
-                            time_slot_list = new ArrayList<>();
-
-                            JSONArray time_slot_ja = jo.getJSONArray("time_slot");
-                            TimeSlotBox box = null;
-                            for (int i = 0; i < time_slot_ja.length(); i++) {
-                                box = new TimeSlotBox();
-                                box.idx = time_slot_ja.getJSONObject(i).getInt("idx");
-                                box.time_slot = time_slot_ja.getJSONObject(i).getString("time_slot");
-
-                                time_slot_list.add(box);
-                            }
-
-                            if (time_slot_list.size() == 0) {
-                                mDeliveryTime.setText(Constant.DELIVERY_IS_FINISHED);
-                                selected_time_slot = -1;
-                            } else {
-                                mDeliveryTime.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
-                                mDeliveryTime.setTextColor(getResources().getColor(R.color.orange_300));
-                                IB_time.setEnabled(true);
-                                selected_time_slot = 1;
-                            }
-
-                            message = jo.getString("message");
-                            canOrder = jo.getBoolean("can_order");
-                            if(!canOrder) {
-                                messageBox.setVisibility(View.VISIBLE);
-                                messageText.setText(message);
-                            } else {
-                                messageBox.setVisibility(View.GONE);
-                                messageText.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
-                            }
-
-                            setCartInformation();
-                            enableOrDisablePlaceOrderButton();
-
-                            ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
-                            boolean hasInsertedAddress = (address.equals(Constant.PLEASE_ENTER_ADDRESS) ? false : true);
-                            mixPanelPropertyArrayList.add(new MixPanelProperty("Address", hasInsertedAddress));
-                            if (hasInsertedAddress) {
-                                mixPanelPropertyArrayList.add(new MixPanelProperty("Address Detail", address));
-                            }
-                            mixPanelPropertyArrayList.add(new MixPanelProperty("Coverage", (hasInsertedAddress && delivery_available) ? true : false));
-                            mixPanelPropertyArrayList.add(new MixPanelProperty("Choose Covered Address", delivery_available ? true : false));
-
-                            boolean hasInsertedPhoneNumber = (phoneNumber.equals(Constant.PLEASE_ENTER_PHONE_NUMBER) ? false : true);
-                            mixPanelPropertyArrayList.add(new MixPanelProperty("Phone Number", hasInsertedPhoneNumber));
-                            boolean hasInsertedCard = (card_no.equals(Constant.PLEASE_ENTER_CREDIT_CARD) ? false : true);
-                            mixPanelPropertyArrayList.add(new MixPanelProperty("Credit Card", hasInsertedCard));
-
-                            MixPanel.mixPanel_trackWithProperties("Cart Info", mixPanelPropertyArrayList);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        String address = (my_info.getString("address_detail").equals("")) ? my_info.getString("address") : my_info.getString("address") + "\n" + my_info.getString("address_detail");
+                        Log.d(LOG_TAG, "ADDRESS: " + address);
+                        mAddress.setText(address);
+                        int available = my_info.getInt("delivery_available");
+                        if (available == 1) {
+                            delivery_available = true;
+                        } else {
+                            delivery_available = false;
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
-            }
-        });
+                        free_credit = my_info.getInt("free_credit");
+                        myPoint = my_info.getInt("point");
+                        String phoneNumber = my_info.getString("mobile");
+                        if (my_info.getString("mobile") != "null") {
+                            if(my_info.getString("mobile").equals(Constant.PLEASE_ENTER_PHONE_NUMBER)) {
+                                mPhoneNumber.setText(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW);
+                            } else {
+                                mPhoneNumber.setText(my_info.getString("mobile"));
+                                mobileArrowImageview.setVisibility(View.INVISIBLE);
+                            }
+                        } else {
+                            mPhoneNumber.setText(PhoneNumberAPI.getPhoneNumber());
+                        }
+
+                        time_slot_list = new ArrayList<>();
+
+                        JSONArray time_slot_ja = jo.getJSONArray("time_slot");
+                        TimeSlotBox box = null;
+                        for (int i = 0; i < time_slot_ja.length(); i++) {
+                            box = new TimeSlotBox();
+                            box.idx = time_slot_ja.getJSONObject(i).getInt("idx");
+                            box.time_slot = time_slot_ja.getJSONObject(i).getString("time_slot");
+
+                            time_slot_list.add(box);
+                        }
+
+                        if (time_slot_list.size() == 0) {
+                            mDeliveryTime.setText(Constant.DELIVERY_IS_FINISHED);
+                            selected_time_slot = -1;
+                        } else {
+                            mDeliveryTime.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
+                            mDeliveryTime.setTextColor(getResources().getColor(R.color.orange_300));
+                            IB_time.setEnabled(true);
+                            selected_time_slot = 1;
+                        }
+
+                        message = jo.getString("message");
+                        canOrder = jo.getBoolean("can_order");
+                        if(!canOrder) {
+                            messageBox.setVisibility(View.VISIBLE);
+                            messageText.setText(message);
+                        } else {
+                            messageBox.setVisibility(View.GONE);
+                            messageText.setText(Constant.PLEASE_ENTER_DELIVERY_TIME);
+                        }
+
+                        setCartInformation();
+                        enableOrDisablePlaceOrderButton();
+
+                        ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
+                        boolean hasInsertedAddress = (address.equals(Constant.PLEASE_ENTER_ADDRESS) ? false : true);
+                        mixPanelPropertyArrayList.add(new MixPanelProperty("Address", hasInsertedAddress));
+                        if (hasInsertedAddress) {
+                            mixPanelPropertyArrayList.add(new MixPanelProperty("Address Detail", address));
+                        }
+                        mixPanelPropertyArrayList.add(new MixPanelProperty("Coverage", (hasInsertedAddress && delivery_available) ? true : false));
+                        mixPanelPropertyArrayList.add(new MixPanelProperty("Choose Covered Address", delivery_available ? true : false));
+
+                        boolean hasInsertedPhoneNumber = (phoneNumber.equals(Constant.PLEASE_ENTER_PHONE_NUMBER) ? false : true);
+                        mixPanelPropertyArrayList.add(new MixPanelProperty("Phone Number", hasInsertedPhoneNumber));
+                        boolean hasInsertedCard = (card_no.equals(Constant.PLEASE_ENTER_CREDIT_CARD) ? false : true);
+                        mixPanelPropertyArrayList.add(new MixPanelProperty("Credit Card", hasInsertedCard));
+
+                        MixPanel.mixPanel_trackWithProperties("Cart Info", mixPanelPropertyArrayList);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
         queue.add(stringRequest);
     }
 
