@@ -164,6 +164,10 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mFirebaseAnalytics.logEvent(event.getEventName(), event.getEventArguments());
     }
 
+    public void sendLogEventToFacebookAnalysis(String event) {
+        mAppEventsLogger.logEvent(event);
+    }
+
     public void mixPanelTrackingWithOutProperties(@NonNull String eventName) {
         mMixpanelAPI.track(eventName);
     }
@@ -174,10 +178,11 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mMixpanelAPI.track(eventName, event.getProperties());
     }
 
-    public void setMixPanelUserIdentity(@NonNull String userIdentity) {
-        mMixpanelAPI.getPeople().identify(userIdentity);
-        mMixpanelAPI.getPeople().initPushHandling(this.getString(R.string.GCM_project_number));
-        mMixpanelAPI.alias(userIdentity, null);
+    public void setMixPanelUserIdentity(MixPanelProperty property) {
+        mMixpanelAPI.getPeople().identify(property.getPropertyName());
+        mMixpanelAPI.getPeople().set(property.getPropertyName(), property.getPropertyObject());
+        mMixpanelAPI.getPeople().initPushHandling(MyApplication.getAppContext().getResources().getString(R.string.GCM_project_number));
+        mMixpanelAPI.alias(property.getPropertyName(), null);
     }
 
     public void setProfileProperty(MixPanelProperty property) {
@@ -187,7 +192,7 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
     }
 
     public void updateNumericProperty(MixPanelProperty property) {
-        mMixpanelAPI.getPeople().increment(property.propertyName, Integer.valueOf(property.propertyObject));
+        mMixpanelAPI.getPeople().increment(property.getPropertyName(), Double.valueOf(property.getPropertyObject().toString()));
     }
 
     // Navigate back. Same as pressing back button
