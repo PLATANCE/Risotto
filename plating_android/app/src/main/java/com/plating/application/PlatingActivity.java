@@ -182,7 +182,10 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mMixpanelAPI.getPeople().identify(property.getPropertyName());
         mMixpanelAPI.getPeople().set(property.getPropertyName(), property.getPropertyObject());
         mMixpanelAPI.getPeople().initPushHandling(MyApplication.getAppContext().getResources().getString(R.string.GCM_project_number));
-        mMixpanelAPI.alias(property.getPropertyName(), null);
+    }
+
+    public void linkAliasProperty(MixPanelProperty property) {
+        mMixpanelAPI.alias(String.valueOf(property.getPropertyObject()), null);
     }
 
     public void setProfileProperty(MixPanelProperty property) {
