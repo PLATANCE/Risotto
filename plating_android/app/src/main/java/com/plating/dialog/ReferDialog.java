@@ -2,21 +2,16 @@ package com.plating.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
 import com.plating.network.VolleySingleton;
 import com.plating.pages.p_write_review_activity.WriteReviewListActivity;
-import com.plating.pages.s_refer.ReferActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 
 /**
@@ -49,11 +44,11 @@ public class ReferDialog extends Dialog implements View.OnClickListener {
 
         // Set View
         image = (ImageView) findViewById(R.id.imageView);
-        //imageLoader = VolleySingleton.getsInstance().getmImageLoader();
+        //imageLoader = VolleySingleton.getInstance().getmImageLoader();
         bt_close = (ImageButton) findViewById(R.id.bt_close);
 
         // image load
-        VolleySingleton.getsInstance().loadImageToImageView(image, imageUrl);
+        VolleySingleton.getInstance().loadImageToImageView(image, imageUrl);
 
         // set Listener
         image.setOnClickListener(this);

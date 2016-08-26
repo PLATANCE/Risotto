@@ -224,7 +224,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
             // Load image with volley for food image
             // Handle the case of error, and restaurant.imageReference == null
-            VolleySingleton.getsInstance().loadImageToImageView(foodImage, RequestURL.DAILY_MENU_IMAGE_URL + menuInCart.image_url_menu);
+            VolleySingleton.getInstance().loadImageToImageView(foodImage, RequestURL.DAILY_MENU_IMAGE_URL + menuInCart.image_url_menu);
 
             menuDescription.setText(menuInCart.name_menu.replace(".", "\n"));
             menuPrice.setText(PriceAPI.intPriceToStringPriceWonTextFormat(menuInCart.price));

@@ -4,8 +4,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +17,6 @@ import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.kakao.util.KakaoParameterException;
 import com.plating.R;
 import com.plating.application.PlatingActivity;
-import com.plating.helperAPI.DialogAPI;
 import com.plating.helperAPI.ToastAPI;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
@@ -57,7 +54,7 @@ public class ReferActivity extends PlatingActivity implements View.OnClickListen
     public void setAllViews() {
         refer_image_top = (ImageView) findViewById(R.id.refer_image_top);
 
-        VolleySingleton.getsInstance().loadImageToImageView(refer_image_top, RequestURL.REFER_IMAGE_URL + "new_refer_friend.png");
+        VolleySingleton.getInstance().loadImageToImageView(refer_image_top, RequestURL.REFER_IMAGE_URL + "new_refer_friend.png");
 
         recommend_layout_kakao = (LinearLayout) findViewById(R.id.recommend_layout_kakao);
         recommend_layout_kakao.setOnClickListener(this);

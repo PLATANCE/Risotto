@@ -14,7 +14,7 @@ import com.plating.application.MyApplication;
  * Created by cheehoonha on 2/20/15.
  */
 public class VolleySingleton {
-    private static VolleySingleton sInstance = null;
+    private static VolleySingleton instance = null;
     private final RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
@@ -35,12 +35,12 @@ public class VolleySingleton {
         });
     }
 
-    public static VolleySingleton getsInstance() {
-        if (sInstance == null) {
-            sInstance = new VolleySingleton();
+    public static VolleySingleton getInstance() {
+        if (instance == null) {
+            instance = new VolleySingleton();
         }
 
-        return sInstance;
+        return instance;
     }
 
     public RequestQueue getRequestQueue() {

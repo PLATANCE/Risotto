@@ -2,7 +2,6 @@ package com.plating.pages.d_menu_detail;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -226,9 +225,9 @@ public class MenuDetailActivity extends PlatingActivity {
         mNumberOfBestReviews = singleMenu.reviewArrayList.size();
 
         // Load food image
-        VolleySingleton.getsInstance().loadImageToImageView(mMenuImage, RequestURL.DAILY_MENU_IMAGE_URL + singleMenu.imageUrlMenu);
+        VolleySingleton.getInstance().loadImageToImageView(mMenuImage, RequestURL.DAILY_MENU_IMAGE_URL + singleMenu.imageUrlMenu);
         // Load chef image
-        VolleySingleton.getsInstance().loadImageToImageView(mChefImage, RequestURL.CHEF_IMAGE_URL + singleMenu.imageUrlChef);
+        VolleySingleton.getInstance().loadImageToImageView(mChefImage, RequestURL.CHEF_IMAGE_URL + singleMenu.imageUrlChef);
     }
 
     public void addCustomerReview(ArrayList<CustomerReview> customerReviewArrayList) {

@@ -1,27 +1,20 @@
 package com.plating.pages.r_coupon;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
 import com.plating.application.Constant;
 import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
-import com.plating.network.p_write_review_activity.SubmitReview;
-import com.plating.network.r_coupon.GetCouponAvailableFromServer;
 import com.plating.object.CouponListRow;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 
@@ -61,7 +54,7 @@ public class MyCouponListAdapter extends RecyclerView.Adapter<MyCouponListAdapte
     public void onBindViewHolder(final MenuViewHolder viewHolder, int position) {
         CouponListRow couponListRow = data.get(position);
 
-        VolleySingleton.getsInstance().loadImageToImageView(viewHolder.coupon_image, RequestURL.COUPON_IMAGE_URL + couponListRow.getImage_url_coupon());
+        VolleySingleton.getInstance().loadImageToImageView(viewHolder.coupon_image, RequestURL.COUPON_IMAGE_URL + couponListRow.getImage_url_coupon());
 
         // When activity starts from intent, set the Button(bt_use) in visible
         Bundle extras = ((MyCouponListActivity) mContext).getIntent().getExtras();

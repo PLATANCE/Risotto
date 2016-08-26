@@ -1,29 +1,19 @@
 package com.plating.dialog;
 
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.plating.R;
-import com.plating.helperAPI.PhoneNumberAPI;
-import com.plating.network.RequestURL;
 import com.plating.network.VolleySingleton;
 import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
@@ -71,12 +61,12 @@ public class StartEventDialog extends Dialog implements View.OnClickListener {
 
         // Set View
         image = (ImageView) findViewById(R.id.imageView);
-        imageLoader = VolleySingleton.getsInstance().getmImageLoader();
+        imageLoader = VolleySingleton.getInstance().getmImageLoader();
         bt_close = (ImageButton) findViewById(R.id.bt_close);
         textview_close_again = (TextView) findViewById(R.id.textview_close_again);
 
         // image load
-        VolleySingleton.getsInstance().loadImageToImageView(image, imageUrl);
+        VolleySingleton.getInstance().loadImageToImageView(image, imageUrl);
 
         // set Listener
         image.setOnClickListener(this);

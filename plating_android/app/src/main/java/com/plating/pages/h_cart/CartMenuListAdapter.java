@@ -40,7 +40,7 @@ public class CartMenuListAdapter extends RecyclerView.Adapter<CartMenuListAdapte
         this.inflater = LayoutInflater.from(context);
         this.data = Cart.getCartInstance().getMenuList();
 
-        imageLoader = VolleySingleton.getsInstance().getmImageLoader();
+        imageLoader = VolleySingleton.getInstance().getmImageLoader();
     }
 
     @Override

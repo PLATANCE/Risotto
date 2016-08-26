@@ -65,7 +65,7 @@ public class SetLocationActivity_Old extends PlatingActivity {
             });
         }
 
-        mVolleySingleton = VolleySingleton.getsInstance();
+        mVolleySingleton = VolleySingleton.getInstance();
         mRequestQueue = mVolleySingleton.getRequestQueue();
 
         cx = this;

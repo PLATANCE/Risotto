@@ -41,7 +41,7 @@ public class WriteReviewListAdapter extends RecyclerView.Adapter<WriteReviewList
         this.inflater = LayoutInflater.from(context);
         this.data = data;
 
-        imageLoader = VolleySingleton.getsInstance().getmImageLoader();
+        imageLoader = VolleySingleton.getInstance().getmImageLoader();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class WriteReviewListAdapter extends RecyclerView.Adapter<WriteReviewList
         viewHolder.menuName.setText(writeReviewRow.menuName.replace(".", "\n"));
 
         // Load image with volley for food image
-        VolleySingleton.getsInstance().loadImageToImageView(viewHolder.menuImage, RequestURL.DAILY_MENU_IMAGE_URL + writeReviewRow.menuImageUrl);
+        VolleySingleton.getInstance().loadImageToImageView(viewHolder.menuImage, RequestURL.DAILY_MENU_IMAGE_URL + writeReviewRow.menuImageUrl);
 
 /*
             LayerDrawable stars = (LayerDrawable) holder.RB_star.getProgressDrawable();

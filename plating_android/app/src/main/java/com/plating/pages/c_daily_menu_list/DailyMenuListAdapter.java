@@ -50,7 +50,7 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
         this.data = data;
         this.inflater = LayoutInflater.from(context);
 
-        imageLoader = VolleySingleton.getsInstance().getmImageLoader();
+        imageLoader = VolleySingleton.getInstance().getmImageLoader();
     }
 
     @Override
@@ -85,13 +85,13 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
             DailyMenu dailyMenu = data.get(position - 1);
 
             // Load image with volley for food image
-            VolleySingleton.getsInstance().loadImageToImageView(viewHolder.menuImage, RequestURL.DAILY_MENU_IMAGE_URL + dailyMenu.imageUrlMenu);
+            VolleySingleton.getInstance().loadImageToImageView(viewHolder.menuImage, RequestURL.DAILY_MENU_IMAGE_URL + dailyMenu.imageUrlMenu);
             if (dailyMenu.is_event == 0) {
                 viewHolder.imageView_event_tag.setVisibility(View.GONE);
             }
 
             // Load image with volley for chef image
-            VolleySingleton.getsInstance().loadImageToImageView(viewHolder.chefImage, RequestURL.CHEF_IMAGE_URL + dailyMenu.imageUrlChef);
+            VolleySingleton.getInstance().loadImageToImageView(viewHolder.chefImage, RequestURL.CHEF_IMAGE_URL + dailyMenu.imageUrlChef);
 
             if (dailyMenu.stock <= 0) {
                 viewHolder.putToCartButton.setEnabled(false);
@@ -131,9 +131,9 @@ public class DailyMenuListAdapter extends RecyclerView.Adapter<DailyMenuListAdap
             viewHolder.updateNumberOfItemAddedInCartTextView();
         } else {
             String url = RequestURL.BANNER_IMAGE_URL + "admin_banner.png";
-            VolleySingleton.getsInstance().getRequestQueue().getCache().remove(url);
+            VolleySingleton.getInstance().getRequestQueue().getCache().remove(url);
 
-            VolleySingleton.getsInstance().getmImageLoader().get(url, new ImageLoader.ImageListener() {
+            VolleySingleton.getInstance().getmImageLoader().get(url, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                     Log.d(LOG_TAG, response.toString());

@@ -50,7 +50,7 @@ public class ChefDetailActivity extends PlatingActivity {
     }
 
     public void setAllDataToViews() {
-        VolleySingleton.getsInstance().loadImageToImageView(mChefImageView, RequestURL.CHEF_IMAGE_URL + mChefImageUrl);
+        VolleySingleton.getInstance().loadImageToImageView(mChefImageView, RequestURL.CHEF_IMAGE_URL + mChefImageUrl);
         mChefNameTextView.setText(mChefName);
         mChefCareerSummaryTextView.setText(mChefCareerSummary);
         mChefCareerTextView.setText(mChefCareer);

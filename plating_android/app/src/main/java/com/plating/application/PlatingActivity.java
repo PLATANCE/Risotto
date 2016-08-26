@@ -80,7 +80,7 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
 
         // Set up volley network connection queue
 
-        mVolleySingleton = VolleySingleton.getsInstance();
+        mVolleySingleton = VolleySingleton.getInstance();
         mRequestQueue = mVolleySingleton.getRequestQueue();
         mImageLoader = mVolleySingleton.getmImageLoader();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -98,7 +98,7 @@ public class PlatingActivity extends ActionBarActivity implements GoogleApiClien
         mActivity = this;
 
         // Set up volley network connection queue
-        mVolleySingleton = VolleySingleton.getsInstance();
+        mVolleySingleton = VolleySingleton.getInstance();
         mRequestQueue = mVolleySingleton.getRequestQueue();
         mImageLoader = mVolleySingleton.getmImageLoader();
     }
