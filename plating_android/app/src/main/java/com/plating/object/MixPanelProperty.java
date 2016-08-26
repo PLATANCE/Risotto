@@ -10,5 +10,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MixPanelProperty {
     public String propertyName;
-    public String propertyObject;
+    public Object propertyObject;
 }
