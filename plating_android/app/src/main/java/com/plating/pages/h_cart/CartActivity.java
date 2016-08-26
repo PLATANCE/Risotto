@@ -316,29 +316,27 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
             RadioButton radioButton = (RadioButton) findViewById(selectedId);
             pay_method = Integer.parseInt((String) radioButton.getTag());
 
-            ArrayList<MixPanelProperty> mixPanelPropertyArrayList = new ArrayList<>();
+            ArrayList<MixPanelProperty> properties = new ArrayList<>();
 
             if (pay_method == 1) {
-                mixPanelPropertyArrayList.add(new MixPanelProperty("Pay Method", "Card"));
+                properties.add(new MixPanelProperty("Pay Method", "Card"));
             } else if (pay_method == 2) {
-                mixPanelPropertyArrayList.add(new MixPanelProperty("Pay Method", "Physical Card"));
+                properties.add(new MixPanelProperty("Pay Method", "Physical Card"));
             } else if (pay_method == 3) {
-                mixPanelPropertyArrayList.add(new MixPanelProperty("Pay Method", "Cash"));
+                properties.add(new MixPanelProperty("Pay Method", "Cash"));
             }
 
             include_cutlery = Integer.parseInt((String) findViewById(radio_cutlery_group.getCheckedRadioButtonId()).getTag());
-            mixPanelPropertyArrayList.add(new MixPanelProperty("Coupon", (coupon_price > 0) ? true : false));
 
-
-            MixPanel.mixPanel_trackWithProperties("Place Order", mixPanelPropertyArrayList);
-
-
-            Log.d(LOG_TAG, "pay_method :" + pay_method);
+            properties.add(new MixPanelProperty("Coupon", (coupon_price > 0)));
+            properties.add(new MixPanelProperty("total_price", totalPrice));
+            mixPanelTrackingWithProperties("Confirm Order", properties);
+            updateNumericProperty(new MixPanelProperty("total_purchased_money", totalPrice));
+            updateNumericProperty(new MixPanelProperty("total_purchased_count", 1));
 
             if (delivery_available) {
                 ConfirmOrderDialog.showDialog(this, deliveryTime, address, phoneNumber, totalPrice, freeCredit, pay_method, coupon_price, include_cutlery);
             }
-
 
         } else if (view == IB_phone) {
             if (mPhoneNumber.getText().equals(Constant.PLEASE_ENTER_PHONE_NUMBER_NEW)) {
