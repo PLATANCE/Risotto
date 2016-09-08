@@ -47,6 +47,7 @@ import com.plating.pages.h_cart.dialog.EnterPhoneNumberDialog;
 import com.plating.pages.i_set_location.AddressListActivity;
 import com.plating.pages.i_set_location.SetLocationActivity;
 import com.plating.pages.j_payment.AddCreditCardActivity;
+import com.plating.pages.j_payment.AddIamPortCardActivity;
 import com.plating.pages.r_coupon.MyCouponListActivity;
 import com.plating.sdk_tools.mix_panel.MixPanel;
 import com.plating.sdk_tools.mix_panel.MixPanelProperty;
@@ -98,7 +99,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
     private int selected_time_slot, selectedRecipient;
     private int free_credit, deliveryFee, myPoint;
 
-    private int total_price, bk_len;
+    private int total_price;
     private boolean delivery_available, card_exist;
     private int credit_used;
 
@@ -360,7 +361,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
         } else if (view == IB_addcard) {
             MixPanel.mixPanel_trackWithOutProperties("Add Credit Card");
 
-            Intent intent = new Intent(mContext, AddCreditCardActivity.class);
+            Intent intent = new Intent(mContext, AddIamPortCardActivity.class);
             startActivity(intent);
         } else if (view == radio_pay_card) {
             if (cart_payment_detail_layout.getChildCount() == 1) {
@@ -576,7 +577,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void place_order(final AlertDialog orderConfirmDialog, final CircularProgressButton confirmOrderButton) {
         final StringRequest myReq = new StringRequest(Request.Method.POST,
-                "http://api.plating.co.kr/place_order",
+                "http://api.plating.co.kr/place_order_update_with_iamport",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -701,7 +702,7 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
 
     public void getCartInformation() {
         RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(this);
-        String url = "http://api.plating.co.kr/cart_info?user_idx=" + SVUtil.GetUserIdx(cx) + "&coupon_idx=" + coupon_idx;
+        String url = "http://api.plating.co.kr/cart_info_update_with_iamport?user_idx=" + SVUtil.GetUserIdx(cx) + "&coupon_idx=" + coupon_idx;
         Log.d(LOG_TAG, url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -712,7 +713,6 @@ public class CartActivity extends PlatingActivity implements View.OnClickListene
                             JSONObject jo = new JSONObject(response);
                             JSONObject my_info = jo.getJSONObject("my_info");
                             min_total_price = jo.getInt("min_total_price");
-                            bk_len = jo.getInt("bk_len");
                             card_no = jo.getString("card_no");
                             // user has already registerd credit card, inflate view and check radio button valued 'CARD'
 

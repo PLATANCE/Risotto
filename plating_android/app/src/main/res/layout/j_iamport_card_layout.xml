@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_background_grey_color">
+
+    <RelativeLayout
+        android:id="@+id/tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal">
+
+        <include layout="@layout/tool_bar" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/transparent"
+            android:onClick="onClickNavigateBack"
+            android:padding="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/action_icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="카드 등록"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:onClick="onClickCallPlating"
+            android:padding="13dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/action_icon_phone_white_100px"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:padding="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="카드번호"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="right">
+
+            <EditText
+                android:id="@+id/card_number_first"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="4"
+                android:background="@drawable/border_black"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/card_number_second"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="4"
+                android:background="@drawable/border_black"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/card_number_third"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="4"
+                android:background="@drawable/border_black"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/card_number_fourth"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="4"
+                android:background="@drawable/border_black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:padding="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="비밀번호"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="right">
+
+            <EditText
+                android:id="@+id/card_password"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="2"
+                android:background="@drawable/border_black"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="**"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:padding="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="유효기간(mm/yy)"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right">
+
+            <EditText
+                android:id="@+id/card_expiry_month"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="2"
+                android:background="@drawable/border_black"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="/"
+                android:gravity="center"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/card_expiry_year"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="2"
+                android:background="@drawable/border_black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/card_private_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/corner_primary_primary">
+
+            <TextView
+                android:id="@+id/card_private_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="개인"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/card_inc_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/corner_white_primary"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/card_inc_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="3dp"
+                android:textColor="@color/colorPrimary"
+                android:text="법인"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <include
+        android:id="@+id/private_card_layout"
+        layout="@layout/private_card_number_layout" />
+    <include
+        android:id="@+id/inc_card_layout"
+        layout="@layout/inc_card_number_layout" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notice"
+            android:textStyle="bold"
+            android:textColor="@color/grey_700"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="∙ 고객님의 카드정보는 나이스정보통신㈜을 통해 암호화되어 관리되며 플레이팅은 일체 저장하지 않습니다."/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="∙ 결제는 고객님의 동의 하에서만 진행됩니다."/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="∙ 등록한 카드 외에 캡틴(라이더)과 만나서 카드결제, 현금결제가 가능합니다."/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/card_regist_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/corner_grey300_grey300">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="등록하기"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</LinearLayout>

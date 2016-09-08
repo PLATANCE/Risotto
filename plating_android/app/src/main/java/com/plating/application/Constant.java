@@ -20,6 +20,8 @@ public class Constant {
     // Constants for Server Requests
     public static String SERVER_CONNECTION_FAILURE = "서버와의 연결이 불안정합니다.";
 
+    public static String IAMPORTCARD_REGIST_ERROR = "다시 시도해 주세요.";
+
     // Empty cart
     public static String CART_IS_EMPTY = "장바구니가 비어있습니다.";
 

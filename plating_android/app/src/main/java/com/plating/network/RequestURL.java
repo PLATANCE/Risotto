@@ -63,4 +63,5 @@ public class RequestURL {
     public static final String REQUEST_AUTH_NUMBER = "https://smsauth.plating.co.kr/user/{userIdx}/requestAuthNumber";
     public static final String VALIDATE_AUTH_NUMBER = "https://smsauth.plating.co.kr/user/{userIdx}/validateAuthNumber";
 
+    public static final String CREATE_BILL_KEY = "https://iamport.plating.co.kr/createBillKey";
 }

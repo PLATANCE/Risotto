@@ -130,6 +130,10 @@
             android:label="@string/title_activity_my_information"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".pages.j_payment.AddIamPortCardActivity"
+            android:label="@string/title_activity_my_information"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".pages.o_order_history.OrderHistoryListActivity"
             android:label="@string/title_activity_order_history"
             android:theme="@style/AppTheme"
