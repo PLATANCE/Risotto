@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,8 +22,11 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -64,9 +68,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
-public class DailyMenuListActivity extends PlatingActivity {
+public class DailyMenuListActivity extends PlatingActivity implements Spinner.OnItemSelectedListener {
     // Left navigation drawer
     private DrawerLayout mDrawerLayout;
     private LeftNavigationDrawerFragment mLeftNavigationDrawerFragment;
@@ -76,6 +82,10 @@ public class DailyMenuListActivity extends PlatingActivity {
     private RecyclerView mRecyclerView;
     private DailyMenuListAdapter mAdapter;
     private GoogleApiClient mGoogleApiClient;
+    private int mSort;
+    final static int SORT_NOTHING = 0;
+    final static int SORT_POPULAR = 1;
+    final static int SORT_PRICE_LOW = 2;
 
     // Arraylist for keeping daily menu. When a user press on "장바구니" button, this list gets used.
     private ArrayList<DailyMenu> mDailyMenuArrayList;
@@ -94,6 +104,17 @@ public class DailyMenuListActivity extends PlatingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.d_daily_menu_list_activity);
+
+        // Dropdown sort menu
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_sort);
+        spinner.setOnItemSelectedListener(this);
+        ArrayList<String> sortItem = new ArrayList<String>();
+        sortItem.add("정렬");
+        sortItem.add("인기도 높은 순");
+        sortItem.add("가격 낮은 순");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sortItem);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
 
         setUpLeftNavigationDrawer();
 
@@ -133,6 +154,40 @@ public class DailyMenuListActivity extends PlatingActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+        mSort = position;
+        if(mSort != SORT_NOTHING) {
+            if(mSort == SORT_POPULAR) {
+                Collections.sort(mAdapter.data, new Comparator<DailyMenu>() {
+                    public int compare(DailyMenu c1, DailyMenu c2) {
+                        if (c1.numOfReviews > c2.numOfReviews) return -1;
+                        if (c1.numOfReviews < c2.numOfReviews) return 1;
+                        return 0;
+                    }
+                });
+            }
+            else if(mSort == SORT_PRICE_LOW) {
+                Collections.sort(mAdapter.data, new Comparator<DailyMenu>() {
+                    public int compare(DailyMenu c1, DailyMenu c2) {
+                        if (c1.price < c2.price) return -1;
+                        if (c1.price > c2.price) return 1;
+                        return 0;
+                    }
+                });
+            }
+            mAdapter.updateData(mAdapter.data);
+            mAdapter.notifyDataSetChanged();
+        }
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     public void getAddressInUseFromServer() {
@@ -299,6 +354,11 @@ public class DailyMenuListActivity extends PlatingActivity {
         // Set recyclerview, which is the listview in this case
         mAdapter = new DailyMenuListAdapter(this, new ArrayList<DailyMenu>());
         mRecyclerView.setAdapter(mAdapter);
+
+        // GitHub: thehighestend
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
     }
 
     public void startMenuActivity(int menuId, int menuDIdx, int stock) {
